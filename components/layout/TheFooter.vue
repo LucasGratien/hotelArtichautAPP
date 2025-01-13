@@ -1,11 +1,11 @@
 <template>
-  <footer class="w-full">
+  <footer class="pt-8 w-full">
     <div class="bg-[#4B6547] w-full py-8">
       <div class="max-w-7xl mx-auto">
         <div class="bg-[#EAC684] rounded-lg p-6">
           <div class="flex flex-col md:flex-row items-center justify-between gap-6">
             <div class="text-center md:text-left">
-              <h3 class="text-[#4B6547] font-serif text-xl font-semibold">
+              <h3 class="text-[#4B6547] font-serif text-xl font-light">
                 STAY UP TO DATE ABOUT OUR LATEST OFFERS
               </h3>
             </div>
@@ -21,7 +21,7 @@
                   size="lg"
                   color="bg-[#4B6547]"
                   variant="solid"
-                  class="bg-[#4B6547] flex items-center justify-center"
+                  class="bg-[#4B6547] text-[#EAC684] flex items-center justify-center"
               >
                 Subscribe to Newsletter
               </UButton>

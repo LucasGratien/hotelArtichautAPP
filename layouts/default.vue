@@ -5,9 +5,9 @@
     <slot/>
   </div>
   </main>
-  <Thefooter/>
+  <TheFooter/>
 </template>
 <script setup lang="ts">
 import Theheader from "~/components/layout/Theheader.vue";
-import Thefooter from "~/components/layout/Thefooter.vue";
+import TheFooter from "~/components/layout/TheFooter.vue";
 </script>
