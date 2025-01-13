@@ -1,3 +1,0 @@
-<template>
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark"></nav>
-</template>
