@@ -87,11 +87,15 @@ const toggleMenu = () => {
 .menu li {
   padding: 10px 20px;
 }
+.menu li:hover{
+  transform: scale(1.1);
+}
 
 .menu li a {
   color: white;
   text-decoration: none;
   transition: color 0.2s ease;
+
 }
 
 .menu li a:hover {
