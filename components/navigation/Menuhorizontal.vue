@@ -1,7 +1,7 @@
 <template>
   <ul class="Menu flex flex-row items-center justify-center gap-4 bg">
     <li>
-      <NuxtLink to = "/Home" >Home</NuxtLink>
+      <NuxtLink to = "/" >Home</NuxtLink>
     </li>
     <li>
       <NuxtLink to = '/Rooms'>Rooms</NuxtLink>
@@ -23,7 +23,8 @@
 <style>
 .Menu li{
   color: rgba(234, 198, 132, 1);
-font-family: sans-serif;
+font-family: Cardo, Serif;
+  font-size: 20px;
 }
 .Menu button {
   background-color: rgba(75, 101, 71, 1);

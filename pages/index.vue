@@ -1,10 +1,8 @@
 <template>
-<div>
-  <Herobanner/>
-</div>
+  <div>
+    <Herobanner/>
+  </div>
 </template>
-<script setup lang="ts">
-
-import Tittle from "~/components/ui/Tittle.vue";
+<script setup lang="js">
 import Herobanner from "~/components/ui/Herobanner.vue";
 </script>

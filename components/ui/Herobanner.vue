@@ -2,15 +2,15 @@
   <div class="herobaner-wrapper">
   <div class="video-container relative">
     <div class="image-container">
-    <video v-if="hero[name]?.image && hero[name]?.image.includes('.mp4')" autoplay muted loop class="background-video">
-      <source :src="hero[name]?.image" type="video/mp4" />
+    <video v-if="heroPageData?.image && heroPageData?.image.includes('.mp4')" autoplay muted loop class="background-video">
+      <source :src="heroPageData?.image" type="video/mp4" />
       Votre navigateur ne supporte pas la lecture des vidéos.
     </video>
-      <img v-else :src="hero[name]?.image" alt="background image" class="background-image" />
+      <img v-else :src="heroPageData?.image" alt="background image" class="background-image" />
     <div class="filter absolute top-0 bottom-0 right-0 left-0"></div>
     <div class="content">
-      <h1>{{ hero[name]?.titre }}</h1>
-      <p>{{ hero[name]?.texte }}</p>
+      <h1>{{ heroPageData?.titre }}</h1>
+      <p>{{ heroPageData?.texte }}</p>
       <button>Booking</button>
     </div>
   </div>
@@ -21,6 +21,7 @@
 <script setup lang="js">
 const route = useRoute();
 const name = route.name;
+
 
 const hero = {
   Home: {
@@ -54,6 +55,11 @@ const hero = {
     image: "/assets/image/DALL·E 2025-01-14 14.42.14 - A luxurious hotel service scene, showcasing a variety of high-end services. A valet in uniform opening the door of a shiny luxury car, with a high-end.webp",
   }
 };
+let heroPageData = hero[name];
+if (!heroPageData) {
+  heroPageData = hero["Home"];
+}
+
 </script>
 
 <style scoped>
