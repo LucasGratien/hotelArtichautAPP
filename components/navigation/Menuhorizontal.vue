@@ -1,7 +1,7 @@
 <template>
   <ul class="Menu flex flex-row items-center justify-center gap-4 bg">
     <li>
-      <NuxtLink to = "/" >Home</NuxtLink>
+      <NuxtLink to = "/Home" >Home</NuxtLink>
     </li>
     <li>
       <NuxtLink to = '/Rooms'>Rooms</NuxtLink>
@@ -13,7 +13,7 @@
       <NuxtLink to = '/SPA'>SPA</NuxtLink>
     </li>
     <li>
-      <NuxtLink to = '/Services'>Services</NuxtLink>
+      <NuxtLink to = '/Service'>Services</NuxtLink>
     </li>
     <li>
       <NuxtLink to = '/Reserver'><button>Booking</button></NuxtLink>

@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-md">
     <div class="flex justify-between items-center mx-auto w-full px-4"> <!--J'applique les class tailwind de cette facon sur les enfants-->
 
-      <img class="h-10" src="@/components/assets/image/logoArtichaut.png" alt="Logo" />
+      <img class="h-10" src="public/assets/image/logoArtichaut.png" alt="Logo" />
 
 
      <div class="title-wrapper flex flex-col items-center justify-center">  <!-- tailwind sur l'enfant title-->
