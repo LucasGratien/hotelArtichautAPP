@@ -9,11 +9,11 @@
 
     <nav v-if="isOpen" class="menu">
       <ul>
-        <li><a href="#Home">Home</a></li>
-        <li><a href="#Rooms">Rooms</a></li>
-        <li><a href="#Restaurant">Restaurant</a></li>
-        <li><a href="#Spa">SPA</a></li>
-        <li><a href="#Service">Services</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/Rooms">Rooms</a></li>
+        <li><a href="/Restaurant">Restaurant</a></li>
+        <li><a href="/Spa">SPA</a></li>
+        <li><a href="/Service">Services</a></li>
       </ul>
     </nav>
   </div>
