@@ -1,20 +1,21 @@
 <template>
   <div class="herobaner-wrapper">
-  <div class="video-container relative">
-    <div class="image-container">
-    <video v-if="heroPageData?.image && heroPageData?.image.includes('.mp4')" autoplay muted loop class="background-video">
-      <source :src="heroPageData?.image" type="video/mp4" />
-      Votre navigateur ne supporte pas la lecture des vidéos.
-    </video>
-      <img v-else :src="heroPageData?.image" alt="background image" class="background-image" />
-    <div class="filter absolute top-0 bottom-0 right-0 left-0"></div>
-    <div class="content">
-      <h1>{{ heroPageData?.titre }}</h1>
-      <p>{{ heroPageData?.texte }}</p>
-      <button>Booking</button>
+    <div class="video-container relative">
+      <div class="image-container">
+        <video v-if="heroPageData?.image && heroPageData?.image.includes('.mp4')" autoplay muted loop
+               class="background-video">
+          <source :src="heroPageData?.image" type="video/mp4"/>
+          Votre navigateur ne supporte pas la lecture des vidéos.
+        </video>
+        <img v-else :src="heroPageData?.image" alt="background image" class="background-image"/>
+        <div class="filter absolute top-0 bottom-0 right-0 left-0"></div>
+        <div class="content">
+          <h1>{{ heroPageData?.titre }}</h1>
+          <p>{{ heroPageData?.texte }}</p>
+          <button>Booking</button>
+        </div>
+      </div>
     </div>
-  </div>
-  </div>
   </div>
 </template>
 
@@ -48,7 +49,7 @@ const hero = {
     button: "Booking",
     image: "/assets/image/woman-swimming-pool-spa.png",
   },
-  Service:{
+  Service: {
     titre: "Service",
     texte: "Notre hôtel de luxe vous offre des services exclusifs tels que valet, pressing, voiturier et bien plus pour un séjour inoubliable",
     button: "Booking",
@@ -75,12 +76,14 @@ if (!heroPageData) {
   height: 100%;
   object-fit: cover;
 }
+
 .image-container {
   position: relative;
   width: 100vw;
   height: calc(100vh - 60px);
   overflow: hidden;
 }
+
 .background-image {
   width: 100vw;
   height: 100%;

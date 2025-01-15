@@ -48,3 +48,5 @@ font-family: Cardo, Serif;
 }
 
 </style>
+<script setup lang="ts">
+</script>

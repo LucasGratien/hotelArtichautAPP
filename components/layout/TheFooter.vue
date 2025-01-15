@@ -2,9 +2,9 @@
   <footer class="bg-[#FBF9F4]">
     <div class="mx-auto space-t-8">
       <!-- Subscription Section -->
-      <div class="bg-[#eac684] rounded text-center md:flex md:flex-row md:flex-nowrap  md:mx-8">
+      <div class="bg-[#eac684] py-4 rounded text-center md:flex md:flex-row md:flex-nowrap  md:mx-8">
         <div class="md:w-2/3 flex items-center justify-center">
-          <h2 class="text-[#4b6447] pt-4 md:pt-0 text-3xl font-cardo">
+          <h2 class="text-[#4b6447]  md:pt-0 text-2xl md:text-3xl font-cardo">
             Stay up to date about our latest offers
           </h2>
         </div>
@@ -75,7 +75,9 @@
             </div>
           </div>
         </div>
-
+        <div class="flex py-4 justify-center items-center md:hidden">
+          <img src="public/assets/image/component_separator.png" alt="separator">
+        </div>
         <!--help menu-->
         <div class="hidden md:block md:w-3/4 ">
           <div class="grid grid-cols-4 sm:grid-cols-4 gap-4 px-8 text-[#1e1e1e] text-start text-lg font-lora">
@@ -118,9 +120,9 @@
           </div>
         </div>
         <!--navigation links-->
-        <div class="md:hidden">
+        <div class="md:hidden py-4">
           <h3 class="text-[#4b6447] text-3xl font-cardo">Plan du site</h3>
-          <div class="grid grid-cols-3 sm:grid-cols-3 gap-4 text-[#1e1e1e] text-lg font-lora">
+          <div class="grid grid-cols-3 sm:grid-cols-3 gap-4 text-[#1e1e1e] pt-6 text-lg font-lora">
             <a href="#">Accueil</a>
             <a href="#">Histoire</a>
             <a href="#">Chambres</a>
@@ -153,7 +155,6 @@ export default {
 .font-cardo {
   font-family: 'Cardo', serif;
 }
-
 .font-lora {
   font-family: 'Lora', serif;
 }
