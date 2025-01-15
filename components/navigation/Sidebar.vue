@@ -1,23 +1,33 @@
 <template>
   <UVerticalNavigation :links="links">
     <template #default="{ link }">
-      <span class="group-hover:text-primary relative">{{ link.label }}</span>
+      <span class="group-hover:text-primary relative items-center text-[#eac684] font-cardo">{{ link.label }}</span>
     </template>
   </UVerticalNavigation>
 </template>
-<script>
-export default {
-  name: 'Sidebar',
-}
+<script setup lang="js">
+
 const links = [{
-  label: 'Vertical Navigation',
+  label: 'Services',
   to: '/components/vertical-navigation'
 }, {
-  label: 'Command Palette',
+  label: 'Rooms ',
   to: '/components/command-palette'
 }, {
-  label: 'Table',
+  label: 'Contents',
   to: '/components/table'
+}, {
+  label: 'Clients',
+  to: '/components/command-palette'
+}, {
+  label: 'Reservations',
+  to: '/components/command-palette'
+}, {
+  label: 'Staff',
+  to: '/components/command-palette'
+}, {
+  label: 'Statistiques',
+  to: '/components/command-palette'
 }]
 </script>
 
