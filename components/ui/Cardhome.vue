@@ -1,36 +1,54 @@
 <template>
-  <div class="room-card flex flex-col md:flex-row items-center bg-[#f7f3eb] p-8 rounded-lg shadow-lg w-full mt-4">
-
-    <div class="image-container w-full md:w-1/2">
+  <div class="ui-card flex flex-col-reverse md:flex-row items-center bg-[#f7f3eb] p-8 rounded-lg shadow-lg w-full mt-4"
+       :class="inverted ? 'md:flex-row-reverse' : ''">
+    <div class="image-container w-full md:w-1/2 relative">
       <img
-          class="rounded-lg object-cover w-full h-full"
-          src="/assets/image/parisluxe.png"
-          alt="Chambre"
+          class="rounded-lg object-cover w-full h-auto"
+          :src="image"
+          :alt="imageAlt"
       />
     </div>
-
     <div class="text-container w-full md:w-1/2 p-8 flex flex-col justify-center">
-      <h2 class="title text-3xl font-serif mb-6 text-center md:text-left">Rooms</h2>
-      <p class="description text-gray-700 leading-relaxed mb-8 text-center md:text-left">
-        La chambre standard de notre hôtel allie confort et simplicité pour un séjour agréable. Elle est équipée d'un lit double spacieux, d'une télévision à écran plat, d'une connexion Wi-Fi gratuite, et d'une salle de bain privative avec douche ou baignoire. Un bureau fonctionnel et un espace de rangement sont également à votre disposition. La décoration moderne et chaleureuse offre une ambiance propice à la détente. Idéale pour les séjours professionnels ou touristiques, cette chambre vous garantit un repos optimal.
-      </p>
+      <h2 class="title text-3xl font-serif mb-6 text-center md:text-left">{{ title }}</h2>
+      <p class="description text-gray-700 leading-relaxed mb-8 text-center md:text-left">{{ description }}</p>
       <div class="text-center md:text-left">
         <NuxtLink
-            to="/Rooms"
+            :to="link"
             class="bg-yellow-500 hover:bg-yellow-600 text-white py-3 px-8 rounded-md shadow cta-btn"
         >
-          En savoir+
+          {{ buttonText }}
         </NuxtLink>
       </div>
     </div>
   </div>
 </template>
 
-<script setup lang="js">
+<script setup>
+defineProps({
+  title: String,
+  description: String,
+  image: String,
+  imageAlt: {
+    type: String,
+    default: 'Image',
+  },
+  link: {
+    type: String,
+    default: '#',
+  },
+  buttonText: {
+    type: String,
+    default: 'En savoir+',
+  },
+  inverted: {
+    type: Boolean,
+    default: false,
+  },
+});
 </script>
 
 <style scoped>
-.room-card {
+.ui-card {
   background-color: rgba(234, 198, 132, 0.15);
   width: 100%;
 }
