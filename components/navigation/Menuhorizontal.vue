@@ -25,6 +25,7 @@
   color: rgba(234, 198, 132, 1);
 font-family: Cardo, Serif;
   font-size: 20px;
+  letter-spacing: 2px;
 }
 .Menu button {
   background-color: rgba(75, 101, 71, 1);

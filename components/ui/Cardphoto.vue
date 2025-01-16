@@ -1,5 +1,5 @@
 <template>
-  <div class="card w-full max-w-[60%] ">
+  <div class="card w-full max-w-[60%] flex  ">
     <img
         class=" mt-8 md:relative w-full max-h-[600px] object-cover "
         src="/assets/image/parisluxe.png"
