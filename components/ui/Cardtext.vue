@@ -1,5 +1,5 @@
 <template>
-  <div class="card flex flex-col justify-between relative items-center mx-auto w-80 p-6 rounded-lg shadow-lg">
+  <div class="card flex flex-col justify-between relative items-center p-6 shadow-lg w-full md:relative md:top-4 md:right-4 ">
     <div class="title-container mb-4">
       <p class="title">Our Rooms</p>
     </div>

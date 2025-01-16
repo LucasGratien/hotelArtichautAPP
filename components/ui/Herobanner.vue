@@ -2,16 +2,15 @@
   <div class="herobaner-wrapper">
     <div class="video-container relative">
       <div class="image-container">
-        <video v-if="heroPageData?.image && heroPageData?.image.includes('.mp4')" autoplay muted loop
-               class="background-video">
-          <source :src="heroPageData?.image" type="video/mp4"/>
+        <video v-if="image && image.includes('.mp4')" autoplay muted loop class="background-video">
+          <source :src="image" type="video/mp4" />
           Votre navigateur ne supporte pas la lecture des vidéos.
         </video>
-        <img v-else :src="heroPageData?.image" alt="background image" class="background-image"/>
+        <img v-else :src="image" alt="background image" class="background-image" />
         <div class="filter absolute top-0 bottom-0 right-0 left-0"></div>
         <div class="content">
-          <h1>{{ heroPageData?.titre }}</h1>
-          <p>{{ heroPageData?.texte }}</p>
+          <h1>{{ title }}</h1>
+          <p>{{ text }}</p>
           <button>Booking</button>
         </div>
       </div>
@@ -20,47 +19,13 @@
 </template>
 
 <script setup lang="js">
-const route = useRoute();
-const name = route.name;
-
-
-const hero = {
-  Home: {
-    titre: "L'Artichaut",
-    texte: "Passez un séjour unique dans un hotel intimiste et chaleureux",
-    button: "Booking",
-    image: "/assets/video/0_Outdoor Living_Fire Pit_3840x2160_reset.mp4",
-  },
-  Rooms: {
-    titre: "Rooms",
-    texte: "Vivez l'exception, séjournez dans l'élégance absolue",
-    button: "Booking",
-    image: "/assets/video/0_Modern Living Room_City View_3840x2160.mp4",
-  },
-  Restaurant: {
-    titre: "Restaurant",
-    texte: "Savourez l'excellence, où chaque moment devient une expérience",
-    button: "Booking",
-    image: "/assets/image/restaurant-hall-with-round-square-tables-some-chairs-plants.png",
-  },
-  Spa: {
-    titre: "SPA",
-    texte: "Évadez-vous dans un sanctuaire de sérénité et de bien-être absolu.",
-    button: "Booking",
-    image: "/assets/image/woman-swimming-pool-spa.png",
-  },
-  Service: {
-    titre: "Service",
-    texte: "Notre hôtel de luxe vous offre des services exclusifs tels que valet, pressing, voiturier et bien plus pour un séjour inoubliable",
-    button: "Booking",
-    image: "/assets/image/DALL·E 2025-01-14 14.42.14 - A luxurious hotel service scene, showcasing a variety of high-end services. A valet in uniform opening the door of a shiny luxury car, with a high-end.webp",
-  }
-};
-let heroPageData = hero[name];
-if (!heroPageData) {
-  heroPageData = hero["Home"];
-}
-
+defineProps({
+      title: String,
+      text: String,
+      button: String,
+      image: String,
+    }
+)
 </script>
 
 <style scoped>

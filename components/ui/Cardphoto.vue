@@ -1,7 +1,7 @@
 <template>
-  <div class="card">
+  <div class="card w-full max-w-[60%] ">
     <img
-        class="w-[800px] max-h-[600px] object-contain mt-10 mx-auto"
+        class=" mt-8 md:relative w-full max-h-[600px] object-cover "
         src="/assets/image/parisluxe.png"
         alt="logo">
   </div>
