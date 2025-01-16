@@ -1,6 +1,10 @@
 <template>
   <UCard
-      class="review-card bg-[#4B6547] h-full flex flex-col">
+      :ui="{
+      ring: 'ring-green-900/50 dark:ring-green-900/50',
+      divide: 'divide-green-900 dark:divide-green-900'
+      }"
+      class="review-card bg-[#4B6547] dark:bg-[#4B6547] my-2 flex flex-col">
     <template #header>
       <div class="flex items-center justify-between">
         <p class="font-semibold font-lora text-lg pr-2">{{ name }}</p>
@@ -25,7 +29,7 @@
         />
         <div>
           <p class="font-medium text-[#eac684] font-lora">{{ name }}</p>
-          <p class="text-sm font-lora text-[#4B6547] ">Client vérifié</p>
+          <p class="text-sm font-lora text-green-950">Client vérifié</p>
         </div>
       </div>
     </template>

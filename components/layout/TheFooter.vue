@@ -4,14 +4,14 @@
       <!-- Subscription Section -->
       <div class="bg-[#eac684] py-4 rounded text-center md:flex md:flex-row md:flex-nowrap  md:mx-8">
         <div class="md:w-2/3 flex items-center justify-center">
-          <h2 class="text-[#4b6447]  md:pt-0 text-2xl md:text-3xl font-cardo">
+          <h2 class="text-[#4b6447]  md:pt-0 text-2xl md:text-4xl font-cardo">
             Stay up to date about our latest offers
           </h2>
         </div>
         <div class="flex flex-col sm:flex-row md:flex-col md:w-1/3 justify-center p-2 items-center gap-4">
           <input
               type="email"
-              placeholder="Enter your email..."
+              placeholder="Enter your email ..."
               class="bg-[#4b6447] text-[#eac684] text-base font-cardo px-5 py-2 rounded-md focus:outline-none focus:ring focus:ring-[#4b6447]"
           />
           <button
@@ -22,7 +22,7 @@
       </div>
 
       <!-- Site Information -->
-      <div class="bg-[#FBF9F4] md:flex md:flex-row  w-full text-center py-8">
+      <div class="bg-[#FBF9F4] md:flex md:flex-row  w-full text-center pt-8 pb-2">
         <!--texte info-->
         <div class="md:w-1/4">
           <h3 class="text-[#4b6447] text-3xl font-cardo">L’Artichaut</h3>
@@ -134,7 +134,9 @@
             <a href="#">Spa</a>
           </div>
         </div>
-
+      </div>
+      <div class="flex items-center justify-center  md:justify-end md:pr-4">
+        <img src="public/assets/logo/pay_method.png" alt="pay_method">
       </div>
 
 
@@ -144,6 +146,8 @@
       </div>
     </div>
   </footer>
+
+
 </template>
 <script>
 export default {
@@ -155,6 +159,7 @@ export default {
 .font-cardo {
   font-family: 'Cardo', serif;
 }
+
 .font-lora {
   font-family: 'Lora', serif;
 }

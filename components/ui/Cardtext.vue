@@ -18,7 +18,6 @@ export default {};
 <style scoped>
 .card {
   background-color: rgba(234, 198, 132, 0.54);
-
   max-width: 320px;
   text-align: center;
   margin-top: -20px;

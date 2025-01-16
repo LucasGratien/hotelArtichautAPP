@@ -4,6 +4,7 @@
     <div>
       <slot/>
       <UiLogo/>
+      <UiReview/>
     </div>
   </main>
   <layoutTheFooter/>

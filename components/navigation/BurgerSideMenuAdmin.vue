@@ -1,12 +1,12 @@
 <script setup lang="ts">
 const isOpen = ref(false)
 </script>
-
 <template>
   <div class="flex items-center justify-center p-2">
-  <UButton label="Admin" @click="isOpen = true" class="bg-[#4B6547] text-white border-2 border-[#EAC684] rounded px-4 py-2" />
+    <UButton label="Admin" @click="isOpen = true"
+             class="bg-[#4B6547] text-white border-2 border-[#EAC684] rounded px-4 py-2"/>
   </div>
-    <USlideover v-model="isOpen">
+  <USlideover v-model="isOpen">
     <div class="p-4 flex-1">
       <UButton
           color="gray"
@@ -18,7 +18,6 @@ const isOpen = ref(false)
           padded
           @click="isOpen = false"
       />
-
       <div class="flex items-center justify-center max-h-[80vh] bg-gray-100">
         <div class="max-h-[80vh] text-[#eac684] text-center text-3xl font-cardo p-4 bg-white rounded-lg shadow-md">
           <ul>

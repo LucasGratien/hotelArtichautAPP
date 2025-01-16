@@ -1,9 +1,20 @@
-
 <template>
-  <UTable :columns="columns" :rows="people" />
+  <div class="bg-[">
+    <UTable :columns="columns" :rows="people"/>
+    <div class="flex justify-end px-3 py-3.5 border-t border-gray-200 dark:border-gray-700">
+      <UPagination v-model="page" :page-count="pageCount" :total="people.length"/>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
+const page = ref(1)
+const pageCount = 5
+
+const rows = computed(() => {
+  return people.slice((page.value - 1) * pageCount, (page.value) * pageCount)
+})
+
 const columns = [{
   key: 'id',
   label: 'ID'
