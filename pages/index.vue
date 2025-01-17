@@ -5,8 +5,9 @@
                   :button="heroPageData?.button"
                   :image="heroPageData?.image" />
   </div>
- <div class="wrapper page-container flex flex-col items-center md:flex-row md:items-end w-full "> <UiCardphoto/>
-  <UiCardtext/></div>
+  <UiCardhome/>
+  <UiCardhomespa/>
+<UiCardrestaurant/>
 </template>
 
 
