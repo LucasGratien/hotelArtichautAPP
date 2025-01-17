@@ -1,5 +1,5 @@
 <template>
-  <div class="ui-card flex flex-col-reverse md:flex-row items-center bg-[#f7f3eb] p-8 rounded-lg shadow-lg w-full mt-4"
+  <div class="ui-card flex flex-col md:flex-row items-center bg-[#f7f3eb] p-8 rounded-lg shadow-lg w-full mt-4"
        :class="inverted ? 'md:flex-row-reverse' : ''">
     <div class="image-container w-full md:w-1/2 relative">
       <img
