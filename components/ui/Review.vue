@@ -4,32 +4,33 @@
     <div class="flex justify-center items-center">
       <img src="public/assets/image/component_separator.png" alt="separator">
     </div>
-    <div class="relative w-full max-w-8xl mx-auto px-16">
+    <div class="relative w-full max-w-8xl mx-auto px-0 md:px-8">
       <UCarousel
-          v-slot="{ item }"
           :items="reviews"
           :ui="{
       item: 'basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/5 px-2',
-      container: 'rounded-lg',
+      container: 'rounded-lg ',
       wrapper: 'relative'
     }"
           :prev-button="{
       variant: 'link',
       icon: 'i-heroicons-arrow-left-20-solid',
-      class: 'absolute -left- text-[#eac684] hover:text-[#eac684]/80'
+      class: '-start-6'
     }"
           :next-button="{
       variant: 'link',
       icon: 'i-heroicons-arrow-right-20-solid',
-      class: 'absolute -right- text-[#eac684] hover:text-[#eac684]/80'
+      class: '-end-6'
     }"
           arrows
           class="p-4"
       >
-        <ReviewCard
-            :name="item.name"
-            :rate="item.rate"
-            :description="item.description"
+        <UiReviewCard
+            v-for="review in reviews"
+            :key="review.id"
+            :name="`User #${review.user_id}`"
+            :rate="review.rate"
+            :description="review.review_content"
         />
       </UCarousel>
     </div>
@@ -46,35 +47,39 @@ interface Review {
   user_id: number;
 }
 
-import ReviewCard from "~/components/ui/ReviewCard.vue";
+const { data: reviews } = await useFetch<Review[]>('/review/', {
+  baseURL: useRuntimeConfig().public.apiBase,
+  default: () => []
 
-const reviews = [
-  {
-    rate: 5,
-    name: "Johnny",
-    description: "Mais c'était merveilleux cet Hotel, je recommande vivement ! Le service était impeccable et les installations sont magnifiques."
-  },
-  {
-    rate: 4,
-    name: "Marie",
-    description: "Très bon séjour, personnel attentionné. Seul petit bémol : le petit-déjeuner pourrait être plus varié."
-  },
-  {
-    rate: 5,
-    name: "Pierre",
-    description: "Une expérience inoubliable ! La vue depuis la chambre était à couper le souffle."
-  },
-  {
-    rate: 5,
-    name: "Sophie",
-    description: "Excellent rapport qualité-prix. Je reviendrai sans hésiter !"
-  },
-  {
-    rate: 4,
-    name: "Lucas",
-    description: "Très satisfait de mon séjour. L'emplacement est parfait pour visiter la ville."
-  }
-]
+})
+
+// const reviews = [
+//   {
+//     rate: 5,
+//     name: "Johnny",
+//     description: "Mais c'était merveilleux cet Hotel, je recommande vivement ! Le service était impeccable et les installations sont magnifiques."
+//   },
+//   {
+//     rate: 4,
+//     name: "Marie",
+//     description: "Très bon séjour, personnel attentionné. Seul petit bémol : le petit-déjeuner pourrait être plus varié."
+//   },
+//   {
+//     rate: 5,
+//     name: "Pierre",
+//     description: "Une expérience inoubliable ! La vue depuis la chambre était à couper le souffle."
+//   },
+//   {
+//     rate: 5,
+//     name: "Sophie",
+//     description: "Excellent rapport qualité-prix. Je reviendrai sans hésiter !"
+//   },
+//   {
+//     rate: 4,
+//     name: "Lucas",
+//     description: "Très satisfait de mon séjour. L'emplacement est parfait pour visiter la ville."
+//   }
+// ]
 </script>
 
 <style scoped>
