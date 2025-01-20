@@ -9,18 +9,18 @@
           :items="reviews"
           :ui="{
       item: 'basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/5 px-2',
-      container: 'rounded-lg ',
+      container: 'rounded-lg',
       wrapper: 'relative'
     }"
           :prev-button="{
       variant: 'link',
       icon: 'i-heroicons-arrow-left-20-solid',
-      class: '-start-6'
+      class: 'hidden sm:block -start-6'
     }"
           :next-button="{
       variant: 'link',
       icon: 'i-heroicons-arrow-right-20-solid',
-      class: '-end-6'
+      class: 'hidden sm:block -end-6'
     }"
           arrows
           class="p-4"
