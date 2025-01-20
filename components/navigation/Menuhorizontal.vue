@@ -24,7 +24,7 @@
 .Menu li{
   color: rgba(234, 198, 132, 1);
 font-family: Cardo, Serif;
-  font-size: 30px;
+  font-size: 25px;
   letter-spacing: 2px;
 }
 .Menu button {

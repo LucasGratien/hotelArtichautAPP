@@ -1,5 +1,5 @@
 <template>
-  <div class="block md:hidden">
+  <div class="block lg:hidden">
     <button class="burger" @click="toggleMenu">
       <span :class="{ open: isOpen }"></span>
       <span :class="{ open: isOpen }"></span>
