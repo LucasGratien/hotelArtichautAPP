@@ -4,7 +4,7 @@
       ring: 'ring-green-900/50 dark:ring-green-900/50',
       divide: 'divide-green-900 dark:divide-green-900'
       }"
-      class="review-card bg-[#4B6547] dark:bg-[#4B6547] my-2 flex flex-col">
+      class="review-card bg-[#4B6547] dark:bg-[#4B6547] m-2 flex flex-col">
     <template #header>
       <div class="flex items-center justify-between">
         <p class="font-semibold font-lora text-lg pr-2">{{ name }}</p>
@@ -19,7 +19,7 @@
       </div>
     </template>
 
-      <p class="text-[#eac684] text-base leading-snug font-lora">{{ description }}</p>
+      <p class="text-[#eac684] text-xs leading-snug font-lora">{{ description }}</p>
 
     <template #footer>
       <div class="flex items-center gap-3">
@@ -42,6 +42,8 @@ defineProps<{
   name: string
   description: string
 }>()
+
+
 </script>
 
 <style scoped>
