@@ -1,8 +1,8 @@
 <template>
-  <div class="restaurant-page">
+  <div class="restaurant-page mt-20">
     <div class="content">
-      <h1>Le restaurant</h1>
-      <p>
+      <h1 class="text-center">Le Restaurant</h1>
+      <p class="text-center">
         La chambre standard de notre hôtel allie confort et simplicité pour un séjour
         agréable. Elle est équipée d'un lit double spacieux, d'une télévision à écran
         plat, d'une connexion Wi-Fi gratuite, et d'une salle de bain privative avec
@@ -48,7 +48,7 @@ export default {
 <style scoped>
 .restaurant-page {
   padding: 20px;
-  background-color: rgba(234, 198, 132, 0.15);
+
 }
 
 .content {
@@ -56,15 +56,18 @@ export default {
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 3rem;
   color: #4a4a4a;
   text-decoration: underline ;
+  font-weight: bold;
+  font-family: Lora, "Times New Roman", Times, serif;
 }
 
 p {
-  font-size: 1rem;
+  font-size: 1.5rem;
   line-height: 1.5;
-  color: #666;
+  color: #4a4a4a;
+  font-family: Cardo, Serif ;
 }
 
 .images img {
