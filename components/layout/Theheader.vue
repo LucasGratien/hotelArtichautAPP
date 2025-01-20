@@ -4,7 +4,7 @@
 
 
       <div class="flex items-center space-x-2">
-        <img class="h-11" src="public/assets/image/logoArtichaut.png" alt="Logo" />
+        <img class="h-16" src="public/assets/image/logoArtichaut.png" alt="Logo" />
         <div class="title-wrapper flex flex-col items-start ">
           <Tittle title="L'Artichaut"></Tittle>
           <p class="text-center w-full -mt-3">* * *</p>
@@ -37,6 +37,6 @@ import Menuhorizontal from "~/components/navigation/Menuhorizontal.vue";
   color: rgba(234, 198, 132, 1);
 }
 img {
-  @apply h-11;
+  @apply h-16;
 }
 </style>
