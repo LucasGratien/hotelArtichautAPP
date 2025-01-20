@@ -6,7 +6,7 @@
                   :image="heroPageData?.image"/>
   </div>
   <div class="bg-white">
-    <div class="bg-[#f1ebd9] text-[#4b6447] text-center pt-8 md:pt-24 md:mx-8 md:mt-8">
+    <div class="bg-[#f1ebd9] text-[#4b6447] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] text-center pt-8 md:pt-24 md:mx-8 md:mt-8">
       <h1 class="text-3xl pb-4">L’Équipe : Une Excellence au Service de Votre Séjour</h1>
       <p>Notre équipe incarne l’excellence et le raffinement,
         afin de garantir une expérience inoubliable à chacun de nos invités.
@@ -20,7 +20,7 @@
         :text="card.text"
         :button="card.button"
         :image="card.image"
-        :interted="card.inverted"
+        :inverted="card.inverted"
     />
   </div>
 </template>
