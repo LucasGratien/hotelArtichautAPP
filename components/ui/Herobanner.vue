@@ -67,13 +67,13 @@ defineProps({
 }
 
 .content h1 {
-  font-size: 3rem;
+  font-size: 8rem;
   font-family: Lora;
   color: rgba(234, 198, 132, 1);
 }
 
 .content p {
-  font-size: 1rem;
+  font-size: 2rem;
   margin-bottom: 1.5rem;
   font-family: Cardo, serif;
 }
@@ -83,7 +83,7 @@ defineProps({
   color: #fcfcfc;
   border: 1px solid rgb(255, 255, 255);
   padding: 5px 10px;
-  font-size: 1rem;
+  font-size: 2rem;
   cursor: pointer;
   border-radius: 10px;
 }
