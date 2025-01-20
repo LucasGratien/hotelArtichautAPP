@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   modules: ['@nuxt/ui'],
   runtimeConfig: {
     public: {
-      apiBase: 'http://192.168.1.245:8000/api/',
+      apibase: 'http://192.168.1.245:8000/api',
     },
   },
 })
