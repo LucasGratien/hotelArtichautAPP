@@ -4,7 +4,7 @@
     <div class="flex justify-center items-center">
       <img src="public/assets/image/component_separator.png" alt="separator">
     </div>
-    <div class="relative w-full max-w-8xl mx-auto px-0 md:px-8">
+    <div class="relative w-full max-w-8xl mx-auto md:px-8">
       <UCarousel
           :items="reviews"
           :ui="{
@@ -40,6 +40,7 @@
 </template>
 
 <script setup lang="ts">
+
 interface Review {
   id: number;
   rate: number;
@@ -50,7 +51,6 @@ interface Review {
 const { data: reviews } = await useFetch<Review[]>('/review/', {
   baseURL: useRuntimeConfig().public.apiBase,
   default: () => []
-
 })
 
 // const reviews = [
