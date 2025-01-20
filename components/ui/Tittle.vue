@@ -16,7 +16,7 @@ const props = defineProps({
 .title {
   color: rgba(234, 198, 132, 1) ;
   font-family: Lora, 'Times New Roman', serif;
-  font-size: 2rem;
+  font-size: 3rem;
 }
 </style>
 

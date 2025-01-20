@@ -24,7 +24,7 @@
 .menu li{
   color: rgba(234, 198, 132, 1);
 font-family: Cardo, Serif;
-  font-size: 20px;
+  font-size: 30px;
   letter-spacing: 2px;
 }
 .menu button {
@@ -49,5 +49,3 @@ font-family: Cardo, Serif;
 }
 
 </style>
-<script setup lang="ts">
-</script>
