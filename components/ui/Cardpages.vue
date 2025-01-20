@@ -10,7 +10,6 @@
     </div>
 
     <div class="w-full :w-2/6 p-8 flex flex-col justify-end  -md-10 z-10 text-background ":class="inverted ? 'lg:-me-10' : 'lg:-ms-10'">
-
         <h2 class="title text-3xl font-serif mb-6 text-center md:text-left">{{ title }}</h2>
         <p class="description text-gray-700 leading-relaxed mb-8 text-center md:text-left">{{ description }}</p>
         <div class="text-center md:text-left">
