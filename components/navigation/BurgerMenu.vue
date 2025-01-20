@@ -7,7 +7,6 @@
       </button>
 
 
-
     <nav v-if="isOpen" class="menu">
       <ul>
         <li><nuxtLink to="/">Home</nuxtlink></li>
