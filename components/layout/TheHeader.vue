@@ -2,20 +2,21 @@
   <nav class="navbar navbar-expand-md">
     <div class="flex justify-between items-center mx-auto w-full px-4">
 
+
       <div class="flex items-center space-x-2">
         <img class="h-16" src="public/assets/image/logoArtichaut.png" alt="Logo" />
         <div class="title-wrapper flex flex-col items-start ">
-          <Tittle title="L'Artichaut"></Tittle>
+          <UiTittle title="L'Artichaut"></UiTittle>
           <p class="text-center w-full -mt-3">* * *</p>
         </div>
       </div>
 
 
-      <div class="hidden md:block menuhorizontal">
-        <MenuHorizontal />
+      <div class="hidden lg:block menuhorizontal">
+        <NavigationMenuhorizontal />
       </div>
       <div class="block md:hidden menuburger">
-        <BurgerMenu />
+        <NavigationBurgermenu />
       </div>
     </div>
   </nav>
@@ -23,8 +24,8 @@
 
 <script setup lang="js">
 import Tittle from "~/components/ui/Tittle.vue";
-import BurgerMenu from "~/components/navigation/BurgerMenu.vue";
-import MenuHorizontal from "~/components/navigation/MenuHorizontal.vue";
+import Burgermenu from "@/components/navigation/Burgermenu.vue";
+import Menuhorizontal from "~/components/navigation/Menuhorizontal.vue";
 </script>
 
 <style scoped>
