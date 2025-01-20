@@ -22,11 +22,6 @@
           src="/assets/image/woman-swimming-pool-spa.png"
           alt="Sauna"
       />
-      <img
-          class="rounded-lg shadow-lg object-cover w-[50%] h-auto absolute -bottom-12 -right-12 md:-bottom-8 md:-right-8"
-          src="/assets/image/massage.png"
-          alt="Massage"
-      />
     </div>
   </div>
 </template>
