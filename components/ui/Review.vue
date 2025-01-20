@@ -86,7 +86,9 @@ const { data: reviews } = await useFetch<Review[]>('/review/', {
 .font-cardo {
   font-family: 'Cardo', serif;
 }
-.font-lora {
-  font-family: 'Lora', serif;
-}
+
 </style>
+
+<!--//.font-lora {-->
+<!--//  font-family: 'Lora', serif;-->
+<!--//}-->
