@@ -4,23 +4,23 @@
     <div class="flex justify-center items-center">
       <img src="public/assets/image/component_separator.png" alt="separator">
     </div>
-    <div class="relative w-full max-w-8xl mx-auto px-0 md:px-8">
+    <div class="relative w-full max-w-8xl mx-auto md:px-8">
       <UCarousel
           :items="reviews"
           :ui="{
       item: 'basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/5 px-2',
-      container: 'rounded-lg ',
+      container: 'rounded-lg',
       wrapper: 'relative'
     }"
           :prev-button="{
       variant: 'link',
       icon: 'i-heroicons-arrow-left-20-solid',
-      class: '-start-6'
+      class: 'hidden sm:block -start-6'
     }"
           :next-button="{
       variant: 'link',
       icon: 'i-heroicons-arrow-right-20-solid',
-      class: '-end-6'
+      class: 'hidden sm:block -end-6'
     }"
           arrows
           class="p-4"
@@ -40,6 +40,7 @@
 </template>
 
 <script setup lang="ts">
+
 interface Review {
   id: number;
   rate: number;
@@ -50,7 +51,6 @@ interface Review {
 const { data: reviews } = await useFetch<Review[]>('/review/', {
   baseURL: useRuntimeConfig().public.apiBase,
   default: () => []
-
 })
 
 // const reviews = [
@@ -90,3 +90,7 @@ const { data: reviews } = await useFetch<Review[]>('/review/', {
   font-family: 'Lora', serif;
 }
 </style>
+
+<!--//.font-lora {-->
+<!--//  font-family: 'Lora', serif;-->
+<!--//}-->
