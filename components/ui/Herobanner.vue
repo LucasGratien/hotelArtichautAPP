@@ -11,7 +11,9 @@
         <div class="content">
           <h1>{{ title }}</h1>
           <p>{{ text }}</p>
-          <button>Booking</button>
+          <div v-if="button && button.trim().length > 0">
+          <button>{{ button }}</button>
+          </div>
         </div>
       </div>
     </div>

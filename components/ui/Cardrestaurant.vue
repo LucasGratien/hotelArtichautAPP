@@ -11,15 +11,14 @@
         ambiance propice à la détente. Idéale pour les séjours professionnels ou
         touristiques, cette chambre vous garantit un repos optimal.
       </p>
-     <div class="arrow-double flex justify-end"> <button class="arrow left " @click="prevSlide">←</button>
-      <button class="arrow right" @click="nextSlide">→</button>
-     </div>
+      <UiCarousel
+          :current-slide="currentSlide"
+          :images="images"
+          @prev-slide="prevSlide"
+          @next-slide="nextSlide"
+      />
     </div>
-    <div class="carousel">
-      <div class="images ">
-        <img :src="images[currentSlide]" alt="Restaurant Image" />
-      </div>
-    </div>
+
   </div>
 </template>
 
@@ -69,37 +68,9 @@ p {
   color: #666;
 }
 
-.carousel {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.images {
-  overflow: hidden;
-  width: 40%;
-  height: auto;
-}
-
 .images img {
   width: 100%;
   border-radius: 10px;
 }
 
-.arrow {
-  background-color: rgba(255, 255, 255, 0.19);
-  border: none;
-  font-size: 2rem;
-  cursor: pointer;
-  padding: 10px;
-  border: #090000 solid 2px;
-  border-radius: 30px;
-  color: #4a4a4a;
-  font-size: large;
-}
-
-.arrow:hover {
-  color: #a09d9d;
-}
 </style>
