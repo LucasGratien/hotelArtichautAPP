@@ -99,6 +99,6 @@ const toggleMenu = () => {
 }
 
 .menu li a:hover {
-  color: rgba(234, 198, 132, 1);
+ color: var(--primary-color);
 }
 </style>

@@ -22,29 +22,29 @@
 </template>
 <style>
 .menu li{
-  color: rgba(234, 198, 132, 1);
-font-family: Cardo, Serif;
+  color:var(--primary-color);
+font-family: Cardo,serif;
   font-size: 25px;
   letter-spacing: 2px;
 }
 .menu button {
-  background-color: rgba(75, 101, 71, 1);
-  color: white;
-  border: 2px solid rgba(234, 198, 132, 1);
+  background-color: var(--secondary-color);
+  color: var(--background-color);
+  border: 2px solid var(--primary-color);
   border-radius: 5px;
   padding: 5px 15px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 .menu li:hover {
-  color: rgba(255, 255, 255, 1);
+  color: var(--background-color);
   transition: color 0.3s ease;
   transform: scale(1.1);
 }
 
 .menu button:hover {
-  background-color: rgba(234, 198, 132, 1);
-  color: rgba(75, 101, 71, 1);
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
   transform: scale(1.1);
 }
 

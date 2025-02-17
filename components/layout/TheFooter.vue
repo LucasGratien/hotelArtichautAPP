@@ -12,10 +12,10 @@
           <input
               type="email"
               placeholder="Enter your email ..."
-              class="bg-[#4b6Utiliser des nommages corrects : du kebab-case pour les classes css (et non .Menu dans Menuhorizontal.vue), du PascalCase pour les composants Vue (MenuHorizontal au lieu de Menuhorizontal par exemple)447] text-[#eac684] text-base font-cardo px-5 py-2 rounded-md focus:outline-none focus:ring focus:ring-[#4b6447]"
+              class="bg-[#4b6Utiliser des nommages corrects : du kebab-case pour les classes css (et non .Menu dans Menuhorizontal.vue), du PascalCase pour les composants Vue (MenuHorizontal au lieu de Menuhorizontal par exemple)447] text-[var(primary)] text-base font-cardo px-5 py-2 rounded-md focus:outline-none focus:ring focus:ring-[#4b6447]"
           />
           <button
-              class="bg-[#4b6447] text-[#eac684] text-base font-cardo px-8 py-2 rounded-md hover:bg-[#365132]">
+              class="bg-[#4b6447] text-[var(primary)] text-base font-cardo px-8 py-2 rounded-md hover:bg-[#365132]">
             Subscribe to the Newsletter
           </button>
         </div>
@@ -138,7 +138,7 @@
 
 
       <!-- Footer Bottom -->
-      <div class="bg-[#4b6447] text-center text-[#eac684] text-base py-5 font-lora ">
+      <div class="bg-[#4b6447] text-center text-[var(primary)] text-base py-5 font-lora ">
         L’artichaut <br/> © 2000-2023 <br/> All Rights Reserved
       </div>
     </div>

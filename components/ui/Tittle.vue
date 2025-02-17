@@ -14,8 +14,7 @@ const props = defineProps({
 </script>
 <style lang="css" scoped>
 .title {
-  color: rgba(234, 198, 132, 1) ;
-  font-family: Lora, 'Times New Roman', serif;
+  color: var(--primary-color);
   font-size: 3rem;
 }
 </style>

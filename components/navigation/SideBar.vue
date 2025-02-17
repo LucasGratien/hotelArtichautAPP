@@ -2,7 +2,7 @@
   <UVerticalNavigation :links="links">
 
     <template #default="{ link }">
-      <span class="group-hover:text-primary relative items-center text-[#eac684] font-cardo">{{ link.label }}</span>
+      <span class="group-hover:text-primary relative items-center text-[var(primary)] font-cardo">{{ link.label }}</span>
     </template>
 
   </UVerticalNavigation>

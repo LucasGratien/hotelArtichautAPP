@@ -19,7 +19,7 @@
       </div>
     </template>
 
-      <p class="text-[#eac684] text-xs leading-snug font-lora">{{ description }}</p>
+      <p class="text-[var(primary)] text-xs leading-snug">{{ description }}</p>
 
     <template #footer>
       <div class="flex items-center gap-3">
@@ -28,8 +28,8 @@
             size="lg"
         />
         <div>
-          <p class="font-medium text-[#eac684] font-lora">{{ name }}</p>
-          <p class="text-sm font-lora text-green-950">Client vérifié</p>
+          <p class="font-medium text-[var(primary)] ">{{ name }}</p>
+          <p class="text-sm  text-green-950">Client vérifié</p>
         </div>
       </div>
     </template>
@@ -47,8 +47,5 @@ defineProps<{
 <style scoped>
 .review-card :deep( div:nth-child(2)) {
   height : 100%;
-}
-.font-lora {
-  font-family: 'Lora', serif;
 }
 </style>

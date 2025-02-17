@@ -1,6 +1,6 @@
 <template>
   <div class="bg-[#4B6547] pt-4">
-    <h2 class="text-[#eac684] text-2xl font-cardo text-center "> OUR HAPPY CUSTOMER</h2>
+    <h2 class="text-[var(primary)] text-2xl font-cardo text-center "> OUR HAPPY CUSTOMER</h2>
     <div class="flex justify-center items-center">
       <img src="public/assets/image/component_separator.png" alt="separator">
     </div>
@@ -83,12 +83,6 @@ const { data: reviews } = await useFetch<Review[]>('/review/', {
 </script>
 
 <style scoped>
-.font-cardo {
-  font-family: 'Cardo', serif;
-}
-.font-lora {
-  font-family: 'Lora', serif;
-}
 </style>
 
 <!--//.font-lora {-->

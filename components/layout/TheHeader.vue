@@ -13,27 +13,25 @@
 
 
       <div class="hidden lg:block ">
-        <MenuHorizontal />
+        <NavigationMenuHorizontal />
       </div>
       <div class="block lg:hidden">
-        <BurgerMenu/>
+        <NavigationBurgerMenu/>
       </div>
     </div>
   </nav>
 </template>
 
 <script setup lang="js">
-import MenuHorizontal from "~/components/navigation/MenuHorizontal.vue";
-import BurgerMenu from "~/components/navigation/BurgerMenu.vue";
 </script>
 
 <style scoped>
 .navbar {
-  background-color: rgba(75, 101, 71, 1);
+  background-color: var(--secondary-color);
 }
 
 .title-wrapper p {
-  color: rgba(234, 198, 132, 1);
+ color: var(--primary-color);
 }
 img {
   @apply h-16;
