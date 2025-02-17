@@ -12,17 +12,19 @@
       </div>
 
 
-      <div class="hidden lg:block menuhorizontal">
-        <NavigationMenuhorizontal />
+      <div class="hidden lg:block ">
+        <MenuHorizontal />
       </div>
-      <div class="block md:hidden menuburger">
-        <NavigationBurgermenu />
+      <div class="block lg:hidden">
+        <BurgerMenu/>
       </div>
     </div>
   </nav>
 </template>
 
 <script setup lang="js">
+import MenuHorizontal from "~/components/navigation/MenuHorizontal.vue";
+import BurgerMenu from "~/components/navigation/BurgerMenu.vue";
 </script>
 
 <style scoped>
