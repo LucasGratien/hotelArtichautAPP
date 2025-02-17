@@ -32,7 +32,7 @@
             Tél.: +33 454 987 944 <br/>
             reception@lartichaut.fr
           </p>
-          <!-- Social Media Icons -->
+          <!-- Media Icons -->
           <div class="flex justify-center p-3 gap-4">
             <div
                 class="w-12 h-12 md:w-10 md:h-10 bg-[#4b6447] rounded-full flex items-center justify-center hover:bg-[#365132]">

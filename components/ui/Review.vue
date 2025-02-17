@@ -39,19 +39,13 @@
 
 </template>
 
-<script setup lang="ts">
+<script setup lang="js">
 
-interface Review {
-  id: number;
-  rate: number;
-  review_content: string;
-  user_id: number;
-}
-
-const { data: reviews } = await useFetch<Review[]>('/review/', {
+const { data: reviews } = await useFetch('/review/', {
   baseURL: useRuntimeConfig().public.apiBase,
   default: () => []
 })
+
 
 // const reviews = [
 //   {
