@@ -1,0 +1,13 @@
+:root {
+    --primary-color: rgba(234, 198, 132, 1);
+    --secondary-color: rgba(75, 101, 71, 1);
+    --background-color: rgba(255, 255, 255, 1)
+}
+
+h2, h1, h3, h4 {
+    font-family: 'Lora', serif;
+}
+
+p {
+    font-family: 'Cardo', serif;
+}

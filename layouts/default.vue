@@ -1,5 +1,5 @@
 <template>
-  <layoutTheheader/>
+  <LayoutTheHeader/>
   <main class="main">
     <div>
       <slot/>

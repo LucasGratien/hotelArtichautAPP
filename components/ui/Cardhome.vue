@@ -1,5 +1,5 @@
 <template>
-  <div class="ui-card flex flex-col md:flex-row items-center bg-[#f7f3eb] p-8 rounded-lg shadow-lg w-full mt-4"
+  <div class="ui-card flex flex-col md:flex-row items-center bg-[var(--background)] p-8 rounded-lg shadow-lg w-full mt-4"
        :class="inverted ? 'md:flex-row-reverse' : ''">
     <div class="image-container w-full md:w-1/2 relative">
       <img
@@ -14,7 +14,7 @@
       <div class="text-center md:text-left">
         <NuxtLink
             :to="link"
-            class="bg-yellow-500 hover:bg-yellow-600 text-white py-3 px-8 rounded-md shadow cta-btn"
+            class="bg-yellow-500 hover:bg-yellow-600 text-[var(--background)] py-3 px-8 rounded-md shadow cta-btn"
         >
           {{ buttonText }}
         </NuxtLink>
@@ -54,15 +54,9 @@ defineProps({
 }
 
 .title {
-  font-family: 'Lora', serif;
   color: black;
   text-decoration: underline;
 }
-
-.description {
-  font-family: 'Cardo', serif;
-}
-
 .cta-btn {
   transition: background-color 0.3s ease;
 }

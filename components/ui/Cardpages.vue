@@ -15,7 +15,7 @@
         <div class="text-center md:text-left">
           <NuxtLink
               :to="link"
-              class="bg-yellow-500 hover:bg-yellow-600 text-white py-3 px-8 rounded-md ml-10 shadow cta-btn"
+              class="bg-yellow-500 hover:bg-yellow-600 text-[var(--background)] py-3 px-8 rounded-md ml-10 shadow cta-btn"
           >
             {{ buttonText }}
           </NuxtLink>
@@ -56,17 +56,12 @@ defineProps({
 }*/
 
 .text-background {
-  background-color: rgba(241, 235, 217, 0.8);
+  background-color: var(--background-color);
 }
 
 .title {
-  font-family: 'Lora', serif;
   color: black;
   text-decoration: underline;
-}
-
-.description {
-  font-family: 'Cardo', serif;
 }
 
 .cta-btn {

@@ -8,7 +8,7 @@
       <div class="text-center md:text-left">
         <NuxtLink
             to="/Spa"
-            class="bg-yellow-500 hover:bg-yellow-600 text-white py-3 px-8 rounded-md shadow cta-btn"
+            class="bg-yellow-500 hover:bg-yellow-600 text-[var(--background)] py-3 px-8 rounded-md shadow cta-btn"
         >
           En savoir+
         </NuxtLink>
@@ -36,19 +36,14 @@
 
 <style scoped>
 .spa-card {
-  @apply  flex flex-col-reverse md:flex-row items-center bg-[#f7f3eb] p-8 rounded-lg shadow-lg w-full mt-4;
-  background-color: #f7f3eb;
+  @apply  flex flex-col-reverse md:flex-row items-center bg-[var(--background)] p-8 rounded-lg shadow-lg w-full mt-4;
+  background-color: var(--background-color);
   width: 100%;
 }
 
 .title {
-  font-family: 'Lora', serif;
   color: black;
   text-decoration: underline;
-}
-
-.description {
-  font-family: 'Cardo', serif;
 }
 
 .cta-btn {

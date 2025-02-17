@@ -12,10 +12,10 @@
           <input
               type="email"
               placeholder="Enter your email ..."
-              class="bg-[#4b6447] text-[#eac684] text-base font-cardo px-5 py-2 rounded-md focus:outline-none focus:ring focus:ring-[#4b6447]"
+              class="bg-[#4b6Utiliser des nommages corrects : du kebab-case pour les classes css (et non .Menu dans Menuhorizontal.vue), du PascalCase pour les composants Vue (MenuHorizontal au lieu de Menuhorizontal par exemple)447] text-[var(primary)] text-base font-cardo px-5 py-2 rounded-md focus:outline-none focus:ring focus:ring-[#4b6447]"
           />
           <button
-              class="bg-[#4b6447] text-[#eac684] text-base font-cardo px-8 py-2 rounded-md hover:bg-[#365132]">
+              class="bg-[#4b6447] text-[var(primary)] text-base font-cardo px-8 py-2 rounded-md hover:bg-[#365132]">
             Subscribe to the Newsletter
           </button>
         </div>
@@ -123,15 +123,12 @@
         <div class="md:hidden py-4">
           <h3 class="text-[#4b6447] text-3xl font-cardo">Plan du site</h3>
           <div class="grid grid-cols-3 sm:grid-cols-3 gap-4 text-[#1e1e1e] pt-6 text-lg font-lora">
-            <a href="#">Accueil</a>
-            <a href="#">Histoire</a>
-            <a href="#">Chambres</a>
-            <a href="#">Équipe</a>
-            <a href="#">Compte</a>
-            <a href="#">Actualités</a>
-            <a href="#">Restaurant</a>
-            <a href="#">Bar</a>
-            <a href="#">Spa</a>
+            <nuxtLink to ="/">Home</nuxtLink>
+            <nuxtLink to ="/Rooms">Rooms</nuxtLink>
+            <nuxtLink to ="/Restaurant">Restaurant</nuxtLink>
+            <NuxtLink to = '/Service'>Services</NuxtLink>
+            <NuxtLink to = '/Spa'>SPA</NuxtLink>
+            <NuxtLink to = '/Reserver'><button>Booking</button></NuxtLink>
           </div>
         </div>
       </div>
@@ -141,7 +138,7 @@
 
 
       <!-- Footer Bottom -->
-      <div class="bg-[#4b6447] text-center text-[#eac684] text-base py-5 font-lora ">
+      <div class="bg-[#4b6447] text-center text-[var(primary)] text-base py-5 font-lora ">
         L’artichaut <br/> © 2000-2023 <br/> All Rights Reserved
       </div>
     </div>

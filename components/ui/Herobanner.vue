@@ -68,20 +68,18 @@ defineProps({
 
 .content h1 {
   font-size: 8rem;
-  font-family: Lora;
-  color: rgba(234, 198, 132, 1);
+ color: var(--primary-color);
 }
 
 .content p {
   font-size: 2rem;
   margin-bottom: 1.5rem;
-  font-family: Cardo, serif;
 }
 
 .content button {
   background-color: rgba(255, 255, 255, 0.24);
-  color: #fcfcfc;
-  border: 1px solid rgb(255, 255, 255);
+  color: var(--background-color);
+  border: 1px solid var(--background-color);
   padding: 5px 10px;
   font-size: 2rem;
   cursor: pointer;
@@ -89,8 +87,8 @@ defineProps({
 }
 
 .content button:hover {
-  background-color: rgba(75, 101, 71, 1);
-  color: rgba(234, 198, 132, 1);
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
   transform: scale(1.1);
   transition: background-color 0.3s ease;
 }

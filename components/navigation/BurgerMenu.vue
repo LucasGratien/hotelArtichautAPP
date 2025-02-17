@@ -1,19 +1,19 @@
 <template>
   <div class="block ">
-    <button class="burger" @click="toggleMenu">
-      <span :class="{ open: isOpen }"></span>
-      <span :class="{ open: isOpen }"></span>
-      <span :class="{ open: isOpen }"></span>
-    </button>
+      <button class="burger" :class="{ open: isOpen }" @click="toggleMenu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
 
 
     <nav v-if="isOpen" class="menu">
       <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/Rooms">Rooms</a></li>
-        <li><a href="/Restaurant">Restaurant</a></li>
-        <li><a href="/Spa">SPA</a></li>
-        <li><a href="/Service">Services</a></li>
+        <li><nuxtLink to="/">Home</nuxtlink></li>
+        <li><nuxtLink to="/Rooms">Rooms</nuxtlink></li>
+        <li><nuxtLink to="/Restaurant">Restaurant</nuxtlink></li>
+        <li><nuxtLink to="/Spa">SPA</nuxtlink></li>
+        <li><nuxtLink to="/Service">Service</nuxtlink></li>
       </ul>
     </nav>
   </div>
@@ -99,6 +99,6 @@ const toggleMenu = () => {
 }
 
 .menu li a:hover {
-  color: rgba(234, 198, 132, 1);
+ color: var(--primary-color);
 }
 </style>

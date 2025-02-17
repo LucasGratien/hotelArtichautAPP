@@ -1,6 +1,6 @@
 <template>
   <!-- la card -->
-  <div class="bg-[#f1ebd9] dark:bg-[#f1ebd9] m-5 md:flex md:mx-8 md:my-0">
+  <div class="bg-[var(--background)] dark:bg-[var(--background)] m-5 md:flex md:mx-8 md:my-0">
 
     <!--  mobile -->
     <div class="block md:hidden">
@@ -95,11 +95,5 @@ defineProps({
 </script>
 
 <style scoped>
-.font-cardo {
-  font-family: 'Cardo', serif;
-}
 
-.font-lora {
-  font-family: 'Lora', serif;
-}
 </style>

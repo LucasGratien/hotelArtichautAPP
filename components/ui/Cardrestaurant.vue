@@ -47,7 +47,6 @@ export default {
 
 <style scoped>
 .restaurant-page {
-  font-family: Arial, sans-serif;
   padding: 20px;
   background-color: rgba(234, 198, 132, 0.15);
 }
