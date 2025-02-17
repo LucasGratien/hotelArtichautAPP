@@ -15,7 +15,7 @@
       <div class="hidden lg:block menuhorizontal">
         <NavigationMenuhorizontal />
       </div>
-      <div class="block md:hidden menuburger">
+      <div class="block lg:hidden menuburger">
         <NavigationBurgermenu />
       </div>
     </div>
