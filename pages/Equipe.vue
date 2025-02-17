@@ -30,7 +30,7 @@ const heroPageData = {
   title: "L'Equipe",
   text: "Pour votre service",
   button: "",
-  image: "/assets/image/brigade.jpg",
+  image: "@/assets/images/brigade.jpg",
 }
 
 const cardsEquipe = [
@@ -38,34 +38,34 @@ const cardsEquipe = [
     title: "Directrice",
     text: "Madame Élise Dupont Une visionnaire passionnée par l’hospitalité de luxe, Madame Dupont dirige l’établissement avec élégance et innovation. Avec plus de 15 ans d’expérience dans l’hôtellerie de prestige, elle s’assure que chaque séjour dépasse les attentes. ",
     button: "",
-    image: "/assets/image/equipe_placeholder.jpg",
+    image: "@/assets/images/equipe_placeholder.jpg",
     inverted: false,
   },
   {
     title: "Chef Etoile",
     text: " Chef Julien Morel Une cuisine qui mêle tradition et modernité. Le Chef Morel vous propose des saveurs uniques, avec des produits locaux soigneusement sélectionnés pour émerveiller vos papilles. ",
     button: "",
-    image: "/assets/image/equipe_placeholder.jpg",
+    image: "@/assets/images/equipe_placeholder.jpg",
     inverted: true,
   },
   {
     title: "Service Client",
     text: " Monsieur Thomas Leclerc Toujours à votre écoute, Monsieur Leclerc et son équipe veillent à ce que chaque moment de votre séjour soit exceptionnel. ",
     button: "",
-    image: "/assets/image/equipe_placeholder.jpg",
+    image: "@/assets/images/equipe_placeholder.jpg",
     inverted: false
   },
   {
     title: "Spa Manager",
     text: "Madame Sofia Martinez Responsable de notre sanctuaire de bien-être, Madame Martinez vous guide vers une détente absolue grâce à des soins exclusifs et personnalisés, issus des meilleures traditions du monde entier. ",
     button: "",
-    image: "/assets/image/equipe_placeholder.jpg",
+    image: "@/assets/images/equipe_placeholder.jpg",
     inverted: true,
   }, {
     title: "Conciergerie",
     text: "Monsieur Louis Bernard Membre des Clefs d’Or, Monsieur Bernard orchestre les moindres détails pour répondre à toutes vos demandes, qu’il s’agisse d’organiser un dîner romantique, une excursion privée ou une arrivée en hélicoptère ",
     button: "",
-    image: "/assets/image/equipe_placeholder.jpg",
+    image: "@/assets/images/equipe_placeholder.jpg",
     inverted: false,
   }
 ]

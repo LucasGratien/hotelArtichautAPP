@@ -76,7 +76,7 @@
           </div>
         </div>
         <div class="flex py-4 justify-center items-center md:hidden">
-          <img src="public/assets/image/component_separator.png" alt="separator">
+          <img src="@/assets/images/component_separator.png" alt="separator">
         </div>
         <!--help menu-->
         <div class="hidden md:block md:w-3/4 ">
@@ -133,7 +133,7 @@
         </div>
       </div>
       <div class="flex items-center justify-center  md:justify-end md:pr-4">
-        <img src="public/assets/logo/pay_method.png" alt="pay_method">
+        <img src="~/assets/logo/pay_method.png" alt="pay_method">
       </div>
 
 

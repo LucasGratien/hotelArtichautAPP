@@ -19,7 +19,7 @@
     <div class="image-container w-full md:w-1/2 relative flex justify-center items-center">
       <img
           class="rounded-lg shadow-lg object-cover w-[80%] md:w-[70%] h-auto z-0"
-          src="/assets/image/woman-swimming-pool-spa.png"
+          src="@/assets/images/woman-swimming-pool-spa.png"
           alt="Sauna"
       />
     </div>

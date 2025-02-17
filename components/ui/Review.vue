@@ -2,7 +2,7 @@
   <div class="bg-[#4B6547] pt-4">
     <h2 class="text-[var(primary)] text-2xl font-cardo text-center "> OUR HAPPY CUSTOMER</h2>
     <div class="flex justify-center items-center">
-      <img src="public/assets/image/component_separator.png" alt="separator">
+      <img src="@/assets/images/component_separator.png" alt="separator">
     </div>
     <div class="relative w-full max-w-8xl mx-auto md:px-8">
       <UCarousel
@@ -41,10 +41,10 @@
 
 <script setup lang="js">
 
-const { data: reviews } = await useFetch('/review/', {
-  baseURL: useRuntimeConfig().public.apiBase,
-  default: () => []
-})
+ const { data: reviews } = await useFetch('/review/', {
+   baseURL: useRuntimeConfig().public.apiBase,
+   default: () => []
+ })
 
 
 // const reviews = [

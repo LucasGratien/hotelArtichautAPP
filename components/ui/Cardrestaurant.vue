@@ -23,12 +23,14 @@
 </template>
 
 <script>
+import img1 from '@/assets/images/restaurant-hall-with-round-square-tables-some-chairs-plants.png'
+import img2 from '@/assets/images/chef.png'
 export default {
   data() {
     return {
       images: [
-        "/assets/image/restaurant-hall-with-round-square-tables-some-chairs-plants.png",
-        "/assets/image/chef.png",
+        img1,
+        img2,
       ],
       currentSlide: 0,
     };

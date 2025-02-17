@@ -26,7 +26,7 @@
     <!--  Desktop -->
     <div class="hidden md:flex">
 
-      <!--template si image a gauche -->
+      <!--template si images a gauche -->
       <template v-if="!inverted">
         <!-- Image box -->
         <div v-if="image && image.trim().length > 0" class="md:w-1/3 p-8">

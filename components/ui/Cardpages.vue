@@ -4,7 +4,7 @@
     <div class="image-container  w-full max-w-4xl">
       <img
           class="rounded-lg object-cover  w-full"
-          :src="image"
+          src="@/assets/images/parisluxe.png"
           :alt="imageAlt"
       />
     </div>
@@ -61,7 +61,7 @@ room: Object,
   transition: background-color 0.3s ease;
 }
 
-/*.image-container img {
+/*.images-container img {
   object-fit: cover;
 }*/
 </style>
