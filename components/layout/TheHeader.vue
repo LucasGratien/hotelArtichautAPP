@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-md">
     <div class="flex justify-between items-center mx-auto w-full px-4">
 
-
+<!--lucas lucas-->
       <div class="flex items-center space-x-2">
         <img class="h-16" src="public/assets/image/logoArtichaut.png" alt="Logo" />
         <div class="title-wrapper flex flex-col items-start ">
