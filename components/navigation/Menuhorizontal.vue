@@ -1,5 +1,5 @@
 <template>
-  <ul class="Menu flex flex-row items-center justify-center gap-4 bg">
+  <ul class="Menu flex flex-row items-center justify-center gap-4 bg ">
     <li>
       <NuxtLink to = "/" >Home</NuxtLink>
     </li>
