@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="js">
 const isOpen = ref(false)
 </script>
 <template>
@@ -21,13 +21,12 @@ const isOpen = ref(false)
       <div class="flex items-center justify-center max-h-[80vh] bg-gray-100">
         <div class="max-h-[80vh] text-[#eac684] text-center text-3xl font-cardo p-4 bg-white rounded-lg shadow-md">
           <ul>
-            <li class="pb-6"><a href="/">Services</a></li>
-            <li class="pb-6"><a href="/Rooms">Rooms</a></li>
-            <li class="pb-6"><a href="/Restaurant">Content</a></li>
-            <li class="pb-6"><a href="/Spa">Client</a></li>
-            <li class="pb-6"><a href="/Service">Reservation</a></li>
-            <li class="pb-6"><a href="/Service">Staff</a></li>
-            <li class="pb-6"><a href="/Service">Statistiques</a></li>
+            <li class="pb-6"><NuxtLink to = '/'>Home</NuxtLink></li>
+            <li class="pb-6"><NuxtLink to = '/Rooms'>Rooms</NuxtLink></li>
+            <li class="pb-6"><<NuxtLink to = '/Restaurant'>Restaurant</NuxtLink></li>
+            <li class="pb-6"><NuxtLink to = '/Spa'>Spa</NuxtLink></li>
+            <li class="pb-6"><NuxtLink to = '/Service'>Services</NuxtLink></li>
+            <li class="pb-6"><NuxtLink to = '/Booking'>Booking</NuxtLink></li>
           </ul>
         </div>
       </div>

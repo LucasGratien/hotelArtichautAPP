@@ -12,10 +12,10 @@
 
 
       <div class="hidden md:block menuhorizontal">
-        <Menuhorizontal />
+        <MenuHorizontal />
       </div>
       <div class="block md:hidden menuburger">
-        <Burgermenu />
+        <BurgerMenu />
       </div>
     </div>
   </nav>
@@ -23,8 +23,8 @@
 
 <script setup lang="js">
 import Tittle from "~/components/ui/Tittle.vue";
-import Burgermenu from "@/components/navigation/Burgermenu.vue";
-import Menuhorizontal from "~/components/navigation/Menuhorizontal.vue";
+import BurgerMenu from "~/components/navigation/BurgerMenu.vue";
+import MenuHorizontal from "~/components/navigation/MenuHorizontal.vue";
 </script>
 
 <style scoped>
