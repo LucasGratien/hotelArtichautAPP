@@ -4,7 +4,7 @@
     <div class="image-container  w-full max-w-4xl">
       <img
           class="rounded-lg object-cover  w-full"
-          src="@/assets/images/parisluxe.png"
+          :src="image"
           :alt="imageAlt"
       />
     </div>
