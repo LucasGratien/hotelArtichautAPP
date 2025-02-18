@@ -3,7 +3,7 @@
     <UiHerobanner :title="heroPageData?.title"
                   :text="heroPageData?.text"
                   :button="heroPageData?.button"
-                  :image="heroPageData?.image" />
+                  :image="heroPageData?.image"/>
   </div>
   <UiCardhome
       title="Spa"
@@ -23,17 +23,36 @@
       buttonText="En savoir+"
       :inverted="false"
   />
+  <UiCardhome
+      v-for="(item, index) in contentStore.data"
+      :key="item.id"
+      :title="item.title"
+      :description="item.description"
+      :image="item.images[0]"
+      :imageAlt="item.title"
+      :link="item.link || '/Rooms'"
+      :buttonText="'En savoir +'"
+      :inverted="index % 2 === 0"
+  />
 
   <UiCardhomespa/>
-<UiCardrestaurant/>
+  <UiCardrestaurant/>
 </template>
-
 
 
 <script setup lang="js">
 import img1 from '@/assets/video/0_Outdoor Living_Fire Pit_3840x2160_reset.mp4'
 import img2room from "@/assets/images/parisluxe.png"
 import img2swim from "@/assets/images/woman-swimming-pool-spa.png"
+
+import { useContentStore } from '@/stores/contentStore.ts'
+import { onMounted } from 'vue'
+
+const contentStore = useContentStore()
+
+onMounted(() => {
+  contentStore.fetchContent()
+})
 
 const heroPageData = {
   title: "L'Artichaut",
