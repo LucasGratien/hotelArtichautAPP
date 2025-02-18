@@ -37,6 +37,7 @@
 
   <UiCardhomespa/>
   <UiCardrestaurant/>
+
 </template>
 
 
@@ -45,10 +46,16 @@ import img1 from '@/assets/video/0_Outdoor Living_Fire Pit_3840x2160_reset.mp4'
 import img2room from "@/assets/images/parisluxe.png"
 import img2swim from "@/assets/images/woman-swimming-pool-spa.png"
 
-import { useContentStore } from '@/stores/contentStore.ts'
-import { onMounted } from 'vue'
+import { useContentStore } from '~/stores/contentStore.js'
+import { onMounted, watch } from 'vue'
 
 const contentStore = useContentStore()
+
+watch(() => contentStore.error, (error) => {
+  if (error) {
+    console.error('Content fetch error:', error)
+  }
+})
 
 onMounted(() => {
   contentStore.fetchContent()
