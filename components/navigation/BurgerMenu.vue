@@ -14,6 +14,7 @@
         <li><nuxtLink to="/Restaurant">Restaurant</nuxtlink></li>
         <li><nuxtLink to="/Spa">SPA</nuxtlink></li>
         <li><nuxtLink to="/Service">Service</nuxtlink></li>
+        <li><nuxtLink to="/Booking">Booking</nuxtLink></li>
       </ul>
     </nav>
   </div>

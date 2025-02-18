@@ -60,14 +60,13 @@ h1 {
   color: #4a4a4a;
   text-decoration: underline ;
   font-weight: bold;
-  font-family: Lora, "Times New Roman", Times, serif;
+
 }
 
 p {
   font-size: 1.5rem;
   line-height: 1.5;
   color: #4a4a4a;
-  font-family: Cardo, Serif ;
 }
 
 .images img {

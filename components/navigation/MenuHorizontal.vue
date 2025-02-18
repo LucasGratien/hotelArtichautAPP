@@ -16,7 +16,7 @@
       <NuxtLink to = '/Service'>Services</NuxtLink>
     </li>
     <li>
-      <NuxtLink to = '/Reserver'><button>Booking</button></NuxtLink>
+      <NuxtLink to = '/Booking'><button>Booking</button></NuxtLink>
     </li>
   </ul>
 </template>

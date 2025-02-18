@@ -25,7 +25,7 @@
   />
 
   <UiCardhomespa/>
-<UiCardrestaurant/>
+  <UiCardrestaurant/>
 </template>
 
 
