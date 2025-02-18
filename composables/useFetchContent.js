@@ -28,9 +28,6 @@ export function useFetchContent() {
 
         try {
             const response = await fetch('http://192.168.1.245:8000/api/content/lang-2')
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`)
-            }
             data.value = await response.json()
         } catch (err) {
             error.value = err instanceof Error ? err : new Error('An unknown error occurred')
