@@ -1,4 +1,3 @@
-// stores/contentStore.ts
 import { defineStore } from 'pinia'
 import { useFetchContent } from '~/composables/useFetchContent'
 
