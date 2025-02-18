@@ -12,7 +12,7 @@
           <input
               type="email"
               placeholder="Enter your email ..."
-              class="bg-[#4b6Utiliser des nommages corrects : du kebab-case pour les classes css (et non .Menu dans Menuhorizontal.vue), du PascalCase pour les composants Vue (MenuHorizontal au lieu de Menuhorizontal par exemple)447] text-[var(primary)] text-base font-cardo px-5 py-2 rounded-md focus:outline-none focus:ring focus:ring-[#4b6447]"
+              class="bg-[#4b6447] text-[var(primary)] text-base font-cardo px-5 py-2 rounded-md focus:outline-none focus:ring focus:ring-[#4b6447]"
           />
           <button
               class="bg-[#4b6447] text-[var(primary)] text-base font-cardo px-8 py-2 rounded-md hover:bg-[#365132]">
