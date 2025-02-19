@@ -1,15 +1,20 @@
 <template>
   <div>
-    <UiHerobanner :title="heroPageData?.title"
-                  :text="heroPageData?.text"
-                  :button="heroPageData?.button"
-                  :image="heroPageData?.image" />
+    <UiHerobanner
+        :title="heroPageData?.title"
+        :text="heroPageData?.text"
+        :button="heroPageData?.button"
+        :image="heroPageData?.image"
+    />
 
-    <div v-if="rooms && rooms.length">
+    <div v-if="pending" class="text-center py-10">Chargement des chambres...</div>
+    <div v-else-if="error" class="text-center text-red-500 py-10">Erreur lors du chargement des chambres.</div>
+
+    <div v-else-if="rooms && rooms.length">
       <UiCardpages
           v-for="(room, index) in rooms"
-          :inverted="index % 2 === 0"
           :key="index"
+          :inverted="index % 2 === 0"
           :room="room"
           :image="room.image"
           :link="room.link"
@@ -18,31 +23,15 @@
   </div>
 </template>
 
-<script setup lang="js">
-import { ref, onMounted } from 'vue'
-
-const rooms = ref([])
+<script setup>
+import { useFetch } from '#app';
 
 const heroPageData = {
   title: "Rooms",
   text: "Vivez l'exception, séjournez dans l'élégance absolue",
   button: "Booking",
   image: "/assets/video/0_Modern Living Room_City View_3840x2160.mp4",
-}
+};
 
-const getRooms = async () => {
-  try {
-    const response = await fetch('http://192.168.1.245:8000/api/rooms-category/lang-1')
-    if (response.ok) {
-      rooms.value = await response.json()
-    } else {
-      console.error('Erreur lors de la récupération des données')
-    }
-  } catch (error) {
-    console.error('Erreur:', error)
-  }
-}
-onMounted(() => {
-  getRooms()
-})
+const { data: rooms, error } = useFetch('http://192.168.1.245:8000/api/rooms-category/lang-1');
 </script>
