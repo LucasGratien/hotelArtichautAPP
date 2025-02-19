@@ -1,6 +1,6 @@
 <template>
   <div class="block ">
-      <button class="burger" :class="{ open: isOpen }" @click="toggleMenu">
+      <button  class="burger" :class="{ open: isOpen }" @click="toggleMenu">
         <span></span>
         <span></span>
         <span></span>
