@@ -29,10 +29,29 @@
       link="/reservation"
       buttonText="Réserver"
   />
+
+  <UiCardpages
+      v-for="(item,index) in $service.data"
+      :key="item.id"
+      :title="item.title"
+      :description="item.description"
+      :image= "item.images && item.images.length > 0 ? item.images[0].url : ''"
+      :imageAlt="item.title"
+      :link="item.link"
+      buttonText="Réserver"
+      :inverted="index % 2 === 0"
+  />
+
 </template>
+
 <script setup lang="js">
+
 import img1 from "@/assets/images/DALL·E 2025-01-14 14.42.14 - A luxurious hotel service scene, showcasing a variety of high-end services. A valet in uniform opening the door of a shiny luxury car, with a high-end.webp"
 import imgroom from "assets/images/interior-design-neoclassical-style-with-furnishings-decor.jpg";
+
+
+const { $service } = useNuxtApp();
+
 const heroPageData = {
   title: "Service",
   text: "Notre hôtel de luxe vous offre des services exclusifs tels que valet, pressing, voiturier et bien plus pour un séjour inoubliable",
