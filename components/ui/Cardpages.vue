@@ -15,7 +15,7 @@
       <p class="price text-[var(--black-color)] flex justify-end">{{room.price_in_cent}}€</p>
         <div class="text-center md:text-left">
           <NuxtLink
-              :to="link"
+              :to="`/roomdetail/${room.id}`"
               class="bg-yellow-500 hover:bg-yellow-600 text-[var(--background)] py-3 px-8 rounded-md ml-10 shadow cta-btn"
           >
             {{ buttonText }}
