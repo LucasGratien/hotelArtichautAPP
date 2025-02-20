@@ -23,7 +23,6 @@ export function useFetchContent() {
 
     const fetchContent = async () => {
         if (loading.value) return
-
         loading.value = true
         error.value = null
 

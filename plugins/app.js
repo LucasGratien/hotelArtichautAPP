@@ -19,7 +19,6 @@ export default defineNuxtPlugin(async (nuxtApp) => {
         provide: {
             content: contentStore,
             service: serviceStore,
-            language: languageStore,
         }
     }
 })
