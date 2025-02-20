@@ -16,6 +16,9 @@
       <NuxtLink to = '/Service'>Services</NuxtLink>
     </li>
     <li>
+      <nuxtLink to = '/Equipe'>Equipe</nuxtLink>
+    </li>
+    <li>
       <NuxtLink to = '/Booking'><button>Booking</button></NuxtLink>
     </li>
   </ul>

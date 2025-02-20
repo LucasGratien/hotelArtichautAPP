@@ -8,8 +8,8 @@
         </video>
         <img v-else :src="image" alt="background image" class="background-image" />
         <div class="filter absolute top-0 bottom-0 right-0 left-0"></div>
-        <div class="content">
-          <h1>{{ title }}</h1>
+        <div class="content ">
+          <h1 class="sm:text-[4rem]">{{ title }}</h1>
           <p>{{ text }}</p>
           <div v-if="button && button.trim().length > 0">
           <button>{{ button }}</button>
@@ -59,6 +59,8 @@ defineProps({
 
 .content {
   position: absolute;
+  max-width: 100vw;
+
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -67,7 +69,7 @@ defineProps({
 }
 
 .content h1 {
-  font-size: 8rem;
+  font-size: 5rem;
  color: var(--primary-color);
 }
 
