@@ -55,7 +55,6 @@ defineProps({
 
 .title {
   color: black;
-  text-decoration: underline;
   font-size: 3rem;
   font-weight: bold;
 }
