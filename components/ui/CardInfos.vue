@@ -1,6 +1,6 @@
 <template>
   <!-- la card -->
-  <div class="bg-[var(--background)] dark:bg-[var(--background)] m-5 md:flex md:mx-8 md:my-0">
+  <div class="bg-[var(--primary)] dark:bg-[var(--primary)] m-5 md:flex md:mx-8 md:my-0">
 
     <!--  mobile -->
     <div class="block md:hidden">

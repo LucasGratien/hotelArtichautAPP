@@ -19,15 +19,16 @@ export function useFetchContent() {
     const data = ref([])
     const loading = ref(false)
     const error = ref(null)
+    const languageStore = useLanguageStore()
 
     const fetchContent = async () => {
         if (loading.value) return
-
         loading.value = true
         error.value = null
 
         try {
-            const response = await fetch('http://192.168.1.245:8000/api/content/lang-1')
+            const langId = languageStore.id
+            const response = await fetch(`${useRuntimeConfig().public.apiBase}/content/lang-${langId}`)
             data.value = await response.json()
         } catch (err) {
             error.value = err instanceof Error ? err : new Error('An unknown error occurred')
@@ -36,6 +37,9 @@ export function useFetchContent() {
             loading.value = false
         }
     }
+
+    watch(() => languageStore.id, fetchContent, { immediate: true })
+
 
     return { data, loading, error, fetchContent }
 }

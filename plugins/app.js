@@ -1,21 +1,22 @@
-import {useContentStore} from "~/stores/contentStore.js";
-import {useServiceStore} from "~/stores/serviceStore.js";
 
-
-export default defineNuxtPlugin (async () =>{
-
+export default defineNuxtPlugin(async (nuxtApp) => {
     const contentStore = useContentStore();
     const serviceStore = useServiceStore();
-    await contentStore.fetchContent();
-    await serviceStore.fetchService();
+    const languageStore = useLanguageStore();
 
+    try {
+        await languageStore.fetchLanguages();
+        console.log("Languages loaded:", languageStore.languages);
+        await contentStore.fetchContent();
+        await serviceStore.fetchService();
+    } catch (error) {
+        console.error("Error loading initial data:", error);
+    }
     return {
         provide: {
             content: contentStore,
             service: serviceStore,
+            language: languageStore,
         }
     }
-
-
-
 })

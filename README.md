@@ -69,6 +69,14 @@ when your stuff is done pull develop branch from the repo and resolve your confl
 Your finally done you can start another one :) 
 
 
+## Swagger routing and doc
+
+Please run api Project and go on:
+
+    http://192.168.1.245:8000/api/documentation#/
+
+
+
 # Nuxt Minimal Starter
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
@@ -145,9 +153,15 @@ bun run preview
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
 
-### Store with Pinia 
+### Stores with Pinia 
 
 make sur to install it and configure it
+
+    npm install pînia
+
+// Add in nuxt.config.ts modules: 
+
+    '@pinia/nuxt'
 
 
 

@@ -1,26 +1,46 @@
-<script setup lang="ts">
-const items = [
-[{
-    label: 'Français',
-    icon: '🇫🇷​'
-  }, {
-    label: 'Anglais',
-    icon: '🇬🇧​'
-  }, {
-    label: 'Italien',
-    icon: '🇮🇹​'
-  }]
-]
+<script setup lang="js">
+import { useLanguageStore } from '@/stores/languageStore.js'
+import { computed } from 'vue'
+
+const languageStore = useLanguageStore()
+const { $language } = useNuxtApp()
+
+
+const activeLanguage = computed(() => {
+  return $language.languages.find(lang => lang.id === languageStore.id) || $language.languages[0]
+})
+
+
+const dropdownItems = computed(() => {
+  return [$language.languages.map(lang => ({
+    ...lang,
+    label: lang.lang,
+  }))]
+})
+
+
+const changeLanguage = (item) => {
+  languageStore.setLanguage(item.id)
+}
 </script>
 
 <template>
-  <UDropdown :items="items" :popper="{ placement: 'bottom-start' }">
-    <UAvatar src="https://stickerapp.fr/cdn-assets/images/preview/2016/08/05/design-11220/template-sticker-300x300.png" />
-
+  <UDropdown
+      :items="dropdownItems"
+      :popper="{ placement: 'bottom-start' }"
+      @selected="changeLanguage"
+  >
+    <UAvatar
+        :src="activeLanguage?.image?.url || 'https://stickerapp.fr/cdn-assets/images/preview/2016/08/05/design-11220/template-sticker-300x300.png'"
+    />
     <template #item="{ item }">
-      <span class="truncate">{{ item.label }}</span>
-
-      <UIcon :name="item.icon" class="flex-shrink-0 h-4 w-4 text-gray-400 dark:text-gray-500 ms-auto" />
+      <span class="truncate" @click="changeLanguage(item.id)">{{ item.label }}</span>
+      <img
+          v-if="item.image?.url"
+          :src="item.image.url"
+          class="flex-shrink-0 h-4 w-4 ms-auto"
+          alt=""
+      />
     </template>
   </UDropdown>
 </template>

@@ -4,33 +4,33 @@
                 :button="heroPageData?.button"
                 :image="heroPageData?.image" />
 
-  <UiCardpages
-      title="Service Voiturier"
-      description="Profitez de notre service voiturier pour un séjour sans souci. À votre arrivée, confiez-nous votre véhicule et nous nous occuperons du stationnement en toute sécurité. Disponible 24h/24, ce service premium vous garantit une expérience fluide et confortable dès votre arrivée."
-      :image=imgroom
-      imageAlt="Chambre de luxe"
-      link="/reservation"
-      buttonText="Réserver"
-  />
-  <UiCardpages
-      title="Service de Blanchisserie"
-      description="Notre service de blanchisserie vous assure un linge toujours impeccable. Que ce soit pour un nettoyage express ou un soin particulier de vos vêtements, notre équipe est à votre disposition pour garantir un service de qualité et rapide."
-      :image=imgroom
-      imageAlt="Chambre de luxe"
-      link="/reservation"
-      buttonText="Réserver"
-      :inverted="true"
-  />
-  <UiCardpages
-      title="Espace de Travail"
-      description="Travaillez en toute sérénité dans notre espace dédié. Équipé d'une connexion Wi-Fi haut débit, de bureaux ergonomiques et d'un cadre calme, notre espace de travail est idéal pour les voyageurs d'affaires et les freelances en quête d'un environnement productif."
-      :image=imgroom
-      imageAlt="Chambre de luxe"
-      link="/reservation"
-      buttonText="Réserver"
-  />
+<!--  <UiCardpages-->
+<!--      title="Service Voiturier"-->
+<!--      description="Profitez de notre service voiturier pour un séjour sans souci. À votre arrivée, confiez-nous votre véhicule et nous nous occuperons du stationnement en toute sécurité. Disponible 24h/24, ce service premium vous garantit une expérience fluide et confortable dès votre arrivée."-->
+<!--      :image=imgroom-->
+<!--      imageAlt="Chambre de luxe"-->
+<!--      link="/reservation"-->
+<!--      buttonText="Réserver"-->
+<!--  />-->
+<!--  <UiCardpages-->
+<!--      title="Service de Blanchisserie"-->
+<!--      description="Notre service de blanchisserie vous assure un linge toujours impeccable. Que ce soit pour un nettoyage express ou un soin particulier de vos vêtements, notre équipe est à votre disposition pour garantir un service de qualité et rapide."-->
+<!--      :image=imgroom-->
+<!--      imageAlt="Chambre de luxe"-->
+<!--      link="/reservation"-->
+<!--      buttonText="Réserver"-->
+<!--      :inverted="true"-->
+<!--  />-->
+<!--  <UiCardpages-->
+<!--      title="Espace de Travail"-->
+<!--      description="Travaillez en toute sérénité dans notre espace dédié. Équipé d'une connexion Wi-Fi haut débit, de bureaux ergonomiques et d'un cadre calme, notre espace de travail est idéal pour les voyageurs d'affaires et les freelances en quête d'un environnement productif."-->
+<!--      :image=imgroom-->
+<!--      imageAlt="Chambre de luxe"-->
+<!--      link="/reservation"-->
+<!--      buttonText="Réserver"-->
+<!--  />-->
 
-  <UiCardpages
+  <UiCardhome
       v-for="(item,index) in $service.data"
       :key="item.id"
       :title="item.title"

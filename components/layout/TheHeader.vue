@@ -2,7 +2,6 @@
   <nav class="navbar navbar-expand-md">
     <div class="flex justify-between items-center mx-auto w-full px-4">
 
-
       <div class="flex items-center space-x-2">
         <img class="h-10 md:h-16" src="@/assets/images/logoArtichaut.png" alt="Logo" />
         <div class="title-wrapper flex flex-col items-start ">
@@ -10,7 +9,6 @@
           <p class="text-center w-full -mt-3">* * *</p>
         </div>
       </div>
-
 
       <div class="hidden lg:block ">
         <NavigationMenuHorizontal />
