@@ -1,5 +1,6 @@
 <template>
   <ul class="menu flex flex-row items-center justify-center gap-4 bg">
+    <NavigationLangSelector/>
     <li>
       <NuxtLink to = "/" >Home</NuxtLink>
     </li>
@@ -16,7 +17,10 @@
       <NuxtLink to = '/Service'>Services</NuxtLink>
     </li>
     <li>
-      <NuxtLink to = '/Reserver'><button>Booking</button></NuxtLink>
+      <nuxtLink to = '/Equipe'>Equipe</nuxtLink>
+    </li>
+    <li>
+      <NuxtLink to = '/Booking'><button>Booking</button></NuxtLink>
     </li>
   </ul>
 </template>

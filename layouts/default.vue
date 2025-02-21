@@ -9,3 +9,5 @@
   </main>
   <layoutTheFooter/>
 </template>
+<script setup lang="js">
+</script>

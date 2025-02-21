@@ -10,31 +10,24 @@
     </div>
 
     <div class="w-full :w-2/6 p-8 flex flex-col justify-end  -md-10 z-10 text-background ":class="inverted ? 'lg:-me-10' : 'lg:-ms-8'">
-        <h2 class="title text-3xl font-serif mb-6 ml-10 text-center md:text-left">{{ title }}</h2>
-        <p class="description text-gray-700 leading-relaxed mb-10 ml-10 text-center md:text-left">{{ description }}</p>
+        <h2 class="title text-3xl font-serif mb-6 md:ml-10 text-center md:text-left">{{ room.category_name }}</h2>
+        <p class="description text-gray-700 leading-relaxed mb-10 md:ml-10 text-center md:text-left">{{ room.description }}</p>
         <div class="text-center md:text-left">
           <NuxtLink
-              :to="link"
+              :to="`/roomdetail/${room.id}`"
               class="bg-yellow-500 hover:bg-yellow-600 text-[var(--background)] py-3 px-8 rounded-md ml-10 shadow cta-btn"
           >
             {{ buttonText }}
           </NuxtLink>
         </div>
-
     </div>
   </div>
 
 </template>
 
-<script setup>
+<script setup lang="js">
 defineProps({
-  title: String,
-  description: String,
-  image: String,
-  imageAlt: {
-    type: String,
-    default: 'Image',
-  },
+room: Object,
   link: {
     type: String,
     default: '#',
@@ -68,7 +61,7 @@ defineProps({
   transition: background-color 0.3s ease;
 }
 
-/*.image-container img {
+/*.images-container img {
   object-fit: cover;
 }*/
 </style>

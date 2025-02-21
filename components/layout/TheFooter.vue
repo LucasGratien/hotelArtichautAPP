@@ -12,7 +12,7 @@
           <input
               type="email"
               placeholder="Enter your email ..."
-              class="bg-[#4b6Utiliser des nommages corrects : du kebab-case pour les classes css (et non .Menu dans Menuhorizontal.vue), du PascalCase pour les composants Vue (MenuHorizontal au lieu de Menuhorizontal par exemple)447] text-[var(primary)] text-base font-cardo px-5 py-2 rounded-md focus:outline-none focus:ring focus:ring-[#4b6447]"
+              class="bg-[#4b6447] text-[var(primary)] text-base font-cardo px-5 py-2 rounded-md focus:outline-none focus:ring focus:ring-[#4b6447]"
           />
           <button
               class="bg-[#4b6447] text-[var(primary)] text-base font-cardo px-8 py-2 rounded-md hover:bg-[#365132]">
@@ -32,7 +32,7 @@
             Tél.: +33 454 987 944 <br/>
             reception@lartichaut.fr
           </p>
-          <!-- Social Media Icons -->
+          <!-- Media Icons -->
           <div class="flex justify-center p-3 gap-4">
             <div
                 class="w-12 h-12 md:w-10 md:h-10 bg-[#4b6447] rounded-full flex items-center justify-center hover:bg-[#365132]">
@@ -76,7 +76,7 @@
           </div>
         </div>
         <div class="flex py-4 justify-center items-center md:hidden">
-          <img src="public/assets/image/component_separator.png" alt="separator">
+          <img src="@/assets/images/component_separator.png" alt="separator">
         </div>
         <!--help menu-->
         <div class="hidden md:block md:w-3/4 ">
@@ -133,7 +133,7 @@
         </div>
       </div>
       <div class="flex items-center justify-center  md:justify-end md:pr-4">
-        <img src="public/assets/logo/pay_method.png" alt="pay_method">
+        <img src="~/assets/logo/pay_method.png" alt="pay_method">
       </div>
 
 

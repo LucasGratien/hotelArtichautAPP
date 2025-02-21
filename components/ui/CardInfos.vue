@@ -1,6 +1,6 @@
 <template>
   <!-- la card -->
-  <div class="bg-[var(--background)] dark:bg-[var(--background)] m-5 md:flex md:mx-8 md:my-0">
+  <div class="bg-[var(--primary)] dark:bg-[var(--primary)] m-5 md:flex md:mx-8 md:my-0">
 
     <!--  mobile -->
     <div class="block md:hidden">
@@ -26,7 +26,7 @@
     <!--  Desktop -->
     <div class="hidden md:flex">
 
-      <!--template si image a gauche -->
+      <!--template si images a gauche -->
       <template v-if="!inverted">
         <!-- Image box -->
         <div v-if="image && image.trim().length > 0" class="md:w-1/3 p-8">

@@ -1,6 +1,6 @@
 <template>
   <div class="block ">
-      <button class="burger" :class="{ open: isOpen }" @click="toggleMenu">
+      <button  class="burger" :class="{ open: isOpen }" @click="toggleMenu">
         <span></span>
         <span></span>
         <span></span>
@@ -14,6 +14,7 @@
         <li><nuxtLink to="/Restaurant">Restaurant</nuxtlink></li>
         <li><nuxtLink to="/Spa">SPA</nuxtlink></li>
         <li><nuxtLink to="/Service">Service</nuxtlink></li>
+        <li><nuxtLink to="/Booking">Booking</nuxtLink></li>
       </ul>
     </nav>
   </div>

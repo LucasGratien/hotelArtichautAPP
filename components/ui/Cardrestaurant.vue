@@ -1,8 +1,8 @@
 <template>
-  <div class="restaurant-page">
+  <div class="restaurant-page mt-20">
     <div class="content">
-      <h1>Le restaurant</h1>
-      <p>
+      <h1 class="text-center">Le Restaurant</h1>
+      <p class="text-center">
         La chambre standard de notre hôtel allie confort et simplicité pour un séjour
         agréable. Elle est équipée d'un lit double spacieux, d'une télévision à écran
         plat, d'une connexion Wi-Fi gratuite, et d'une salle de bain privative avec
@@ -23,12 +23,14 @@
 </template>
 
 <script>
+import img1 from '@/assets/images/restaurant-hall-with-round-square-tables-some-chairs-plants.png'
+import img2 from '@/assets/images/chef.png'
 export default {
   data() {
     return {
       images: [
-        "/assets/image/restaurant-hall-with-round-square-tables-some-chairs-plants.png",
-        "/assets/image/chef.png",
+        img1,
+        img2,
       ],
       currentSlide: 0,
     };
@@ -48,7 +50,7 @@ export default {
 <style scoped>
 .restaurant-page {
   padding: 20px;
-  background-color: rgba(234, 198, 132, 0.15);
+
 }
 
 .content {
@@ -56,15 +58,17 @@ export default {
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 3rem;
   color: #4a4a4a;
   text-decoration: underline ;
+  font-weight: bold;
+
 }
 
 p {
-  font-size: 1rem;
+  font-size: 1.5rem;
   line-height: 1.5;
-  color: #666;
+  color: #4a4a4a;
 }
 
 .images img {

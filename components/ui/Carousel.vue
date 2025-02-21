@@ -1,11 +1,13 @@
 <template>
   <div class="relative w-full flex justify-center md:p-8">
     <div class="carousel-container relative overflow-hidden w-full md:w-3/5">
-      <img
-          :src="images[currentSlide]"
-          alt="Restaurant Image"
-          class="w-full aspect-square object-cover rounded-[10px]"
-      />
+      <div class="image-wrapper max-h-96 flex items-center justify-center">
+        <img
+            :src="images[currentSlide]"
+            alt="Restaurant Image"
+            class="max-w-full max-h-96 object-contain rounded-[10px]"
+        />
+      </div>
 
       <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
         <UButton

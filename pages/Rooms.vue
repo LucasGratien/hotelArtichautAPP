@@ -1,39 +1,37 @@
 <template>
-<div>  <UiHerobanner :title="heroPageData?.title"
-                :text="heroPageData?.text"
-                :button="heroPageData?.button"
-                :image="heroPageData?.image" />
-  <UiCardpages
-      title="Luxury rooms"
-      description="La chambre standard de notre hôtel allie confort et simplicité pour un séjour agréable. Elle est équipée d'un lit double spacieux, d'une télévision à écran plat, d'une connexion Wi-Fi gratuite, et d'une salle de bain privative avec douche ou baignoire. Un bureau fonctionnel et un espace de rangement sont également à votre disposition. La décoration moderne et chaleureuse offre une ambiance propice à la détente. Idéale pour les séjours professionnels ou touristiques, cette chambre vous garantit un repos optimal."
-      image="/assets/image/parisluxe.png"
-      imageAlt="Chambre de luxe"
-      link="/reservation"
-      buttonText="Réserver"
-  />
-  <UiCardpages
-      title="Luxury rooms"
-      description="La chambre standard de notre hôtel allie confort et simplicité pour un séjour agréable. Elle est équipée d'un lit double spacieux, d'une télévision à écran plat, d'une connexion Wi-Fi gratuite, et d'une salle de bain privative avec douche ou baignoire. Un bureau fonctionnel et un espace de rangement sont également à votre disposition. La décoration moderne et chaleureuse offre une ambiance propice à la détente. Idéale pour les séjours professionnels ou touristiques, cette chambre vous garantit un repos optimal."
-      image="/assets/image/parisluxe.png"
-      imageAlt="Chambre de luxe"
-      link="/reservation"
-      buttonText="Réserver"
-      :inverted="true"
-  />
-  <UiCardpages
-      title="Luxury rooms"
-      description="La chambre standard de notre hôtel allie confort et simplicité pour un séjour agréable. Elle est équipée d'un lit double spacieux, d'une télévision à écran plat, d'une connexion Wi-Fi gratuite, et d'une salle de bain privative avec douche ou baignoire. Un bureau fonctionnel et un espace de rangement sont également à votre disposition. La décoration moderne et chaleureuse offre une ambiance propice à la détente. Idéale pour les séjours professionnels ou touristiques, cette chambre vous garantit un repos optimal."
-      image="/assets/image/parisluxe.png"
-      imageAlt="Chambre de luxe"
-      link="/reservation"
-      buttonText="Réserver"
-  /></div>
+  <div>
+    <UiHerobanner
+        :title="heroPageData?.title"
+        :text="heroPageData?.text"
+        :button="heroPageData?.button"
+        :image="heroPageData?.image"
+    />
+
+    <div v-if="pending" class="text-center py-10">Chargement des chambres...</div>
+    <div v-else-if="error" class="text-center text-red-500 py-10">Erreur lors du chargement des chambres.</div>
+
+    <div v-else-if="rooms && rooms.length">
+      <UiCardpages
+          v-for="(room, index) in rooms"
+          :key="index"
+          :inverted="index % 2 === 0"
+          :room="room"
+          :image="room.image"
+          :link="room.link"
+      />
+    </div>
+  </div>
 </template>
-<script setup lang="ts">
+
+<script setup>
+import { useFetch } from '#app';
+import video1 from "@/assets/video/0_Modern Living Room_City View_3840x2160.mp4"
 const heroPageData = {
   title: "Rooms",
-      text: "Vivez l'exception, séjournez dans l'élégance absolue",
-      button: "Booking",
-      image: "/assets/video/0_Modern Living Room_City View_3840x2160.mp4",
-}
+  text: "Vivez l'exception, séjournez dans l'élégance absolue",
+  button: "Booking",
+  image: video1
+};
+
+const { data: rooms, error } = useFetch('http://192.168.1.245:8000/api/rooms-category/lang-1');
 </script>
