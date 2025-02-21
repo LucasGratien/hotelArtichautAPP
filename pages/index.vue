@@ -5,7 +5,7 @@
                   :button="heroPageData?.button"
                   :image="heroPageData?.image"/>
   </div>
-
+<UiLogo/>
   <UiCardhome
       v-for="(item, index) in $content.data"
       :key="item.id"

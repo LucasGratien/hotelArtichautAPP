@@ -1,3 +1,6 @@
+import {useContentStore} from '~/stores/contentStore'
+import {useServiceStore} from '~/stores/serviceStore'
+import {useLanguageStore} from '~/stores/languageStore'
 
 export default defineNuxtPlugin(async (nuxtApp) => {
     const contentStore = useContentStore();

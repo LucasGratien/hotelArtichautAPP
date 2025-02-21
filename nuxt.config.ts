@@ -7,6 +7,9 @@ export default defineNuxtConfig({
     modules: [
         '@nuxt/ui',
         '@pinia/nuxt'],
+    plugins:[
+        '~/plugins/app.js'
+    ],
     runtimeConfig: {
         public: {
             apiBase: process.env.API_BASE_URL || 'http://192.168.1.245:8000/api',

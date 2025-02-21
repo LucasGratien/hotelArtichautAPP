@@ -23,11 +23,13 @@ export function useFetchContent() {
 
     const fetchContent = async () => {
         if (loading.value) return
+
         loading.value = true
         error.value = null
 
         try {
             const langId = languageStore.id
+
             const response = await fetch(`${useRuntimeConfig().public.apiBase}/content/lang-${langId}`)
             data.value = await response.json()
         } catch (err) {
@@ -38,7 +40,7 @@ export function useFetchContent() {
         }
     }
 
-    watch(() => languageStore.id, fetchContent, { immediate: true })
+    watch(() => languageStore.id, fetchContent,{ immediate: true })
 
 
     return { data, loading, error, fetchContent }

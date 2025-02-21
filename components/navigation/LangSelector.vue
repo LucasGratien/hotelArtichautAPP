@@ -19,7 +19,9 @@ const dropdownItems = computed(() => {
 })
 
 
+
 const changeLanguage = (item) => {
+  console.log("Changing language to:", item.id)
   languageStore.setLanguage(item.id)
 }
 </script>
@@ -28,13 +30,13 @@ const changeLanguage = (item) => {
   <UDropdown
       :items="dropdownItems"
       :popper="{ placement: 'bottom-start' }"
-      @selected="changeLanguage"
+      @select="changeLanguage"
   >
     <UAvatar
         :src="activeLanguage?.image?.url || 'https://stickerapp.fr/cdn-assets/images/preview/2016/08/05/design-11220/template-sticker-300x300.png'"
     />
     <template #item="{ item }">
-      <span class="truncate" @click="changeLanguage(item.id)">{{ item.label }}</span>
+      <span class="truncate" @click="changeLanguage($language.languages.id)" >{{ item.label }}</span>
       <img
           v-if="item.image?.url"
           :src="item.image.url"
