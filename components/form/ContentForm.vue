@@ -2,11 +2,11 @@
   <div>
     <UTable :columns="columns" :rows="rows">
       <template #actions-data="{ row }">
-        <UButton @click="deleteContent(row.id)">Supprimer</UButton>
+        <UButton :disabled="loading" @click="handleDelete(row.id)">Supprimer</UButton>
       </template>
 
       <template #modify-data="{ row }">
-        <UButton @click="modifyContent(row.id)">Modifier</UButton>
+        <UButton :disabled="loading" @click="handleModify(row.id)">Modifier</UButton>
       </template>
 
       <template #image-data="{ row }">
@@ -24,6 +24,7 @@
       <DynamicModalForm
           ref="dynamicModal"
           :fields="formFields"
+          :initialData="selectedItem"
           modalTitle="Ajouter un contenu"
           @submit="handleSubmit"
       />
@@ -34,10 +35,24 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import { useNuxtApp } from "#app";
+import { useContentActions } from "@/composables/useContentActions";
 import DynamicModalForm from "@/components/form/DynamicModalForm.vue";
 
 const { $content } = useNuxtApp();
 const dynamicModal = ref(null);
+const { deleteContent, modifyContent, loading, error } = useContentActions();
+
+// Récupérer les données au montage
+const fetchContent = async () => {
+  try {
+    content.value = await $content().fetch(); // Récupération des données
+  } catch (err) {
+    console.error("Erreur lors de la récupération des données :", err);
+  }
+};
+
+onMounted(fetchContent);
+
 
 // Champs du formulaire
 const formFields = [
@@ -69,7 +84,9 @@ const initializeForm = () => {
 }
 
 const page = ref(1);
- const content = ref($content?.data ??[]);
+const content = ref($content?.data ??[]);
+
+
 
 
 const pageCount = computed(() => Math.max(1, Math.ceil(content.value.length / 5)));
@@ -88,21 +105,28 @@ const columns = [
   { key: "image", label: "Image" },
   { key: "actions", label: "Actions" },
   { key: "modify", label: "Modifier" },
-  { key: 'select', label: 'Sélectionner', class: 'w-2' }
+ // { key: 'select', label: 'Sélectionner', class: 'w-2' }
 ];
 
 // Fonction de suppression
-const deleteContent = (id: number) => {
-  content.value = content.value.filter(item => item.id !== id);
+const handleDelete = async (id: number) => {
+  await deleteContent(id);
+  content.value = content.value.filter((item) => item.id !== id);
 };
 
+
+const selectedItem = ref<Record<string, any> | null>(null);
+
 // Fonction pour modifier un contenu
-const modifyContent = (id: number) => {
-  const itemToModify = content.value.find(item => item.id === id);
+const handleModify = async (id: number) => {
+  const itemToModify = content.value.find((item) => item.id === id);
   if (itemToModify) {
-    dynamicModal.value?.openModal(itemToModify);
+    selectedItem.value = { ...itemToModify }; // Copier les données pour éviter les mutations
+    console.log("Modification en cours pour :", selectedItem.value);
+    dynamicModal.value?.openModal(selectedItem.value);
   }
 };
+
 </script>
 
 <style scoped></style>
