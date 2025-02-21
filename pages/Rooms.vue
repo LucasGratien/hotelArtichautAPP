@@ -25,12 +25,12 @@
 
 <script setup>
 import { useFetch } from '#app';
-
+import video1 from "@/assets/video/0_Modern Living Room_City View_3840x2160.mp4"
 const heroPageData = {
   title: "Rooms",
   text: "Vivez l'exception, séjournez dans l'élégance absolue",
   button: "Booking",
-  image: "/assets/video/0_Modern Living Room_City View_3840x2160.mp4",
+  image: video1
 };
 
 const { data: rooms, error } = useFetch('http://192.168.1.245:8000/api/rooms-category/lang-1');
