@@ -1,4 +1,4 @@
-// composables/useLanguages.js
+
 import { ref } from 'vue'
 export function useLanguages() {
     const languages = ref([])

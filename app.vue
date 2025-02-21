@@ -9,12 +9,14 @@ body{
 }
 
 html, body {
-  width: 100vw;
-  max-width :100%;
-  background-color: rgba(251, 249, 244, 1);
-  z-index: -1;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-image: url("@/assets/images/bckgnd_artichoked.png");
+  background-repeat: repeat-y;
+  background-size: 100% auto;
   letter-spacing: 2px;
-  position: relative;
 }
 .page-container{
   max-width: 1400px;
