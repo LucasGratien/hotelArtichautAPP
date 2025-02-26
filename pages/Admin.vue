@@ -18,7 +18,7 @@
           :link="$content.data[0].link"
           :display_order="$content.data[0].displayOrder"
           :language_id="$content.data[0].language"
-          :image="$content.data[0].image"
+          :images="$content.data[0].images"
           :deleteButtonText="'Supprimer'"
           :editButtonText="'Modifier'"
       />

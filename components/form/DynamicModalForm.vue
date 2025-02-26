@@ -9,7 +9,7 @@
             <UCheckbox v-model="state[field.name]" />
           </template>
           <template v-else-if="field.type === 'file'">
-            <UInput type="file" @change="handleFileUpload($event)" />
+            <UInput type="file" @change="handleFileUpload($event, field.name)" />
           </template>
           <template v-else>
             <UInput :type="field.type" v-model="state[field.name]" :placeholder="field.placeholder" />
@@ -30,28 +30,53 @@ import { ref, reactive, watch } from "vue";
 const props = defineProps({
   fields: Array as () => Array<{ name: string, label: string, type: string, placeholder?: string, required?: boolean }>,
   modalTitle: String,
-  initialData: Object as () => Record<string, any>,
 });
 
 const emit = defineEmits(["submit"]);
 const isOpen = ref(false);
 const state = reactive<Record<string, any>>({});
+const editableItem = ref({});
+let onSaveCallback = null; // Fonction de sauvegarde passée par `handleModify`
 
-watch(() => props.initialData, (newData) => {
-  Object.assign(state, newData || {});
-}, { immediate: true });
 
-const openModal = () => {
+// Réinitialiser le formulaire lorsque le modal est fermé
+watch(isOpen, (isOpen) => {
+  if (!isOpen) {
+    Object.keys(state).forEach((key) => {
+      state[key] = props.fields?.find((field) => field.name === key)?.type === 'checkbox' ? false : '';
+    });
+  }
+});
+
+// Ouvrir le modal avec des données initiales
+const openModal = (initialData = {}) => {
+  Object.assign(state, initialData);
   isOpen.value = true;
 };
 
+// Fermer le modal
 const closeModal = () => {
   isOpen.value = false;
 };
 
+// Gérer la soumission du formulaire
 const onSubmit = () => {
   emit("submit", { ...state });
   closeModal();
+};
+const saveChanges = () => {
+  if (onSaveCallback) {
+    onSaveCallback(editableItem.value); // Appeler la fonction passée
+  }
+  closeModal();
+};
+
+// Gérer l'upload de fichier
+const handleFileUpload = (event: Event, fieldName: string) => {
+  const file = (event.target as HTMLInputElement)?.files?.[0];
+  if (file) {
+    state[fieldName] = [file];
+  }
 };
 
 defineExpose({ openModal });
