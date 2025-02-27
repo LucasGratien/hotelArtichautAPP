@@ -1,6 +1,7 @@
 <template>
   <ul class="menu flex flex-row items-center justify-center gap-4 bg">
-    <NavigationLangSelector/>
+<!--    <NavigationLangSelector/>-->
+    <UiAuthAction/>
     <li>
       <NuxtLink to = "/" >home</NuxtLink>
     </li>
