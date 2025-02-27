@@ -5,9 +5,9 @@
                   :button="heroPageData?.button"
                   :image="heroPageData?.image"/>
   </div>
-
+<UiLogo/>
   <UiCardhome
-      v-for="(item, index) in $content.data"
+      v-for="(item, index) in store.language('content')"
       :key="item.id"
       :title="item.title"
       :description="item.description"
@@ -26,8 +26,10 @@
 
 <script setup lang="js">
 import img1 from '@/assets/video/0_Outdoor Living_Fire Pit_3840x2160_reset.mp4'
+import {useHotelStore} from '@/stores/hotel.js'
 
-const { $content } = useNuxtApp();
+const store = useHotelStore()
+
 
 const heroPageData = {
   title: "L'Artichaut",

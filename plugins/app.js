@@ -1,21 +1,16 @@
-import {useContentStore} from "~/stores/contentStore.js";
-import {useServiceStore} from "~/stores/serviceStore.js";
+import { useHotelStore } from "~/stores/hotel.js";
 
+export default defineNuxtPlugin(async (nuxtApp) => {
+    const hotelStore = useHotelStore()
 
-export default defineNuxtPlugin (async () =>{
+    try {
 
-    const contentStore = useContentStore();
-    const serviceStore = useServiceStore();
-    await contentStore.fetchContent();
-    await serviceStore.fetchService();
-
-    return {
-        provide: {
-            content: contentStore,
-            service: serviceStore,
-        }
+        await hotelStore.loadCommonData()
+        console.log("Données de l'hôtel chargées avec succès");
+    } catch (error) {
+        console.error("Erreur lors du chargement des données de l'hôtel:", error)
     }
 
 
-
+    nuxtApp.provide('hotel', hotelStore)
 })
