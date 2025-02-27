@@ -15,6 +15,7 @@
         <li><nuxtLink to="/Spa">SPA</nuxtlink></li>
         <li><nuxtLink to="/Service">Service</nuxtlink></li>
         <li><nuxtLink to="/Booking">Booking</nuxtLink></li>
+        <UiAuthAction/>
       </ul>
     </nav>
   </div>

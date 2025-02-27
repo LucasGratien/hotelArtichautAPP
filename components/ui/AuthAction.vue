@@ -38,30 +38,35 @@ import signLogo from "@/assets/logo/user.png"
       <UIcon :name="item.icon" class="flex-shrink-0 h-4 w-4 text-gray-400 dark:text-gray-500 ms-auto"/>
     </template>
   </UDropdown>
-  <UModal v-model="isOpen">
-    <UCard :ui="{ ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
+  <UModal v-model="isOpen" prevent-close>
+    <UCard :ui="{ ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800'}">
       <template #header>
-        <Placeholder class="h-8"/>
+        <div class="flex items-center justify-between">
+          <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
+            Connection
+          </h3>
+          <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1"
+                   @click="isOpen = false"/>
+        </div>
       </template>
       <section>
-        <form @submit.prevent="signIn">
-          <input
-              v-model="email"
-              type="email"
-              placeholder="Email"
-          />
-          <input
-              v-model="password"
-              type="password"
-              placeholder="Password"
-          />
-          <button type="submit">Login</button>
-        </form>
-      </section>
-      <Placeholder class="h-32"/>
 
+          <form @submit.prevent="login">
+            <UInput
+                v-model="email"
+                type="email"
+                placeholder="Email"
+            />
+            <UInput
+                v-model="password"
+                type="password"
+                placeholder="Password"
+            />
+          </form>
+
+      </section>
       <template #footer>
-        <Placeholder class="h-8"/>
+        <UButton color="gray" variant="ghost" type="submit">Login</UButton>
       </template>
     </UCard>
   </UModal>
