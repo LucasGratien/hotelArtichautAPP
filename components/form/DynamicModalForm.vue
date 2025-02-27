@@ -72,11 +72,15 @@ const saveChanges = () => {
 };
 
 // Gérer l'upload de fichier
-const handleFileUpload = (event: Event, fieldName: string) => {
-  const file = (event.target as HTMLInputElement)?.files?.[0];
-  if (file) {
-    state[fieldName] = [file];
-  }
+const handleFileUpload = (fileList, fieldName) => {
+  // Met à jour le state dynamiquement
+  state[fieldName] = Array.from(fileList);
+
+  // Corrige l'affectation de images.value
+  images.value = Array.from(fileList);
+
+  console.log("État mis à jour :", state);
+  console.log("Images enregistrées :", images.value);
 };
 
 defineExpose({ openModal });
