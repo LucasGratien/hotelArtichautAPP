@@ -14,6 +14,14 @@ const items = [
 ];
 const isOpen = ref(false)
 import signLogo from "@/assets/logo/user.png"
+
+const { credentials, pending, login, errorMsg } = useLogin({
+  credentials: {
+    email: '',
+    password: '',
+  },
+})
+
 </script>
 
 <template>
@@ -52,13 +60,14 @@ import signLogo from "@/assets/logo/user.png"
       <section>
 
           <form @submit.prevent="login">
+            <p>{{ errorMsg }}</p>
             <UInput
-                v-model="email"
+                v-model="credentials.email"
                 type="email"
                 placeholder="Email"
             />
             <UInput
-                v-model="password"
+                v-model="credentials.password"
                 type="password"
                 placeholder="Password"
             />
@@ -66,7 +75,7 @@ import signLogo from "@/assets/logo/user.png"
 
       </section>
       <template #footer>
-        <UButton color="gray" variant="ghost" type="submit">Login</UButton>
+        <UButton color="gray" variant="ghost" type="submit" :disabled="pending">Login</UButton>
       </template>
     </UCard>
   </UModal>
