@@ -10,14 +10,12 @@
       </template>
 
       <template #images-data="{ row }">
-
-        <img  v-for="image in row.images" :src="image.url" alt="images" class="w-12 h-12 object-cover rounded" />
+        <img v-for="image in row.images" :key="image.id" :src="image.url" alt="images" class="w-12 h-12 object-cover rounded" />
       </template>
-
     </UTable>
 
     <div class="flex justify-end px-3 py-3.5 border-t border-gray-200 dark:border-gray-700">
-      <UPagination v-model="page" :page-count="pageCount" :total="content.length"/>
+      <UPagination v-model="page" :page-count="pageCount" :total="store.contents.length"/>
     </div>
 
     <div class="flex flex-col items-center justify-center py-6 gap-3">
@@ -33,29 +31,31 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { ref, computed, onMounted } from "vue";
 import { useNuxtApp } from "#app";
 import { useContentActions } from "@/composables/useContentActions";
+import { useHotelStore } from "@/stores/hotel"; // Importation du store
 import DynamicModalForm from "@/components/form/DynamicModalForm.vue";
 
-const { $content } = useNuxtApp();
+const store = useHotelStore();
 const dynamicModal = ref(null);
-const { deleteContent, modifyContent, createContent, loading, error } = useContentActions();
+const { deleteContent, modifyContent, createContent, loading } = useContentActions();
+const page = ref(1);
+const pageCount = 10;
+const selectedItem = ref(null);
+const newContent = ref({ title: "", description: "", image: "" });
 
 // Récupérer les données au montage
 const fetchContent = async () => {
   try {
-    const data = await $content()?.fetch();
-    if (data) content.value = data;
+    await store.fetch(); // Suppression du `?`
   } catch (err) {
     console.error("Erreur lors de la récupération des données :", err);
   }
 };
 
-
 onMounted(fetchContent);
-
 
 // Champs du formulaire
 const formFields = [
@@ -76,7 +76,6 @@ const openModal = () => {
   dynamicModal.value?.openModal();
 };
 
-
 // Initialiser les champs du formulaire
 const initializeForm = () => {
   props.fields.forEach((field) => {
@@ -84,78 +83,68 @@ const initializeForm = () => {
   })
 }
 
-const page = ref(1);
-const content = ref($content?.data ??[]);
-
-
-
-
-const pageCount = 10
-console.log(pageCount)
-const rows = computed(() => content.value.slice((page.value - 1) * pageCount, page.value * pageCount));
-console.log(rows)
+const rows = computed(() =>
+    store.contents.slice((page.value - 1) * pageCount, page.value * pageCount)
+);
 
 const columns = [
-  { key: "id", label: "Id" },
-  { key: "name", label: "Nom" },
-  { key: "title", label: "Titre" },
-  { key: "short_description", label: "Description courte" },
-  { key: "description", label: "Description" },
-  { key: "landing_page_display", label: "landing page" },
-  { key: "link", label: "Lien" },
-  { key: "display_order", label: "Ordre d'affichage" },
-  { key: "language_id", label: "Langue" },
-  { key: "images", label: "Images" },
-  { key: "navbar_display", label: "navbar display" },
-  { key: "actions", label: "Actions" },
-  { key: "modify", label: "Modifier" },
-  // { key: 'select', label: 'Sélectionner', class: 'w-2' }
+  {key: "id", label: "Id"},
+  {key: "name", label: "Nom"},
+  {key: "title", label: "Titre"},
+  {key: "short_description", label: "Description courte"},
+  {key: "description", label: "Description"},
+  {key: "landing_page_display", label: "Landing page"},
+  {key: "link", label: "Lien"},
+  {key: "display_order", label: "Ordre d'affichage"},
+  {key: "language_id", label: "Langue"},
+  {key: "images", label: "Images"},
+  {key: "navbar_display", label: "Navbar display"},
+  {key: "actions", label: "Actions"},
+  {key: "modify", label: "Modifier"},
 ];
 
-// Fonction de suppression
-const handleDelete = async (id: number) => {
+// Suppression d'un contenu
+const handleDelete = async (id) => {
   await deleteContent(id);
-  content.value = content.value.filter((item) => item.id !== id);
+  store.contents = store.contents.filter((item) => item.id !== id);
 };
 
 
-const selectedItem = ref<Record<string, any> | null>(null);
-
-const handleSubmit = async (formData: Record<string, any>) => {
+// Ajout d'un contenu
+const handleSubmit = async (formData) => {
   formData.landing_page_display = formData.landing_page_display ? 1 : 0;
   formData.navbar_display = formData.navbar_display ? 1 : 0;
-  console.log('Données du formulaire:', formData);
+
+  console.log("Données du formulaire:", formData);
   const createdContent = await createContent(formData);
+
   if (createdContent) {
-    content.value.push(createdContent); // Met à jour la liste avec le nouveau contenu
-    newContent.value = { title: '', description: '', image: '' }; // Réinitialise le formulaire
+    store.contents.push(createdContent);
+    newContent.value = {title: "", description: "", image: ""};
   }
 };
 
-
-// Fonction pour modifier un contenu
-const handleModify = async (id: number) => {
-  const itemToModify = content.value.find((item) => item.id === id);
+// Modification d'un contenu
+const handleModify = async (id) => {
+  const itemToModify = store.contents.find((item) => item.id === id);
   if (itemToModify) {
-    selectedItem.value = { ...itemToModify };
-    dynamicModal.value?.openModal(selectedItem.value, async (updateData) => {
+    selectedItem.value = {...itemToModify};
+    dynamicModal.value?.openModal(selectedItem.value, async (updateData)=> {
       await saveModifiedData(id, updateData);
     });
   }
 };
 
-
-const saveModifiedData = async (id: number, updatedData: any) => {
-
+const saveModifiedData = async (id, updatedData) => {
   updatedData.landing_page_display = updatedData.landing_page_display ? 1 : 0;
   updatedData.navbar_display = updatedData.navbar_display ? 1 : 0;
+
   try {
     const updatedContent = await modifyContent(id, updatedData);
     if (updatedContent) {
-      // Mettre à jour l'élément modifié dans le tableau local
-      const index = content.value.findIndex((item) => item.id === id);
+      const index = store.contents.findIndex((item) => item.id === id);
       if (index !== -1) {
-        content.value[index] = updatedContent;
+        store.contents[index] = updatedContent;
       }
       console.log("Mise à jour réussie :", updatedContent);
     }
@@ -163,9 +152,6 @@ const saveModifiedData = async (id: number, updatedData: any) => {
     console.error("Erreur lors de la mise à jour :", error);
   }
 };
-
-
-
 </script>
 
 <style scoped></style>

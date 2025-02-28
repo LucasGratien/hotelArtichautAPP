@@ -11,27 +11,38 @@
     <div class="w-full md:w-5/6">
       <UiAdminTitle/>
       <FormContentForm
-          v-if="$content.data && $content.data.length > 0"
-          :title="$content.data[0].title"
-          :short_description="$content.data[0].shortDescription"
-          :description="$content.data[0].description"
-          :link="$content.data[0].link"
-          :display_order="$content.data[0].displayOrder"
-          :language_id="$content.data[0].language"
-          :images="$content.data[0].images"
-          :deleteButtonText="'Supprimer'"
-          :editButtonText="'Modifier'"
+          v-if="store.contents && store.contents.length > 0"
+          :title="store.contents[0].title"
+          :short_description="store.contents[0].shortDescription"
+          :description="store.contents[0].description"
+          :link="store.contents[0].link"
+          :display_order="store.contents[0].displayOrder"
+          :language_id="store.contents[0].language.id"
+          :images="store.contents[0].images"
       />
+
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="js">
 import { useNuxtApp } from "#app";
+import { useHotelStore } from "@/stores/hotel";
+import { onMounted } from "vue";
 
-const { $content } = useNuxtApp();
+const store = useHotelStore();
 
-console.log("Données reçues via $content:", $content.data);
+onMounted(async () => {
+  await store.loadCommonData();
+  console.log("Données du store après fetch :", store.contents);
+});
+
+console.log("Données reçues dans store.data:", store.contents)
+
+
+//const { $content } = useNuxtApp();
+
+//console.log("Données reçues via $content:", $content.data);
 
 </script>
 
