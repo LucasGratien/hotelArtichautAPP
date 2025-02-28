@@ -80,6 +80,10 @@ To access to the auth urls please use the following credentials:
     email: admin@admin.com
     password: adminadmin
 
+To reach the full documentation of the project please use the following command:
+
+    npm run doc
+
 # Nuxt Minimal Starter
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
