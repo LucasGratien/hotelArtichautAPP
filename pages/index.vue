@@ -30,12 +30,26 @@ import {useHotelStore} from '@/stores/hotel.js'
 
 const store = useHotelStore()
 
+const heroPageData = computed(() => {
+  const bannerItem = store.language('banner-')
 
-const heroPageData = {
-  title: "L'Artichaut",
-  text: "Passez un séjour unique dans un hotel intimiste et chaleureux",
-  button: "Booking",
-  image: img1,
-}
+  return {
+    title: bannerItem.title,
+
+    text: bannerItem.short_description,
+
+    button: bannerItem.link || '',
+
+    image: bannerItem.images && bannerItem.images.length > 0 ? bannerItem.images[0].url : ''
+  }
+})
+
+
+// const heroPageData = {
+//   title: "L'Artichaut",
+//   text: "Passez un séjour unique dans un hotel intimiste et chaleureux",
+//   button: "Booking",
+//   image: img1,
+// }
 
 </script>

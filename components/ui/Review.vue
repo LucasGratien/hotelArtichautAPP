@@ -41,44 +41,13 @@
 
 <script setup lang="js">
 
- const { data: reviews } = await useFetch('/review/', {
+ import {useApiFetch} from "~/composables/useApiFetch.js";
+
+ const { data: reviews } = await useApiFetch('/review/', {
    baseURL: useRuntimeConfig().public.apiBase,
    default: () => []
  })
 
-
-// const reviews = [
-//   {
-//     rate: 5,
-//     name: "Johnny",
-//     description: "Mais c'était merveilleux cet Hotel, je recommande vivement ! Le service était impeccable et les installations sont magnifiques."
-//   },
-//   {
-//     rate: 4,
-//     name: "Marie",
-//     description: "Très bon séjour, personnel attentionné. Seul petit bémol : le petit-déjeuner pourrait être plus varié."
-//   },
-//   {
-//     rate: 5,
-//     name: "Pierre",
-//     description: "Une expérience inoubliable ! La vue depuis la chambre était à couper le souffle."
-//   },
-//   {
-//     rate: 5,
-//     name: "Sophie",
-//     description: "Excellent rapport qualité-prix. Je reviendrai sans hésiter !"
-//   },
-//   {
-//     rate: 4,
-//     name: "Lucas",
-//     description: "Très satisfait de mon séjour. L'emplacement est parfait pour visiter la ville."
-//   }
-// ]
 </script>
-
 <style scoped>
 </style>
-
-<!--//.font-lora {-->
-<!--//  font-family: 'Lora', serif;-->
-<!--//}-->

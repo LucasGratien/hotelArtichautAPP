@@ -1,24 +1,24 @@
 <template>
   <ul class="menu flex flex-row items-center justify-center gap-4 bg">
-<!--    <NavigationLangSelector/>-->
-    <UiAuthAction/>
+    <NavigationLangSelector/>
+<!--    <UiAuthAction/>-->
     <li>
-      <NuxtLink to = "/" >home</NuxtLink>
+      <NuxtLink to = "/" >Home</NuxtLink>
     </li>
     <li>
-      <NuxtLink to = '/Rooms'>rooms</NuxtLink>
+      <NuxtLink to = '/Rooms'>Rooms</NuxtLink>
     </li>
     <li>
-      <NuxtLink to = '/Restaurant'>restaurant</NuxtLink>
+      <NuxtLink to = '/Restaurant'>Restaurant</NuxtLink>
     </li>
     <li>
-      <NuxtLink to = '/Spa'>spa</NuxtLink>
+      <NuxtLink to = '/Spa'>Spa</NuxtLink>
     </li>
     <li>
-      <NuxtLink to = '/Service'>services</NuxtLink>
+      <NuxtLink to = '/Service'>Services</NuxtLink>
     </li>
     <li>
-      <nuxtLink to = '/Equipe'>equipe</nuxtLink>
+      <nuxtLink to = '/Equipe'>Equipe</nuxtLink>
     </li>
     <li>
       <NuxtLink to = '/Booking'><button>Booking</button></NuxtLink>
