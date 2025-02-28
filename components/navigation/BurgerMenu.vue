@@ -28,9 +28,9 @@
           <nuxtLink to="/Booking">Booking</nuxtLink>
         </li>
         <!--        <UiAuthAction/>-->
-        <div class="flex justify-center w-full p-2">
+        <li class="flex justify-center w-full p-2">
           <NavigationLangSelector/>
-        </div>
+        </li>
       </ul>
     </nav>
   </div>
