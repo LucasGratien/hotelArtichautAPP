@@ -1,22 +1,23 @@
 <template>
   <ul class="menu flex flex-row items-center justify-center gap-4 bg">
+    <NavigationLangSelector/>
     <li>
-      <NuxtLink to = "/" >Home</NuxtLink>
+      <NuxtLink to = "/" >home</NuxtLink>
     </li>
     <li>
-      <NuxtLink to = '/Rooms'>Rooms</NuxtLink>
+      <NuxtLink to = '/Rooms'>rooms</NuxtLink>
     </li>
     <li>
-      <NuxtLink to = '/Restaurant'>Restaurant</NuxtLink>
+      <NuxtLink to = '/Restaurant'>restaurant</NuxtLink>
     </li>
     <li>
-      <NuxtLink to = '/Spa'>SPA</NuxtLink>
+      <NuxtLink to = '/Spa'>spa</NuxtLink>
     </li>
     <li>
-      <NuxtLink to = '/Service'>Services</NuxtLink>
+      <NuxtLink to = '/Service'>services</NuxtLink>
     </li>
     <li>
-      <nuxtLink to = '/Equipe'>Equipe</nuxtLink>
+      <nuxtLink to = '/Equipe'>equipe</nuxtLink>
     </li>
     <li>
       <NuxtLink to = '/Booking'><button>Booking</button></NuxtLink>
@@ -26,7 +27,6 @@
 <style>
 .menu li{
   color:var(--primary-color);
-font-family: Cardo,serif;
   font-size: 25px;
   letter-spacing: 2px;
 }

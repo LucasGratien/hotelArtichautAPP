@@ -3,9 +3,10 @@
        :class="inverted ? 'lg:flex-row-reverse' : ''">
     <div class="image-container  w-full max-w-4xl">
       <img
+          v-if="room.images.length > 0"
           class="rounded-lg object-cover  w-full"
-          :src="image"
-          :alt="imageAlt"
+          :src="room.images[0].url"
+          alt="photo de chambre"
       />
     </div>
 
@@ -28,10 +29,6 @@
 <script setup lang="js">
 defineProps({
 room: Object,
-  link: {
-    type: String,
-    default: '#',
-  },
   buttonText: {
     type: String,
     default: 'En savoir+',
