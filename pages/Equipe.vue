@@ -25,19 +25,27 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="js">
 import imgchef from "@/assets/images/chef.png"
 import imgbann from "@/assets/images/brigade.jpg"
 import imgdir from "@/assets/images/equipe_placeholder.jpg"
 
 
 
-const heroPageData = {
-  title: "L'Equipe",
-  text: "Pour votre service",
-  button: "",
-  image: imgbann,
-}
+
+
+import {useHotelStore} from '@/stores/hotel.js'
+const store = useHotelStore()
+const heroPageData = computed(() => {
+  const bannerData = store.language('banner').find(item => item.name.includes('equipe'))
+  return {
+    title: bannerData?.title,
+    text: bannerData?.short_description,
+    description: bannerData?.description,
+    button: bannerData?.link,
+    image: bannerData.images && bannerData.images.length > 0 ? bannerData.images[0].url : ''
+  }
+})
 
 const cardsEquipe = [
   {

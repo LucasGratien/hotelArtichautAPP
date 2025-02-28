@@ -21,6 +21,9 @@
       <nuxtLink to = '/Equipe'>Equipe</nuxtLink>
     </li>
     <li>
+      <nuxtLink to = '/Hotel'>Hotel</nuxtLink>
+    </li>
+    <li>
       <NuxtLink to = '/Booking'><button>Booking</button></NuxtLink>
     </li>
   </ul>
@@ -53,3 +56,5 @@
 }
 
 </style>
+<script setup lang="ts">
+</script>

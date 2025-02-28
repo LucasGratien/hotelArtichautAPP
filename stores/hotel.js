@@ -14,11 +14,6 @@ export const useHotelStore = defineStore('hotel', {
             return (category) => state.contents.filter(item => {
                 return state.currentLang.id === item.language.id && item.name.includes(category)
             })
-        },
-        banner: (state) => {
-            return state.contents.filter(item => {
-                return state.currentLang.id === item.language.id && item.name.includes('banner')
-            })
         }
     },
 

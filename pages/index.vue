@@ -27,29 +27,17 @@
 <script setup lang="js">
 import img1 from '@/assets/video/0_Outdoor Living_Fire Pit_3840x2160_reset.mp4'
 import {useHotelStore} from '@/stores/hotel.js'
-
 const store = useHotelStore()
 
 const heroPageData = computed(() => {
-  const bannerItem = store.language('banner-')
-
+  const bannerData = store.language('banner').find(item => item.name.includes('artichaut'))
   return {
-    title: bannerItem.title,
-
-    text: bannerItem.short_description,
-
-    button: bannerItem.link || '',
-
-    image: bannerItem.images && bannerItem.images.length > 0 ? bannerItem.images[0].url : ''
+    title: bannerData?.title,
+    text: bannerData?.short_description,
+    description: bannerData?.description,
+    button: bannerData?.link,
+    image: bannerData.images && bannerData.images.length > 0 ? bannerData.images[0].url : ''
   }
 })
-
-
-// const heroPageData = {
-//   title: "L'Artichaut",
-//   text: "Passez un séjour unique dans un hotel intimiste et chaleureux",
-//   button: "Booking",
-//   image: img1,
-// }
 
 </script>
