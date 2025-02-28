@@ -6,7 +6,9 @@ export default defineNuxtConfig({
     devtools: {enabled: true},
     modules: [
         '@nuxt/ui',
-        '@pinia/nuxt'],
+        '@pinia/nuxt',
+        '@vueuse/motion/nuxt'
+    ],
     plugins:[
         '~/plugins/app.js',
         '~/plugins/motion.js'
