@@ -25,7 +25,7 @@
 
 
 <script setup lang="js">
-import img1 from '@/assets/video/0_Outdoor Living_Fire Pit_3840x2160_reset.mp4'
+
 import {useHotelStore} from '@/stores/hotel.js'
 const store = useHotelStore()
 

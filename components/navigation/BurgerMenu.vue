@@ -1,28 +1,43 @@
 <template>
   <div class="block ">
-      <button class="burger" :class="{ open: isOpen }" @click="toggleMenu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+    <button class="burger" :class="{ open: isOpen }" @click="toggleMenu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
 
     <nav v-if="isOpen" class="menu">
       <ul>
-        <li><nuxtLink to="/">Home</nuxtlink></li>
-        <li><nuxtLink to="/Rooms">Rooms</nuxtlink></li>
-        <li><nuxtLink to="/Restaurant">Restaurant</nuxtlink></li>
-        <li><nuxtLink to="/Spa">SPA</nuxtlink></li>
-        <li><nuxtLink to="/Service">Service</nuxtlink></li>
-        <li><nuxtLink to="/Booking">Booking</nuxtLink></li>
-        <UiAuthAction/>
+        <li>
+          <nuxtLink to="/">Home</nuxtlink>
+        </li>
+        <li>
+          <nuxtLink to="/Rooms">Rooms</nuxtlink>
+        </li>
+        <li>
+          <nuxtLink to="/Restaurant">Restaurant</nuxtlink>
+        </li>
+        <li>
+          <nuxtLink to="/Spa">SPA</nuxtlink>
+        </li>
+        <li>
+          <nuxtLink to="/Service">Service</nuxtlink>
+        </li>
+        <li>
+          <nuxtLink to="/Booking">Booking</nuxtLink>
+        </li>
+        <!--        <UiAuthAction/>-->
+        <div class="flex justify-center w-full p-2">
+          <NavigationLangSelector/>
+        </div>
       </ul>
     </nav>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import {ref} from "vue";
 
 const isOpen = ref(false);
 
@@ -71,7 +86,7 @@ const toggleMenu = () => {
   position: absolute;
   top: 50px;
   right: 0;
-  background: rgba(75, 101, 71, 1) ;
+  background: rgba(75, 101, 71, 1);
   color: white;
   width: 200px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -89,7 +104,8 @@ const toggleMenu = () => {
 .menu li {
   padding: 10px 20px;
 }
-.menu li:hover{
+
+.menu li:hover {
   transform: scale(1.1);
 }
 
@@ -101,6 +117,6 @@ const toggleMenu = () => {
 }
 
 .menu li a:hover {
- color: var(--primary-color);
+  color: var(--primary-color);
 }
 </style>
