@@ -58,7 +58,6 @@ const { credentials, pending, login, errorMsg } = useLogin({
         </div>
       </template>
       <section>
-
           <form @submit.prevent="login">
             <p>{{ errorMsg }}</p>
             <UInput
