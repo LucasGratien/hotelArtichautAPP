@@ -142,3 +142,5 @@ onUnmounted(() => {
   transform: scale(1.05);
 }
 </style>
+<script setup lang="ts">
+</script>
