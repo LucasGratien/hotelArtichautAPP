@@ -115,7 +115,7 @@ onUnmounted(() => {
 });
 </script>
 
-<style>
+<style scoped>
 .menu button {
   cursor: pointer;
   transition:

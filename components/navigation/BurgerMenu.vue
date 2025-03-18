@@ -1,35 +1,34 @@
 <template>
-  <div class="block ">
+  <div class="block">
     <button class="burger" :class="{ open: isOpen }" @click="toggleMenu">
       <span></span>
       <span></span>
       <span></span>
     </button>
 
-
-    <nav v-if="isOpen" class="menu">
+    <nav v-if="isOpen" class="menu mt-5">
       <ul>
         <li>
-          <nuxtLink to="/">Home</nuxtlink>
+          <nuxtLink to="/">Home</nuxtLink>
         </li>
         <li>
-          <nuxtLink to="/Rooms">Rooms</nuxtlink>
+          <nuxtLink to="/Rooms">Rooms</nuxtLink>
         </li>
         <li>
-          <nuxtLink to="/Restaurant">Restaurant</nuxtlink>
+          <nuxtLink to="/Restaurant">Restaurant</nuxtLink>
         </li>
         <li>
-          <nuxtLink to="/Spa">SPA</nuxtlink>
+          <nuxtLink to="/Spa">SPA</nuxtLink>
         </li>
         <li>
-          <nuxtLink to="/Service">Service</nuxtlink>
+          <nuxtLink to="/Service">Service</nuxtLink>
         </li>
         <li>
           <nuxtLink to="/Booking">Booking</nuxtLink>
         </li>
         <!--        <UiAuthAction/>-->
         <li class="flex justify-center w-full p-2">
-          <NavigationLangSelector/>
+          <NavigationLangSelector />
         </li>
       </ul>
     </nav>
@@ -37,17 +36,44 @@
 </template>
 
 <script setup>
-import {ref} from "vue";
-
 const isOpen = ref(false);
-
+const route = useRoute();
 const toggleMenu = () => {
   isOpen.value = !isOpen.value;
 };
+import { ref, watch, onMounted, onUnmounted } from "vue";
+import { useRoute } from "vue-router";
+
+// Fermer le menu au changement de page
+watch(route, () => {
+  isOpen.value = false;
+});
+
+// Fonction pour détecter un clic en dehors du menu
+const closeMenu = (event) => {
+  const menu = document.querySelector(".menu");
+  const burger = document.querySelector(".burger");
+
+  if (
+    menu &&
+    !menu.contains(event.target) &&
+    burger &&
+    !burger.contains(event.target)
+  ) {
+    isOpen.value = false;
+  }
+};
+
+onMounted(() => {
+  document.addEventListener("click", closeMenu);
+});
+
+onUnmounted(() => {
+  document.removeEventListener("click", closeMenu);
+});
 </script>
 
 <style scoped>
-
 .burger {
   display: flex;
   flex-direction: column;
@@ -69,18 +95,17 @@ const toggleMenu = () => {
   transition: all 0.3s ease;
 }
 
-.burger span.open:nth-child(1) {
+.burger.open span:nth-child(1) {
   transform: rotate(45deg) translate(5px, 5px);
 }
 
-.burger span.open:nth-child(2) {
+.burger.open span:nth-child(2) {
   opacity: 0;
 }
 
-.burger span.open:nth-child(3) {
+.burger.open span:nth-child(3) {
   transform: rotate(-45deg) translate(5px, -5px);
 }
-
 
 .menu {
   position: absolute;
@@ -113,7 +138,6 @@ const toggleMenu = () => {
   color: white;
   text-decoration: none;
   transition: color 0.2s ease;
-
 }
 
 .menu li a:hover {
