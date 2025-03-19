@@ -128,7 +128,7 @@
             <nuxtLink to ="/Restaurant">Restaurant</nuxtLink>
             <NuxtLink to = '/Service'>Services</NuxtLink>
             <NuxtLink to = '/Spa'>SPA</NuxtLink>
-            <NuxtLink to = '/Reserver'><button>Booking</button></NuxtLink>
+            <NuxtLink to = '/Booking'><button>Booking</button></NuxtLink>
           </div>
         </div>
       </div>
