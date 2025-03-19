@@ -7,7 +7,7 @@
         <NavigationSideBar />
       </div>
       <div
-        class="block md:hidden h-auto bg-[var(--secondary-color)] border-2 border-[var(primary)]"
+        class="block md:hidden h-auto bg-[var(--secondary-color)] border-2 border-[var(--primary-color)]"
       >
         <NavigationBurgerSideMenuAdmin />
       </div>
