@@ -41,12 +41,12 @@
 
 <script setup lang="js">
 
- import {useApiFetch} from "~/composables/useApiFetch.js";
+import {useApiFetch} from "~/composables/useApiFetch.js";
 
- const { data: reviews } = await useApiFetch('/review/', {
-   baseURL: useRuntimeConfig().public.apiBase,
-   default: () => []
- })
+const { data: reviews } = await useApiFetch('/review/', {
+  baseURL: useRuntimeConfig().public.apiBase,
+  default: () => []
+})
 
 </script>
 <style scoped>
