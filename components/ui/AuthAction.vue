@@ -1,6 +1,6 @@
 <script setup>
 
-//Les imports /le store/l'image du logo (à revoir je pense) / et les composants de connection et d'enregistrement.
+//Les imports /le store/l'image du logo (à revoir, je pense) / et les composants de connection et d'enregistrement.
 
 import {useAuthStore} from '~/stores/auth';
 import signLogo from "@/assets/logo/user.png";
@@ -26,7 +26,7 @@ const dropdownItems = computed(() => {
         [{label: 'Sign-in', icon: 'i-heroicons-arrow-right-on-rectangle', action: () => (isOpenRegister.value = true)}]
       ];
 });
-// propriété calculée qui va vérifier si 'l'utilisateur est connécté et que l'ont peu récupérer le user
+// propriété calculée qui va vérifier si 'l'utilisateur est connécté et que l'on peu récupérer le user
 const avatarSrc = computed(() => {
   if (authStore.isLoggedIn && authStore.user) {
     const { firstname, lastname } = authStore.user;
