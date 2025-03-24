@@ -80,6 +80,16 @@ To access to the auth urls please use the following credentials:
     email: admin@admin.com
     password: adminadmin
 
+Notice the different level of access through rôles: 
+
+    Master = role_id : 4 //Access full power, role,admin,booking,content,stats,user 
+    Manager = role_id : 3 //Access full admin, admin,booking,content,stats,user
+    Employee = role_id : 2 //Access operative task, booking,content,stats,user
+    User = role_id : 1 //Access to service, booking, dashboard
+    Un-authentificated = role_id : 0 //Only visit
+
+
+
 To reach the full documentation of the project please use the following command:
 
     npm run doc

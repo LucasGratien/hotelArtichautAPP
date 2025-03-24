@@ -1,7 +1,7 @@
 <script setup>
 //Les imports /le store/l'image du logo (à revoir, je pense) / et les composants de connection et d'enregistrement.
 
-import { useAuthStore } from "~/stores/auth";
+import {useAuthStore} from '~/stores/auth';
 import signLogo from "@/assets/logo/user.png";
 import LoginModal from "~/components/form/LoginModal.vue";
 import RegisterModal from "~/components/form/RegisterModal.vue";
@@ -16,38 +16,21 @@ const isOpenRegister = ref(false);
 
 const dropdownItems = computed(() => {
   return authStore.isLoggedIn
-    ? [
-        [{ label: "Settings", icon: "i-heroicons-cog-8-tooth" }],
-        [
-          {
-            label: "Sign out",
-            icon: "i-heroicons-arrow-left-on-rectangle",
-            action: authStore.logout,
-          },
-        ],
+      ? [
+        [{label: 'Settings', icon: 'i-heroicons-cog-8-tooth'}],
+        [{label: 'Sign out', icon: 'i-heroicons-arrow-left-on-rectangle', action: authStore.logout}]
       ]
-    : [
-        [
-          {
-            label: "Sign-In",
-            icon: "i-heroicons-arrow-down-tray",
-            action: () => (isOpen.value = true),
-          },
-        ],
-        [
-          {
-            label: "Sign-Up",
-            icon: "i-heroicons-arrow-right-on-rectangle",
-            action: () => (isOpenRegister.value = true),
-          },
-        ],
+      : [
+        [{label: 'Login', icon: 'i-heroicons-arrow-down-tray', action: () => (isOpen.value = true)}],
+        [{label: 'Sign-in', icon: 'i-heroicons-arrow-right-on-rectangle', action: () => (isOpenRegister.value = true)}]
       ];
 });
 // propriété calculée qui va vérifier si 'l'utilisateur est connécté et que l'on peu récupérer le user
 const avatarSrc = computed(() => {
   if (authStore.isLoggedIn && authStore.user) {
-    const { firstname, lastname } = authStore.user;
-    console.log("firstname", firstname);
+    const firstname = authStore.user.firstname;
+    const lastname = authStore.user.lastname;
+    console.log('firstname', authStore.user.firstname);
     return `https://api.dicebear.com/7.x/initials/svg?seed=${firstname} ${lastname}`;
   }
   return signLogo;

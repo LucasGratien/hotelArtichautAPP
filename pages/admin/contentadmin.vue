@@ -29,8 +29,7 @@
 </template>
 
 <script setup lang="js">
-import { useNuxtApp } from "#app";
-import { useHotelStore } from "@/stores/hotel";
+import { useHotelStore } from "~/stores/hotel.js";
 import { onMounted } from "vue";
 
 const store = useHotelStore();
