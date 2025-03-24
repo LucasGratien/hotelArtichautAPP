@@ -128,6 +128,8 @@ export const useAuthStore = defineStore('auth', {
         //Se déco
         logout() {
             this.resetAuth();
+            //message (temporaire de bienvenue)
+            alert(`Vous avez été déconnécté !`);
         },
         //supp le token
         resetAuth() {

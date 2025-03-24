@@ -38,6 +38,8 @@ const register = async () => {
   pending.value = true;
   errorMsg.value = '';
   try {
+    //appel de la fonction register du store afin de charger les données rentrée par l'utilisateur.
+    await authStore.register(credentials);
     //message (temporaire de bienvenue)
     alert(`Compte créé avec succès, bienvenue ${credentials.firstname} ${credentials.lastname}, vous pouvez vous login !`);
     // Fermer la modale après une inscription réussie

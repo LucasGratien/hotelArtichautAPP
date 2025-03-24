@@ -4,6 +4,9 @@
     <button class="px-3 py-2 z-10 h-[50px]">
       <NavigationLangSelector />
     </button>
+    <button class="px-3 py-2 z-10 h-[50px]">
+      <UiAuthAction/>
+    </button>
     <button
         class="text-[var(--primary-color)] text-[20px] border-[var(--primary-color)] border-[3px] font-bold hover:text-[var(--secondary-color)] hover:bg-[var(--primary-color)] rounded-md px-4 py-2 h-[50px]"
     >
