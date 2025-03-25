@@ -29,7 +29,7 @@
         </template>
 
         <template #images-data="{ row }">
-          <div class="flex justify-center shadow-lg flex-wrap gap-1">
+          <div class="flex justify-center shadow-md flex-wrap gap-1">
             <img
               v-for="image in row.images"
               :key="image.id"
