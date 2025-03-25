@@ -25,7 +25,10 @@ const changeLanguage = (item) => {
     />
 
     <template #item="{ item }">
-      <span class="truncate" @click="changeLanguage(item)">
+      <span
+        class="truncate text-[var(--primary-color)]"
+        @click="changeLanguage(item)"
+      >
         {{ item.lang }}
       </span>
       <img
