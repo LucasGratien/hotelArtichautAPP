@@ -156,7 +156,7 @@
 
     <div class="flex flex-col items-center justify-center py-6 gap-3">
       <UButton
-        class="text-[var(--secondary-color)] bg-[var(--primary-color)] hover:text-[var(--primary-color)] hover:bg-[var(--secondary-color)] font-semibold text-lg hover:border-[2px] hover:border-[var(--primary-color)]"
+        class="text-[var(--secondary-color)] bg-[var(--primary-color)] hover:text-[var(--primary-color)] hover:bg-[var(--secondary-color)] font-semibold text-lg hover:border-[2px] hover:border-[var(--primary-color)] dark:text-[var(--secondary-color)] dark:bg-[var(--primary-color)] dark:hover:text-[var(--primary-color)] dark:hover:bg-[var(--secondary-color)] dark:hover:border-[2px] dark:hover:border-[var(--primary-color)]"
         @click="openModal"
         >Ajouter un contenu</UButton
       >
