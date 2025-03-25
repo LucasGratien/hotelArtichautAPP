@@ -26,6 +26,7 @@ const dropdownItems = computed(() => {
       ];
 });
 // propriété calculée qui va vérifier si 'l'utilisateur est connécté et que l'on peu récupérer le user
+// WARNING gérer le fetchuserdata from token
 const avatarSrc = computed(() => {
   if (authStore.isLoggedIn && authStore.user) {
     const firstname = authStore.user.firstname;

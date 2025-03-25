@@ -26,9 +26,14 @@
         <li>
           <nuxtLink to="/Booking">Booking</nuxtLink>
         </li>
-        <!--        <UiAuthAction/>-->
         <li class="flex justify-center w-full p-2">
-          <NavigationLangSelector />
+          <NavigationLangSelector/>
+        </li>
+        <li class="flex justify-center w-full p-2">
+          <UiAuthAction/>
+        </li>
+        <li class="flex justify-center w-full p-2">
+          <UiAdminButton/>
         </li>
       </ul>
     </nav>
@@ -41,8 +46,8 @@ const route = useRoute();
 const toggleMenu = () => {
   isOpen.value = !isOpen.value;
 };
-import { ref, watch, onMounted, onUnmounted } from "vue";
-import { useRoute } from "vue-router";
+import {ref, watch, onMounted, onUnmounted} from "vue";
+import {useRoute} from "vue-router";
 
 // Fermer le menu au changement de page
 watch(route, () => {
@@ -55,10 +60,10 @@ const closeMenu = (event) => {
   const burger = document.querySelector(".burger");
 
   if (
-    menu &&
-    !menu.contains(event.target) &&
-    burger &&
-    !burger.contains(event.target)
+      menu &&
+      !menu.contains(event.target) &&
+      burger &&
+      !burger.contains(event.target)
   ) {
     isOpen.value = false;
   }

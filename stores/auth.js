@@ -1,13 +1,13 @@
 import { defineStore } from 'pinia';
 import { jwtDecode } from 'jwt-decode';
 import { useApiFetch } from '~/composables/useApiFetch';
-import { useUserStore } from '~/stores/User';
 
 export const useAuthStore = defineStore('auth', {
     //Stat du user
     state: () => ({
         user: null,
         token: '',
+        tokenUser: null,
         isLoggedIn: false,
     }),
     //Bha les getters
@@ -40,8 +40,6 @@ export const useAuthStore = defineStore('auth', {
                 }
                 //récupère les données de l'utilisateur
                 if (data.value?.user) {
-                    const userStore = useUserStore();
-                    userStore.setUser(data.value.user);
                     this.user = {
                         id: data.value.user.id,
                         email: data.value.user.email,
@@ -53,7 +51,6 @@ export const useAuthStore = defineStore('auth', {
                         phone: data.value.user.phone,
                         images: data.value.user.images
                     };
-
                     console.log('User connecté:', this.user);
                 }
             } catch (error) {
@@ -89,44 +86,43 @@ export const useAuthStore = defineStore('auth', {
             this.token = token;
             this.isLoggedIn = true;
             this.setUserFromToken(token);
-
-            if (this.user?.id) {
-                this.fetchUserData(this.user.id);
-            }
+            // localStorage.setItem('user', JSON.stringify(this.user));
 
             // Stocker le token dans un cookie
             const authToken = useCookie('authToken', {
-                maxAge: 60 * 60 * 24 * 7, // 7 jours
+                maxAge: 60 * 60 * 24, // 7 jours
                 secure: true, // Activer en prod
                 sameSite: 'strict',
             });
-
             authToken.value = token;
-
         },
         //charger les infos du token et les stocker
         async setUserFromToken(token) {
             const decodedToken = jwtDecode(token);
             console.log('Decoded token:', decodedToken);
-            this.user = {
+            this.tokenUser = {
                 id: decodedToken.id,
                 role_id: decodedToken.role_id,
                 is_pro: decodedToken.is_pro,
                 is_vip: decodedToken.is_vip,
             };
-            // Récupérer les infos complètes du user via id du token
-            await this.fetchUserData(decodedToken.id);
+            // Récupérer les infos complètes du user via token
+             await this.fetchUserData();
             console.log('Id du token: ',decodedToken.id);
             console.log('Role_id :',decodedToken.role_id);
+            console.log('User data : ', this.user)
         },
 
         // Récupérer les infos complètes du user depuis l'API en lian l'id dans le token et l'id du user
-        async fetchUserData(userId) {
+        async fetchUserData() {
             try {
-                const { data, error } = await useApiFetch(`/user/${userId}`, {
+                console.log(`Fetching: /user`);
+                const { data, error } = await useApiFetch(`/user`, {
                     method: 'GET',
                     headers: { Authorization: `Bearer ${this.token}` },
                 });
+                console.log('Data:', data.value);
+                console.log('Error:', error.value);
 
                 if (error.value) {
                     console.error('Erreur récupération user:', error.value);
@@ -149,6 +145,7 @@ export const useAuthStore = defineStore('auth', {
             this.resetAuth();
             //message (temporaire de salut)
             alert(`Vous avez été déconnécté !`);
+            return navigateTo('/');
         },
         //supp le token
         resetAuth() {
@@ -162,14 +159,11 @@ export const useAuthStore = defineStore('auth', {
         },
         initializeAuth() {
             const authToken = useCookie('authToken');
-            const userStore = useUserStore();
+
             if (authToken.value) {
                 this.setAuthToken(authToken.value);
-                userStore.loadUserFromStorage(); // restore info perso user
-
-                if (userStore.user) {
-                    this.isLoggedIn = true; // Assure que le user reste connecté
-                }
+                this.isLoggedIn = true;
+                this.fetchUserData(authToken.value);
             }
         },
     },

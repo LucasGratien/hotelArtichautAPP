@@ -2,7 +2,10 @@
   <div class="menu flex space-x-5">
     <!-- Dropdown Service -->
     <button class="px-3 py-2 z-10 h-[50px]">
-      <NavigationLangSelector />
+      <UiAdminButton/>
+    </button>
+    <button class="px-3 py-2 z-10 h-[50px]">
+      <NavigationLangSelector/>
     </button>
     <button class="px-3 py-2 z-10 h-[50px]">
       <UiAuthAction/>
@@ -81,13 +84,13 @@
     <button
         class="booking-button rounded-md border-[3px] border-[var(--primary-color)] font-bold text-[20px] px-4 py-2 h-[50px]"
     >
-      <NuxtLink to="/Booking"><p>Booking</p> </NuxtLink>
+      <NuxtLink to="/Booking"><p>Booking</p></NuxtLink>
     </button>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
+import {ref, onMounted, onUnmounted} from "vue";
 
 const openDropdown = ref(null);
 const dropdownService = ref(null);
@@ -121,10 +124,10 @@ onUnmounted(() => {
 <style scoped>
 .menu button {
   cursor: pointer;
-  transition:
-      background-color 0.3s ease,
-      transform 0.2s ease;
+  transition: background-color 0.3s ease,
+  transform 0.2s ease;
 }
+
 .menu li:hover {
   transition: color 0.3s ease;
   transform: scale(1.1);
@@ -133,6 +136,7 @@ onUnmounted(() => {
 .menu button:hover {
   transform: scale(1.1);
 }
+
 .menu button.booking-button {
   background-color: rgba(255, 255, 255, 0.24);
   color: var(--background-color);

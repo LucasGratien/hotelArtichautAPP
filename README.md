@@ -120,6 +120,13 @@ bun install
 
 Start the development server on `http://localhost:3000`:
 
+## Alternative software
+
+    Handbrake // the open source video transcoder
+
+    https://handbrake.fr/
+
+
 ```bash
 # npm
 npm run dev
