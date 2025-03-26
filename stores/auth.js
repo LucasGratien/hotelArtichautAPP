@@ -86,7 +86,6 @@ export const useAuthStore = defineStore('auth', {
             this.token = token;
             this.isLoggedIn = true;
             this.setUserFromToken(token);
-            // localStorage.setItem('user', JSON.stringify(this.user));
 
             // Stocker le token dans un cookie
             const authToken = useCookie('authToken', {
@@ -124,13 +123,8 @@ export const useAuthStore = defineStore('auth', {
                 console.log('Data:', data.value);
                 console.log('Error:', error.value);
 
-                if (error.value) {
-                    console.error('Erreur récupération user:', error.value);
-                    return;
-                }
-
-                if (data.value?.user) {
-                    this.user = data.value.user;
+                if (data.value) {
+                    this.user = data.value;
                     console.log('Firstname:', this.user.firstname);
                     console.log('Lastname:', this.user.lastname);
                 }
@@ -159,11 +153,9 @@ export const useAuthStore = defineStore('auth', {
         },
         initializeAuth() {
             const authToken = useCookie('authToken');
-
             if (authToken.value) {
                 this.setAuthToken(authToken.value);
                 this.isLoggedIn = true;
-                this.fetchUserData(authToken.value);
             }
         },
     },
