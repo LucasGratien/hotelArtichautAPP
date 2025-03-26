@@ -48,4 +48,9 @@ UButton:hover {
 </style>
 
 <script setup>
+import {useAuthStore} from '~/stores/auth';
+const authStore = useAuthStore();
+onMounted(() => {
+  authStore.initializeAuth();
+});
 </script>

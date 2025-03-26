@@ -18,7 +18,6 @@ export default defineNuxtRouteMiddleware((to, from) => {
         // le role_id doit être suffisant
         if (authStore.tokenUser.role_id < 2) {
             console.log('admin auth was not unable to access.');
-            alert(`pas accès !`);
             // Rediriger vers une page accès refusé
             return navigateTo('/unauthorized');
         }
