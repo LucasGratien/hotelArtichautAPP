@@ -8,7 +8,10 @@
       <div class="text-center md:text-left">
         <NuxtLink
             to="/Spa"
-            class="bg-yellow-500 hover:bg-yellow-600 text-[var(--background)] py-3 px-8 rounded-md shadow cta-btn"
+            class="
+            bg-[var(--primary-color)] hover:bg-[var(--champ-color)]
+            text-[var(--secondary-color)] hover:text-[var(--primary-color)]
+             py-3 px-8 rounded-md shadow cta-btn"
         >
           En savoir+
         </NuxtLink>

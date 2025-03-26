@@ -27,7 +27,6 @@
 
 <script setup lang="js">
 import imgchef from "@/assets/images/chef.png"
-import imgbann from "@/assets/images/brigade.jpg"
 import imgdir from "@/assets/images/equipe_placeholder.jpg"
 
 

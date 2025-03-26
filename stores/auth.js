@@ -89,7 +89,7 @@ export const useAuthStore = defineStore('auth', {
 
             // Stocker le token dans un cookie
             const authToken = useCookie('authToken', {
-                maxAge: 60 * 60 * 24, // 7 jours
+                maxAge: 60 * 60 * 24 * 7, // 7 jours
                 secure: true, // Activer en prod
                 sameSite: 'strict',
             });

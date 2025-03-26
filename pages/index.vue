@@ -3,7 +3,8 @@
     <UiHerobanner :title="heroPageData?.title"
                   :text="heroPageData?.text"
                   :button="heroPageData?.button"
-                  :image="heroPageData?.image"/>
+                  :image="heroPageData?.image"
+                 />
   </div>
 <UiLogo/>
   <UiCardhome
@@ -17,8 +18,14 @@
       :buttonText="'En savoir +'"
       :inverted="index % 2 === 0"
   />
-
   <UiCardhomespa/>
+    <UiHerobanner :title="heroPageDataEquipe?.title"
+                  :buttonText="'Je découvre'"
+                  :image="heroPageDataEquipe?.image"
+                  :link="'/Equipe'" >
+    </UiHerobanner>
+
+
   <UiCardrestaurant/>
 
 </template>
@@ -40,4 +47,18 @@ const heroPageData = computed(() => {
   }
 })
 
+const heroPageDataEquipe = computed(() => {
+  const bannerData = store.language('banner').find(item => item.name.includes('equipe'))
+  return {
+    title: bannerData?.title,
+    link: bannerData?.link,
+    image: bannerData.images && bannerData.images.length > 0 ? bannerData.images[0].url : ''
+  }
+})
+
 </script>
+
+<style scoped>
+
+
+</style>

@@ -3,16 +3,30 @@
     <div class="video-container relative">
       <div class="image-container">
         <video v-if="image && image.includes('.mp4')" autoplay muted loop class="background-video">
-          <source :src="image" type="video/mp4" />
+          <source :src="image" type="video/mp4"/>
           Votre navigateur ne supporte pas la lecture des vidéos.
         </video>
-        <img v-else :src="image" alt="background image" class="background-image" />
+        <img v-else :src="image" alt="background image" class="background-image"/>
         <div class="filter absolute top-0 bottom-0 right-0 left-0"></div>
         <div class="content ">
           <h1 class="sm:text-[4rem]">{{ title }}</h1>
           <p>{{ text }}</p>
+
+
           <div v-if="button && button.trim().length > 0">
-          <button>{{ button }}</button>
+            <button>{{ button }}</button>
+          </div>
+
+          <div v-if="link && link.trim().length > 0">
+            <NuxtLink
+                :to="link"
+                class="
+            bg-[var(--primary-color)] hover:bg-[var(--champ-color)]
+            text-[var(--secondary-color)] hover:text-[var(--primary-color)]
+             py-3 px-8 rounded-md shadow cta-btn"
+            >
+              {{ buttonText }}
+            </NuxtLink>
           </div>
         </div>
       </div>
@@ -26,6 +40,8 @@ defineProps({
       text: String,
       button: String,
       image: String,
+      link: String,
+      buttonText: String
     }
 )
 </script>
@@ -70,7 +86,7 @@ defineProps({
 
 .content h1 {
   font-size: 5rem;
- color: var(--primary-color);
+  color: var(--primary-color);
 }
 
 .content p {
