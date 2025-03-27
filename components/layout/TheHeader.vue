@@ -1,5 +1,5 @@
 <template>
-  <nav class="bg-[var(--secondary-color)] navbar-expand-md drop-shadow-xl ">
+  <nav class="bg-[var(--secondary-color)] navbar-expand-md ">
     <div class="flex justify-between items-center mx-auto w-full px-4">
       <div class="flex items-center space-x-2">
         <NuxtLink to="/">
