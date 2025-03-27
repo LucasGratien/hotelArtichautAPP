@@ -26,7 +26,12 @@
     </UiHerobanner>
 
 
-  <UiCardrestaurant/>
+
+  <UiCardrestaurant
+      :title="restaurantData?.title"
+      :description="restaurantData?.description"
+      :images="restaurantData?.images.map(img => img.url)"
+  />
 
 </template>
 
@@ -59,5 +64,12 @@ const heroPageDataEquipe = computed(() => {
     image: bannerData.images && bannerData.images.length > 0 ? bannerData.images[0].url : ''
   }
 })
-
+const restaurantData = computed(() => {
+  const carouselData = store.language('restaurant-carousel').find(item => item.name.includes('restaurant-carousel'));
+  return {
+    title: carouselData?.title,
+    description: carouselData?.description,
+    images: carouselData?.images || []
+  };
+});
 </script>

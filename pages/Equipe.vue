@@ -7,7 +7,7 @@
   </div>
   <div>
     <div
-        class="bg-[#f1ebd9] text-[#4b6447] text-center shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]
+        class="bg-[#f1ebd9] text-[var(--secondary-color)] text-center shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]
         mt-6  py-4 px-2 mx-4
         md:mx-16 md:py-16 md:px-16
         ">

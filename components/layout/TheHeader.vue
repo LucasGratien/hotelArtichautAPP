@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-md">
+  <nav class="bg-[var(--secondary-color)] navbar-expand-md drop-shadow-xl ">
     <div class="flex justify-between items-center mx-auto w-full px-4">
       <div class="flex items-center space-x-2">
         <NuxtLink to="/">
@@ -30,9 +30,7 @@
 <script setup lang="js"></script>
 
 <style scoped>
-.navbar {
-  background-color: var(--secondary-color);
-}
+
 
 .title-wrapper p {
   color: var(--primary-color);
