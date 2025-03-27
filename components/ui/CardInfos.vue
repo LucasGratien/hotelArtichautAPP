@@ -5,48 +5,48 @@
     <!--  mobile -->
     <div class="block md:hidden">
       <!-- Image box -->
-      <div v-if="image && image.trim().length > 0" class="p-8">
-        <img class="w-full aspect-square" :src="image" alt="background image"/>
+      <div v-if="image && image.trim().length > 0" class="p-1">
+        <img class="w-full aspect-square drop-shadow-xl" :src="image" alt="employee-picture"/>
       </div>
 
       <!-- Text box -->
       <div class="p-2">
-        <div class="font-cardo text-3xl text-center text-[#4b6447] p-2">
+
+        <div class="font-bold text-3xl text-center text-[#4b6447] p-2">
           <h1>{{ title }}</h1>
         </div>
-        <div class="font-cardo text-center text-[#4b6447] p-2">
-          <p>{{ text }}</p>
+        <div class="text-3xl text-center text-[#4b6447]">
+          <h1>{{ short_description }}</h1>
         </div>
-        <div v-if="button && button.trim().length > 0" class="text-center p-2">
-          <button>{{ button }}</button>
+        <div class="text-center text-[#4b6447] p-2">
+          <p>{{ description }}</p>
         </div>
       </div>
     </div>
 
     <!--  Desktop -->
-    <div class="hidden md:flex">
+    <div class="hidden md:flex items-center">
 
       <!--template si images a gauche -->
       <template v-if="!inverted">
         <!-- Image box -->
-        <div v-if="image && image.trim().length > 0" class="md:w-1/3 p-8">
-          <img class="w-full aspect-square" :src="image" alt="background image"/>
+        <div v-if="image && image.trim().length > 0" class="md:w-1/3 p-4">
+          <img class="w-full aspect-square drop-shadow-xl" :src="image" alt="employee-picture"/>
         </div>
 
         <!-- Text box -->
-        <div class="md:w-2/3 p-2">
+        <div class="md:w-2/3 md:h-1/2">
           <!-- titre -->
-          <div class="font-cardo text-3xl text-center md:text-center text-[#4b6447] p-2">
+          <div class="font-bold text-3xl text-center md:text-center text-[#4b6447] p-2">
             <h1>{{ title }}</h1>
           </div>
-          <!-- texte -->
-          <div class="font-cardo text-center md:text-center text-[#4b6447] p-2">
-            <p>{{ text }}</p>
+          <!-- Nom  -->
+          <div class=" text-3xl text-center  text-[#4b6447] ">
+            <h1>{{ short_description }}</h1>
           </div>
-
-          <!-- bouton -->
-          <div v-if="button && button.trim().length > 0" class="text-center md:text-left p-2">
-            <button>{{ button }}</button>
+          <!-- texte -->
+          <div class="text-2xl text-center md:text-center text-[#4b6447] py-2 px-20">
+            <p>{{ description }}</p>
           </div>
 
         </div>
@@ -55,36 +55,34 @@
       <!-- Version inversée -->
       <template v-else>
         <!-- Text box (gauche quand inversé) -->
-        <div class="md:w-2/3 p-2">
+        <div class="md:w-2/3 h-1/2">
           <!-- titre -->
-          <div class="font-cardo text-3xl text-center  text-[#4b6447] p-2">
+          <div class="font-bold text-3xl text-center  text-[#4b6447] p-2">
             <h1>{{ title }}</h1>
           </div>
-          <!-- texte -->
-          <div class="font-cardo text-center text-[#4b6447] p-2">
-            <p>{{ text }}</p>
+          <!-- Nom  -->
+          <div class=" text-3xl text-center  text-[#4b6447] ">
+            <h1>{{ short_description }}</h1>
           </div>
-          <!-- bouton -->
-          <div v-if="button && button.trim().length > 0" class="text-center md:text-left p-2">
-            <button>{{ button }}</button>
+          <!-- texte -->
+          <div class="text-2xl text-center text-[#4b6447] py-2 px-20">
+            <p>{{ description }}</p>
           </div>
         </div>
-
         <!-- Image box (droite quand inversé) -->
         <div v-if="image && image.trim().length > 0" class="md:w-1/3 p-8">
-          <img class="w-full aspect-square" :src="image" alt="background image"/>
+          <img class="w-full aspect-square drop-shadow-xl" :src="image" alt="background image"/>
         </div>
-
       </template>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 defineProps({
       title: String,
-      text: String,
-      button: String,
+      short_description: String,
+      description: String,
       image: String,
       inverted: {
         type: Boolean,
@@ -93,7 +91,3 @@ defineProps({
     }
 )
 </script>
-
-<style scoped>
-
-</style>

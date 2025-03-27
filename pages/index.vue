@@ -33,9 +33,13 @@
 
 <script setup lang="js">
 
+//gestion des imports pour l'hydratation
+
 import {useHotelStore} from '@/stores/hotel.js'
 const store = useHotelStore()
 
+
+//gestion de la récupération des données pour les banners en fonction de leur nature (artichaut / equipe)
 const heroPageData = computed(() => {
   const bannerData = store.language('banner').find(item => item.name.includes('artichaut'))
   return {
@@ -57,8 +61,3 @@ const heroPageDataEquipe = computed(() => {
 })
 
 </script>
-
-<style scoped>
-
-
-</style>
