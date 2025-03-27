@@ -1,10 +1,14 @@
 <template>
-  <div class="spa-card">
+  <div class="flex flex-col-reverse md:flex-row items-center bg-[var(--background-color)] p-8 rounded-lg shadow-lg w-full mt-4">
     <div class="text-container w-full md:w-1/2 flex flex-col justify-center relative z-10">
       <h2 class="underline font-bold text-3xl text-[var(--secondary-color)] mb-6 text-center md:text-left">SPA</h2>
       <p class="description text-[var(--secondary-color)] leading-relaxed mb-8 text-center md:text-left">
-        La chambre standard de notre hôtel allie confort et simplicité pour un séjour agréable. Elle est équipée d'un lit double spacieux, d'une télévision à écran plat, d'une connexion Wi-Fi gratuite, et d'une salle de bain privative avec douche ou baignoire. Un bureau fonctionnel et un espace de rangement sont également à votre disposition. La décoration moderne et chaleureuse offre une ambiance propice à la détente. Idéale pour les séjours professionnels ou touristiques, cette chambre vous garantit un repos optimal.
-      </p>
+        L’espace bien-être de notre hôtel est une véritable oasis de détente, conçu pour vous offrir un moment de
+        sérénité absolue. Profitez de notre spa raffiné, de notre sauna apaisant et de notre piscine chauffée pour
+        une expérience revitalisante. Des espaces de relaxation et des soins personnalisés sont à votre disposition
+        pour une parenthèse hors du temps. Dans un cadre élégant et apaisant, laissez-vous envelopper par une atmosphère
+        propice au bien-être. Que ce soit pour un instant de douceur après une journée active ou pour un séjour dédié
+        à la relaxation, notre espace bien-être vous promet une évasion inoubliable.</p>
       <div class="text-center md:text-left">
         <NuxtLink
             to="/Spa"
@@ -29,15 +33,3 @@
   </div>
 </template>
 
-<script setup lang="js">
-</script>
-
-<style scoped>
-.spa-card {
-  @apply  flex flex-col-reverse md:flex-row items-center bg-[var(--background)] p-8 rounded-lg shadow-lg w-full mt-4;
-  background-color: var(--background-color);
-  width: 100%;
-}
-
-
-</style>

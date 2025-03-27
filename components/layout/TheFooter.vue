@@ -2,9 +2,9 @@
   <footer class="bg-[#FBF9F4]">
     <div class="mx-auto space-t-8">
       <!-- Subscription Section -->
-      <div class="bg-[#eac684] py-4 rounded text-center md:flex md:flex-row md:flex-nowrap  md:mx-8">
+      <div class="bg-[var(--primary-color)] py-4 rounded text-center md:flex md:flex-row md:flex-nowrap  md:mx-8">
         <div class="md:w-2/3 flex items-center justify-center">
-          <h2 class="text-[#4b6447]  md:pt-0 text-2xl md:text-4xl font-cardo">
+          <h2 class="text-[var(--secondary-color)]  md:pt-0 text-2xl md:text-4xl">
             Stay up to date about our latest offers
           </h2>
         </div>
@@ -12,10 +12,10 @@
           <input
               type="email"
               placeholder="Enter your email ..."
-              class="bg-[#4b6447] text-[var(primary)] text-base font-cardo px-5 py-2 rounded-md focus:outline-none focus:ring focus:ring-[#4b6447]"
+              class="bg-[var(--secondary-color)] text-[var(--primary-color)] text-base px-8 py-2 rounded-md hover:bg-[#365132] focus:outline-none focus:ring focus:ring-[#4b6447]"
           />
           <button
-              class="bg-[#4b6447] text-[var(primary)] text-base font-cardo px-8 py-2 rounded-md hover:bg-[#365132]">
+              class="bg-[var(--secondary-color)] text-[var(--primary-color)] text-base px-8 py-2 rounded-md hover:bg-[#365132]">
             Subscribe to the Newsletter
           </button>
         </div>
@@ -138,7 +138,7 @@
 
 
       <!-- Footer Bottom -->
-      <div class="bg-[#4b6447] text-center text-[var(primary)] text-base py-5 font-lora ">
+      <div class="bg-[var(--secondary-color)] text-center text-[var(--primary-color)] text-base py-5 font-lora ">
         L’artichaut <br/> © 2000-2023 <br/> All Rights Reserved
       </div>
     </div>

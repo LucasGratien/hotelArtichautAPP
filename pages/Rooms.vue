@@ -6,7 +6,6 @@
         :button="heroPageData?.button"
         :image="heroPageData?.image"
     />
-
       <UiCardpages
           v-for="(item, index) in $hotel.roomCategories"
           :key="index"

@@ -126,6 +126,11 @@ Start the development server on `http://localhost:3000`:
 
     https://handbrake.fr/
 
+For colors please try this. 
+
+    https://www.tailwindshades.com/
+
+tailwind sheet code
 
 ```bash
 # npm
