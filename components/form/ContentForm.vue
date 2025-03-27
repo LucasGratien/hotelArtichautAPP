@@ -112,6 +112,7 @@ import { useContentActions } from "@/composables/useContentActions";
 import { useHotelStore } from "@/stores/hotel";
 import DynamicModalForm from "@/components/form/DynamicModalForm.vue";
 
+
 const store = useHotelStore();
 const dynamicModal = ref(null);
 const { deleteContent, modifyContent, createContent, loading } = useContentActions();
@@ -128,7 +129,7 @@ const updateWidth = () => {
 onMounted(() => window.addEventListener("resize", updateWidth));
 onUnmounted(() => window.removeEventListener("resize", updateWidth));
 
-const rowsWithExpandedState = ref(
+const rowsWithExpandedState = computed(() =>
     store.contents
         .slice((page.value - 1) * pageCount, page.value * pageCount)
         .map((row) => ({
@@ -137,20 +138,10 @@ const rowsWithExpandedState = ref(
         }))
 );
 
-watch(page, () => {
-  rowsWithExpandedState.value = store.contents
-      .slice((page.value - 1) * pageCount, page.value * pageCount)
-      .map((row) => ({
-        ...row,
-        expanded: false,
-      }));
-});
-
 const toggleDescription = (id) => {
   const rowIndex = rowsWithExpandedState.value.findIndex((row) => row.id === id);
   if (rowIndex !== -1) {
-    const updatedRow = { ...rowsWithExpandedState.value[rowIndex], expanded: !rowsWithExpandedState.value[rowIndex].expanded };
-    rowsWithExpandedState.value.splice(rowIndex, 1, updatedRow);
+    rowsWithExpandedState.value[rowIndex].expanded = !rowsWithExpandedState.value[rowIndex].expanded;
   }
 };
 
@@ -165,19 +156,20 @@ const fetchContent = async () => {
 onMounted(fetchContent);
 
 const formFields = [
-  { name: 'name', label: 'Nom', type: 'text', placeholder: 'Entrez votre nom', required: true },
-  { name: 'title', label: 'Titre', type: 'text', placeholder: 'Entrez le titre', required: true },
-  { name: 'short_description', label: 'Description courte', type: 'textarea', placeholder: 'Entrez une description courte', required: true },
-  { name: 'description', label: 'Description', type: 'textarea', placeholder: 'Entrez une description', required: true },
-  { name: 'link', label: 'Lien', type: 'text', placeholder: 'Entrez le lien', required: true },
-  { name: 'display_order', label: 'Ordre d`affichage', type: 'text', placeholder: 'Entrez l`ordre daffichage', required: true },
-  { name: 'language_id', label: 'Langue', type: 'text', placeholder: 'Entrez la langue', required: true },
-  { name: 'images', label: 'Images', type: 'file',  required: true },
-  { name: 'landing_page_display', label: 'Afficher sur la page daccueil', type: 'checkbox' },
-  { name: 'navbar_display', label: 'Afficher dans la barre de navigation', type: 'checkbox' },
+  { name: "name", label: "Nom", type: "text", placeholder: "Entrez votre nom", required: true },
+  { name: "title", label: "Titre", type: "text", placeholder: "Entrez le titre", required: true },
+  { name: "short_description", label: "Description courte", type: "textarea", placeholder: "Entrez une description courte", required: true },
+  { name: "description", label: "Description", type: "textarea", placeholder: "Entrez une description", required: true },
+  { name: "link", label: "Lien", type: "text", placeholder: "Entrez le lien", required: true },
+  { name: "display_order", label: "Ordre d'affichage", type: "number", placeholder: "Entrez l'ordre d'affichage", required: true },
+  { name: "language_id", label: "Langue", type: "number", placeholder: "Entrez la langue", required: true },
+  { name: "images", label: "Images", type: "file", required: true },
+  { name: "landing_page_display", label: "Afficher sur la page d'accueil", type: "checkbox" },
+  { name: "navbar_display", label: "Afficher dans la barre de navigation", type: "checkbox" },
 ];
 
 const openModal = () => {
+  selectedItem.value = null; // Reset de la sélection
   dynamicModal.value?.openModal();
 };
 
@@ -187,54 +179,42 @@ const columns = ref([
   { key: "description", label: "Description" },
   { key: "images", label: "Images" },
   { key: "actions", label: "Supprimer", align: "center" },
-  { key: "modify", label: "Modifier", align: "center" }
+  { key: "modify", label: "Modifier", align: "center" },
 ]);
 
 const handleDelete = async (id) => {
-  await deleteContent(id);
-  store.contents = store.contents.filter((item) => item.id !== id);
+  if (confirm("Voulez-vous vraiment supprimer ce contenu ?")) {
+    try {
+      await store.deleteContent(id);
+      await fetchContent(); // Rafraîchir les données
+      toast.success("Supprimé avec succès");
+    } catch (error) {
+      toast.error("Échec de la suppression");
+    }
+  }
+};
+
+const handleModify = (id) => {
+  selectedItem.value = store.contents.find((item) => item.id === id);
+  if (selectedItem.value) {
+    dynamicModal.value?.openModal(selectedItem.value);
+  }
 };
 
 const handleSubmit = async (formData) => {
-  formData.landing_page_display = formData.landing_page_display ? 1 : 0;
-  formData.navbar_display = formData.navbar_display ? 1 : 0;
-
-  console.log("Données du formulaire:", formData);
-  const createdContent = await createContent(formData);
-
-  if (createdContent) {
-    store.contents.push(createdContent);
-    newContent.value = { title: "", description: "", image: "" };
-  }
-};
-
-const handleModify = async (id) => {
-  const itemToModify = store.contents.find((item) => item.id === id);
-  if (itemToModify) {
-    selectedItem.value = { ...itemToModify };
-    dynamicModal.value?.openModal(selectedItem.value, async (updateData) => {
-      await saveModifiedData(id, updateData);
-    });
-  }
-};
-
-const saveModifiedData = async (id, updatedData) => {
-  updatedData.landing_page_display = updatedData.landing_page_display ? 1 : 0;
-  updatedData.navbar_display = updatedData.navbar_display ? 1 : 0;
-
   try {
-    const updatedContent = await modifyContent(id, updatedData);
-    if (updatedContent) {
-      const index = store.contents.findIndex((item) => item.id === id);
-      if (index !== -1) {
-        store.contents[index] = updatedContent;
-      }
-      console.log("Mise à jour réussie :", updatedContent);
+    if (selectedItem.value) {
+      await store.modifyContent(selectedItem.value.id, formData);
+      toast.success("Modification réussie");
+    } else {
+      await store.createContent(formData);
+      toast.success("Création réussie");
     }
+    dynamicModal.value?.resetForm(); // Reset du formulaire
+    await fetchContent(); // Rafraîchir les données
   } catch (error) {
-    console.error("Erreur lors de la mise à jour :", error);
+    toast.error("Erreur : " + error.message);
   }
 };
 </script>
 
-<style scoped></style>

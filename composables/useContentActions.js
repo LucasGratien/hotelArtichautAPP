@@ -1,5 +1,6 @@
-import { ref } from 'vue';
-
+import { ref } from 'vue'
+import { defineStore } from 'pinia'
+import { useApiFetch } from '@/composables/useApiFetch'
 /**
  * Hook pour gérer les actions CRUD sur les contenus
  * @returns {{
@@ -21,7 +22,6 @@ export function useContentActions() {
         error.value = null;
 
         try {
-            // Validation des champs obligatoires
             const requiredFields = ['name', 'title', 'short_description', 'description', 'landing_page_display', 'navbar_display', 'display_order', 'language_id'];
             for (const field of requiredFields) {
                 if ([null, undefined].includes(newData[field])) {
@@ -29,48 +29,46 @@ export function useContentActions() {
                 }
             }
 
-            // Convertir les cases à cocher en 1 ou 0
             newData.landing_page_display = newData.landing_page_display ? 1 : 0;
             newData.navbar_display = newData.navbar_display ? 1 : 0;
             newData.display_order = String(newData.display_order);
             newData.language_id = String(newData.language_id);
 
-            // S'assurer que `images` est un tableau (initialiser à un tableau vide si non défini)
             if (!newData.images) {
                 newData.images = [];
             } else if (!Array.isArray(newData.images)) {
-                newData.images = [newData.images]; // Convertir en tableau si ce n'est pas déjà un tableau
+                newData.images = [newData.images];
             }
 
-            // Création de FormData
             const formData = new FormData();
             Object.keys(newData).forEach((key) => {
                 if (key === "images" && Array.isArray(newData.images)) {
                     newData.images.forEach((file, index) => {
-                        formData.append(`images[${index}]`, file); // Format array
+                        formData.append(`images[${index}]`, file);
                     });
                 } else {
                     formData.append(key, newData[key]);
                 }
             });
 
-            console.log('FormData envoyé :', Object.fromEntries(formData.entries()));
-
-            // Envoi de la requête
-            const response = await fetch('http://192.168.1.245:8000/api/content', {
-                method: "POST",
-                body: formData, // Pas besoin de définir "Content-Type" manuellement
+            formData.forEach((value, key) => {
+                console.log(key, value);
             });
 
-            if (!response.ok) {
-                throw new Error(`Erreur ${response.status}: ${response.statusText}`);
+            const response = await useApiFetch('content', {
+                method: "POST",
+                body: formData,
+            });
+
+            if (!response || response.error) {
+                throw new Error(response?.error || "Erreur inconnue");
             }
 
-            return await response.json();
+            return response;
         } catch (err) {
             error.value = err instanceof Error ? err : new Error('Une erreur inconnue est survenue');
             console.error('Erreur lors de la création:', error.value);
-            return null;
+            return { success: false, error: error.value };
         } finally {
             loading.value = false;
         }
@@ -83,10 +81,10 @@ export function useContentActions() {
         error.value = null;
 
         try {
-            const response = await fetch(`http://192.168.1.245:8000/api/content/${id}`, { method: "DELETE" });
+            const response = await useApiFetch(`content/${id}`, { method: "DELETE" });
 
-            if (!response.ok) {
-                throw new Error(`Erreur ${response.status}: ${response.statusText}`);
+            if (!response || response.error) {
+                throw new Error(response?.error || "Erreur inconnue");
             }
 
             return true;
@@ -106,14 +104,12 @@ export function useContentActions() {
         error.value = null;
 
         try {
-            // S'assurer que `images` est bien un tableau (initialiser à un tableau vide si non défini)
             if (!updatedData.images) {
                 updatedData.images = [];
             } else if (!Array.isArray(updatedData.images)) {
-                updatedData.images = [updatedData.images]; // Convertir en tableau si ce n'est pas déjà un tableau
+                updatedData.images = [updatedData.images];
             }
 
-            // Création de FormData
             const formData = new FormData();
             Object.keys(updatedData).forEach((key) => {
                 if (key === "images" && Array.isArray(updatedData.images)) {
@@ -125,23 +121,24 @@ export function useContentActions() {
                 }
             });
 
-            console.log("Données envoyées :", Object.fromEntries(formData.entries()));
-
-            // Envoi de la requête
-            const response = await fetch(`http://192.168.1.245:8000/api/content/${id}`, {
-                method: "POST",
-                body: formData, // Utiliser formData ici
+            formData.forEach((value, key) => {
+                console.log(key, value);
             });
 
-            if (!response.ok) {
-                throw new Error(`Erreur ${response.status}: ${response.statusText}`);
+            const response = await useApiFetch(`content/${id}`, {
+                method: "PUT",
+                body: formData,
+            });
+
+            if (!response || response.error) {
+                throw new Error(response?.error || "Erreur inconnue");
             }
 
-            return await response.json();
+            return response;
         } catch (err) {
             error.value = err instanceof Error ? err : new Error('Une erreur inconnue est survenue');
             console.error('Erreur lors de la modification:', error.value);
-            return null;
+            return { success: false, error: error.value };
         } finally {
             loading.value = false;
         }
