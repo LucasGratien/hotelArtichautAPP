@@ -21,7 +21,5 @@ export default defineNuxtConfig({
     css: [
         '@/public/assets/css/variables.css'
     ],
-    colorMode: {
-        preference: 'light'
-      }
+    
 })
