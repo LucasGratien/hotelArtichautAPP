@@ -16,8 +16,4 @@ html, body {
   letter-spacing: 2px;
 }
 
-.page-container {
-  max-width: 1400px;
-  margin-inline: auto;
-}
 </style>
