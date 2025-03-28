@@ -4,7 +4,7 @@
                 :button="heroPageData?.button"
                 :image="heroPageData?.image" />
   <UiCardhome
-      v-for="(item, index) in spaCards"
+      v-for="(item, index) in restautCards"
       :key="item.id"
       :title="item.title"
       :description="item.description"
@@ -31,6 +31,6 @@ const heroPageData = computed(() => {
   }
 })
 
-const spaCards = computed(() => store.language('restaurant-cards'))
+const restautCards = computed(() => store.language('restaurant-cards'))
 </script>
 
