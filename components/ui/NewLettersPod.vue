@@ -14,10 +14,10 @@
       <input
           type="email"
           placeholder="Enter your email ..."
-          class="bg-[var(--secondary-color)] text-[var(--primary-color)] px-10 py-2 rounded-md hover:bg-[#365132] focus:outline-none focus:ring focus:ring-[#4b6447]
+          class="bg-[var(--secondary-color)] placeholder:font-[Cardo] placeholder:text-[var(--primary-color)] md:w-1/2 py-2 rounded-md hover:bg-[#365132] text-center
               hover:scale-105 transition-transform duration-300 ease-in-out"/>
       <button
-          class="bg-[var(--secondary-color)] text-[var(--primary-color)] px-8 py-2 rounded-md hover:bg-[#365132]
+          class="bg-[var(--secondary-color)] text-[var(--primary-color)] md:w-1/2 py-2 rounded-md hover:bg-[#365132]
               hover:scale-105 transition-transform duration-300 ease-in-out">
         Subscribe to the Newsletter
       </button>

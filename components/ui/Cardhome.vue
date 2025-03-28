@@ -11,7 +11,7 @@
     <div class="text-container w-full md:w-1/2 p-8 flex flex-col justify-center">
       <h2 class="font-bold text-3xl text-[var(--secondary-color)] underline mb-6 text-center md:text-left">{{ title }}</h2>
       <p class="description text-[var(--secondary-color)] leading-relaxed mb-8 text-center md:text-left">{{ description }}</p>
-      <div class="text-center md:text-left">
+      <div v-if="link && link.trim().length > 0" class="text-center md:text-left">
         <NuxtLink
             :to="link"
             class="bg-[var(--primary-color)] hover:bg-[var(--champ-color)]
@@ -34,14 +34,8 @@ defineProps({
     type: String,
     default: 'Image',
   },
-  link: {
-    type: String,
-    default: '#',
-  },
-  buttonText: {
-    type: String,
-    default: 'En savoir+',
-  },
+  link:String,
+  buttonText: String,
   inverted: {
     type: Boolean,
     default: false,
@@ -49,11 +43,3 @@ defineProps({
 });
 </script>
 
-<style scoped>
-
-
-.image-container img {
-
-  object-fit: cover;
-}
-</style>
