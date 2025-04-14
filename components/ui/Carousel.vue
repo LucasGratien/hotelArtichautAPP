@@ -4,7 +4,7 @@
       <img
           :src="images[currentSlide]"
           alt="Restaurant Image"
-          class="max-h-[300px] w-full  object-cover rounded-[10px]"
+          class="max-h-[500px] w-full  object-cover rounded-[10px]"
       />
 
       <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
