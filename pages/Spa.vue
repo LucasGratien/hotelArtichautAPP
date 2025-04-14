@@ -27,7 +27,7 @@ const heroPageData = computed(() => {
     text: bannerData?.short_description,
     description: bannerData?.description,
     button: bannerData?.link,
-    image: bannerData.images && bannerData.images.length > 0 ? bannerData.images[0].url : ''
+    // image: bannerData.images && bannerData.images.length > 0 ? bannerData.images[0].url : ''
   }
 })
 
