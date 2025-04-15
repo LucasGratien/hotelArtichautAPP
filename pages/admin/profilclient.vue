@@ -1,8 +1,13 @@
 <template>
   <div class="min-h-screen bg-gray-100 p-8">
     <div class="grid grid-cols-4 gap-8">
+
+
       <!-- Colonne principale avec les deux premières cards -->
       <div class="col-span-3 space-y-8">
+
+
+<!-- UserInfoAdmin-->
         <!-- Première card avec bouton jaune et champs de texte -->
         <div class="bg-white rounded-lg shadow-md p-8 relative">
           <!-- Bouton en haut à droite -->
@@ -25,6 +30,7 @@
           </div>
         </div>
 
+<!-- UserBookingHistory-->
         <!-- Deuxième card avec tableau et pagination -->
         <div class="bg-white rounded-lg shadow-md p-8">
           <UTable
@@ -50,6 +56,7 @@
         </div>
       </div>
 
+<!-- UserReviewPref-->
       <!-- Colonne de droite avec la troisième card verticale -->
       <div class="col-span-1">
         <div class="bg-white rounded-lg shadow-md p-8 h-full">
