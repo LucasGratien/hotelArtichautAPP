@@ -1,10 +1,10 @@
 <template>
-  <div class="relative w-full flex justify-center md:p-8">
-    <div class="carousel-container relative overflow-hidden w-full md:w-3/5">
+  <div class="hover:scale-105 transition-transform duration-300 ease-in-out relative w-full flex justify-center md:p-8">
+    <div class="carousel-container relative overflow-hidden w-full md:w-2/5 max-h-1/2 aspect-square">
       <img
           :src="images[currentSlide]"
           alt="Restaurant Image"
-          class="w-full aspect-square object-cover rounded-[10px]"
+          class="max-h-[500px] w-full  object-cover rounded-[10px]"
       />
 
       <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
@@ -37,7 +37,7 @@
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
   currentSlide: {
     type: Number,
     required: true

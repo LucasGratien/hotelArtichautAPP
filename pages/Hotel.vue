@@ -1,7 +1,6 @@
 <template>
   <UiHerobanner :title="heroPageData?.title"
                 :text="heroPageData?.text"
-                :button="heroPageData?.button"
                 :image="heroPageData?.image" />
   <UiCardhome
       v-for="(item, index) in hotelCards"

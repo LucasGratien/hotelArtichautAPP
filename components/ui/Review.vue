@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-[#4B6547] pt-4">
-    <h2 class="text-[var(primary)] text-2xl font-cardo text-center "> OUR HAPPY CUSTOMER</h2>
+  <div class="bg-[var(--secondary-color)] pt-4">
+    <h2 class="text-[var(--primary-color)] text-2xl text-center "> OUR HAPPY CUSTOMER</h2>
     <div class="flex justify-center items-center">
       <img src="@/assets/images/component_separator.png" alt="separator">
     </div>
@@ -14,12 +14,12 @@
     }"
           :prev-button="{
       variant: 'link',
-      icon: 'i-heroicons-arrow-left-20-solid',
+      icon: 'i-heroicons-arrow-left-20-solid text-[var(--primary-color)]',
       class: 'hidden sm:block -start-6'
     }"
           :next-button="{
       variant: 'link',
-      icon: 'i-heroicons-arrow-right-20-solid',
+      icon: 'i-heroicons-arrow-right-20-solid text-[var(--primary-color)]',
       class: 'hidden sm:block -end-6'
     }"
           arrows
@@ -40,14 +40,10 @@
 </template>
 
 <script setup lang="js">
+ import {useApiFetch} from "~/composables/useApiFetch.js";
 
-import {useApiFetch} from "~/composables/useApiFetch.js";
-
-const { data: reviews } = await useApiFetch('/review/', {
-  baseURL: useRuntimeConfig().public.apiBase,
-  default: () => []
-})
-
+ const { data: reviews } = await useApiFetch('/review/', {
+   baseURL: useRuntimeConfig().public.apiBase,
+   default: () => []
+ })
 </script>
-<style scoped>
-</style>

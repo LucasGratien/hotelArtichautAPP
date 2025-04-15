@@ -9,8 +9,6 @@
       :description="item.description"
       :image="item.images && item.images.length > 0 ? item.images[0].url : ''"
       :imageAlt="item.title"
-      :link="item.link"
-      :buttonText="'En savoir +'"
       :inverted="index % 2 === 0"
   />
 </template>
