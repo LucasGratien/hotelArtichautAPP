@@ -8,6 +8,7 @@ export const useHotelStore = defineStore("hotel", {
     currentLang: { id: 1 },
     contents: [],
     rooms: [],
+    selectedRoom: null,
   }),
 
   getters: {
@@ -29,6 +30,7 @@ export const useHotelStore = defineStore("hotel", {
         const langResponse = await useApiFetch(`/language`);
         const contentResponse = await useApiFetch(`/content`);
         const availableResponse = await useApiFetch(`/room/lang-1/available`);
+
 
         console.log("Langues récupérées:", langResponse.data.value);
 
@@ -58,7 +60,9 @@ export const useHotelStore = defineStore("hotel", {
         );
       }
     },
-
+setSelectedRoom(room){
+      this.selectedRoom = room;
+},
     async changeLanguage(id) {
       try {
         const langResponse = await useApiFetch(`/language/${id}`);

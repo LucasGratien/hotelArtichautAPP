@@ -35,8 +35,23 @@ const totalPages = computed(() =>
 );
 
 const goToChambre = (id) => {
-  router.push(`/Reservation/chambre/${id}`);
+  const chambre = hotelStore.rooms.find((room) => room.id === id);
+  if (chambre) {
+    hotelStore.setSelectedRoom(chambre);
+    router.push({
+      path: `/Reservation/chambre/${id}`,
+      query: {
+        check_in: form.value.dateDebut,
+        check_out: form.value.dateFin,
+        persons: form.value.nombrePersonnes,
+      },
+    });
+  } else {
+    console.error("Chambre introuvable");
+  }
 };
+
+
 
 const nextPage = () => {
   if (currentPage.value < totalPages.value) {
