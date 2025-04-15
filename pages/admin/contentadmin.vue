@@ -46,6 +46,3 @@ console.log("Données reçues dans store.data:", store.contents)
 
 </script>
 
-<style scoped>
-
-</style>
