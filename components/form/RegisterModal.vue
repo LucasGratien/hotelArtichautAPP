@@ -45,6 +45,19 @@ const register = async () => {
     alert(`Compte créé avec succès, bienvenue ${credentials.firstname} ${credentials.lastname}, vous pouvez vous login !`);
     // Fermer la modale après une inscription réussie
     isOpenRegister.value = false;
+    // reset des champs
+    Object.assign(credentials, {
+      email: '',
+      password: '',
+      confirmPassword: '',
+      firstname: '',
+      lastname: '',
+      address: '',
+      city: '',
+      postal_code: '',
+      phone: '',
+      is_pro: false
+    });
   } catch (error) {
     console.error("Erreur d'inscription :", error);
     errorMsg.value = "Une erreur est survenue lors de l'inscription.";
