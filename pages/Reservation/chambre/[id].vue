@@ -92,8 +92,16 @@ const creerReservation = async () => {
   } catch (err) {
     console.error("❌ Exception lors de la réservation :", err);
   } finally {
-    isLoading.value = false;
+    isLoading.value = false;localStorage.setItem("bookingData", JSON.stringify({
+      reservation_id: reservationId.value,
+      room_name: hotelStore.selectedRoom.room_name,
+      check_in: checkIn.value,
+      check_out: checkOut.value,
+      persons: numberOfPersons.value,
+      prix: prixTotal.value
+    }));
   }
+
 };
 
 const payerReservation = async () => {
@@ -136,14 +144,6 @@ const payerReservation = async () => {
     console.error("❌ Exception lors du paiement :", err);
   }
 };
-localStorage.setItem("bookingData", JSON.stringify({
-  reservation_id: reservationId.value,
-  room_name: hotelStore.selectedRoom.room_name,
-  check_in: checkIn.value,
-  check_out: checkOut.value,
-  persons: numberOfPersons.value,
-  prix: prixTotal.value
-}));
 
 const continuer = () => {
   if (!authStore.isLoggedIn) {

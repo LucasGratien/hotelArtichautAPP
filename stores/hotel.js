@@ -31,7 +31,6 @@ export const useHotelStore = defineStore("hotel", {
         const contentResponse = await useApiFetch(`/content`);
         const availableResponse = await useApiFetch(`/room/lang-1/available`);
 
-
         console.log("Langues récupérées:", langResponse.data.value);
 
         this.roomCategories = roomResponse.data.value || [];
@@ -48,11 +47,11 @@ export const useHotelStore = defineStore("hotel", {
 
     async fetchAvailableRooms(dateDebut, dateFin, nombrePersonnes) {
       try {
-          const response = await useApiFetch(
-              `/room/lang-1/available?check_in=${dateDebut}&check_out=${dateFin}&category=${nombrePersonnes}`
-          );
+        const response = await useApiFetch(
+          `/room/lang-1/available?check_in=${dateDebut}&check_out=${dateFin}&number_of_persons=${nombrePersonnes}`,
+        );
 
-          this.rooms = response.data.value || [];
+        this.rooms = response.data.value || [];
       } catch (error) {
         console.error(
           "Erreur lors de la récupération des chambres disponibles:",
@@ -60,9 +59,9 @@ export const useHotelStore = defineStore("hotel", {
         );
       }
     },
-setSelectedRoom(room){
+    setSelectedRoom(room) {
       this.selectedRoom = room;
-},
+    },
     async changeLanguage(id) {
       try {
         const langResponse = await useApiFetch(`/language/${id}`);
