@@ -1,5 +1,4 @@
 import { ref } from 'vue'
-import { defineStore } from 'pinia'
 import { useApiFetch } from '@/composables/useApiFetch'
 /**
  * Hook pour gérer les actions CRUD sur les contenus
