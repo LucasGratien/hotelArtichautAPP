@@ -1,7 +1,7 @@
 <script setup>
 // import du store et méthodes de vue // router pour la redirection après l'enregistrement
 import {useAuthStore} from '~/stores/auth';
-import {ref, reactive, toRaw} from 'vue';
+import {ref, reactive} from 'vue';
 
 //injection du store
 const authStore = useAuthStore();
