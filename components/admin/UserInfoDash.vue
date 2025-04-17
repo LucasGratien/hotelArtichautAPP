@@ -24,6 +24,11 @@ const labels = {
   created_at: 'Créé le'
 };
 
+import {useAuthStore} from "~/stores/auth.js";
+
+const authStore = useAuthStore();
+const userInfos = computed(() => authStore.user);
+
 </script>
 
 <template>
@@ -39,7 +44,10 @@ const labels = {
 
     <!-- Image -->
     <div class="w-full md:w-1/3 h-64 md:h-auto overflow-hidden rounded-lg">
-      <img :src=images alt="User image" class="object-cover w-full h-full"/>
+      <img :src="userInfos.images && userInfos.images.length > 0 ? userInfos.images[0].url : ''"
+           alt="User image"
+           class="object-cover w-full h-full"
+      />
     </div>
 
     <!-- Infos -->
@@ -48,21 +56,21 @@ const labels = {
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
         <span class="text-sm font-medium text-gray-600">{{ labels.lastname }}</span>
-        <span class="p-2 bg-gray-100 rounded text-gray-800">{{ lastname }}</span>
+        <span class="p-2 bg-gray-100 rounded text-gray-800">{{ userInfos?.lastname }}</span>
         <span class="text-sm font-medium text-gray-600">{{ labels.firstname }}</span>
-        <span class="p-2 bg-gray-100 rounded text-gray-800">{{ firstname }}</span>
+        <span class="p-2 bg-gray-100 rounded text-gray-800">{{ userInfos?.firstname }}</span>
         <span class="text-sm font-medium text-gray-600">{{ labels.address }}</span>
-        <span class="p-2 bg-gray-100 rounded text-gray-800">{{ address }}</span>
+        <span class="p-2 bg-gray-100 rounded text-gray-800">{{ userInfos?.address }}</span>
         <span class="text-sm font-medium text-gray-600">{{ labels.city }}</span>
-        <span class="p-2 bg-gray-100 rounded text-gray-800">{{ city }}</span>
+        <span class="p-2 bg-gray-100 rounded text-gray-800">{{ userInfos?.city }}</span>
         <span class="text-sm font-medium text-gray-600">{{ labels.postal_code }}</span>
-        <span class="p-2 bg-gray-100 rounded text-gray-800">{{ postal_code }}</span>
+        <span class="p-2 bg-gray-100 rounded text-gray-800">{{ userInfos?.postal_code }}</span>
         <span class="text-sm font-medium text-gray-600">{{ labels.email }}</span>
-        <span class="p-2 bg-gray-100 rounded text-gray-800">{{ email }}</span>
+        <span class="p-2 bg-gray-100 rounded text-gray-800">{{ userInfos?.email }}</span>
         <span class="text-sm font-medium text-gray-600">{{ labels.phone }}</span>
-        <span class="p-2 bg-gray-100 rounded text-gray-800">{{ phone }}</span>
+        <span class="p-2 bg-gray-100 rounded text-gray-800">{{ userInfos?.phone }}</span>
         <span class="text-sm font-medium text-gray-600">{{ labels.created_at }}</span>
-        <span class="p-2 bg-gray-100 rounded text-gray-800">{{ created_at }}</span>
+        <span class="p-2 bg-gray-100 rounded text-gray-800">{{ userInfos?.created_at }}</span>
 
 
       </div>
