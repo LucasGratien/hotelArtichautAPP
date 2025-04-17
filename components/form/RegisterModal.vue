@@ -47,7 +47,7 @@ const register = async () => {
     //On instancie un nouveau formData pour gérer l'état de la donnée rentrée par l'utilisateur avant de l'envoyer à l'Api
     const formData = new FormData();
   // ici je parcours chaque clé valeur des données entrées par l'utilisateur
-    // et à chaque fois je vais utiliser la méthode
+    // et à chaque fois je vais utiliser la méthode append pour associer les données dans le même formData
     for (const key in credentials) {
       // Si c’est l’image, on skip si vide
       if (key === 'image') {
@@ -66,11 +66,11 @@ const register = async () => {
         formData.append(key, credentials[key]);
       }
     }
+    //Les consoles.log permettent le contrôle de l'état de la donnée avant le fetch
     console.log('FormData FINAL :');
     for (let [k, v] of formData.entries()) {
       console.log(k, v);
     }
-
     console.log('FormData envoyé :');
     for (const pair of formData.entries()) {
       console.log(pair[0], pair[1]);
@@ -78,24 +78,31 @@ const register = async () => {
     console.log('Body envoyé :', formData);
 
     //appel de la fonction register du store afin de charger les données rentrée par l'utilisateur.
-    await authStore.register (formData);
-    //message (temporaire de bienvenue)
-    alert(`Compte créé avec succès, bienvenue ${credentials.firstname} ${credentials.lastname}, vous pouvez vous login !`);
-    // Fermer la modale après une inscription réussie
-    isOpenRegister.value = false;
-    // reset des champs
-    Object.assign(credentials, {
-      email: '',
-      password: '',
-      confirmPassword: '',
-      firstname: '',
-      lastname: '',
-      address: '',
-      city: '',
-      postal_code: '',
-      phone: '',
-      is_pro: false
-    });
+    // await authStore.register (formData);
+
+    const response = await authStore.register(formData);
+
+    if (response?.status === 'success') {
+      //message (temporaire de bienvenue)
+      alert(`Compte créé avec succès, bienvenue ${credentials.firstname} ${credentials.lastname}, vous pouvez vous login !`);
+      // Fermer la modale après une inscription réussie
+      isOpenRegister.value = false;
+      // reset des champs
+      Object.assign(credentials, {
+        email: '',
+        password: '',
+        confirmPassword: '',
+        firstname: '',
+        lastname: '',
+        address: '',
+        city: '',
+        postal_code: '',
+        phone: '',
+        is_pro: false
+      });
+    } else {
+      errorMsg.value = response?.message;
+    }
   } catch (error) {
     console.error("Erreur d'inscription :", error);
     errorMsg.value = "Une erreur est survenue lors de l'inscription.";
