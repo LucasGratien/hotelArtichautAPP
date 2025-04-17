@@ -121,6 +121,7 @@ const pageCount = 10;
 const selectedItem = ref(null);
 const newContent = ref({ title: "", description: "", image: "" });
 const windowWidth = ref(window.innerWidth);
+const expandedStates = ref({});
 
 const updateWidth = () => {
   windowWidth.value = window.innerWidth;
@@ -129,30 +130,30 @@ const updateWidth = () => {
 onMounted(() => window.addEventListener("resize", updateWidth));
 onUnmounted(() => window.removeEventListener("resize", updateWidth));
 
+const toggleDescription = (id) => {
+  expandedStates.value[id] = !expandedStates.value[id];
+};
+
 const rowsWithExpandedState = computed(() =>
     store.contents
         .slice((page.value - 1) * pageCount, page.value * pageCount)
         .map((row) => ({
           ...row,
-          expanded: false,
+          expanded: expandedStates.value[row.id] || false,
         }))
 );
-
-const toggleDescription = (id) => {
-  const rowIndex = rowsWithExpandedState.value.findIndex((row) => row.id === id);
-  if (rowIndex !== -1) {
-    rowsWithExpandedState.value[rowIndex].expanded = !rowsWithExpandedState.value[rowIndex].expanded;
-  }
-};
 
 const fetchContent = async () => {
   try {
     await store.fetch();
+    store.contents = store.contents.map((item) => ({
+      ...item,
+      expanded: false,
+    }));
   } catch (err) {
     console.error("Erreur lors de la récupération des données :", err);
   }
 };
-
 onMounted(fetchContent);
 
 const formFields = [
@@ -169,7 +170,6 @@ const formFields = [
 ];
 
 const openModal = () => {
-  selectedItem.value = null; // Reset de la sélection
   dynamicModal.value?.openModal();
 };
 
@@ -179,42 +179,64 @@ const columns = ref([
   { key: "description", label: "Description" },
   { key: "images", label: "Images" },
   { key: "actions", label: "Supprimer", align: "center" },
-  { key: "modify", label: "Modifier", align: "center" },
+  { key: "modify", label: "Modifier", align: "center" }
 ]);
 
 const handleDelete = async (id) => {
-  if (confirm("Voulez-vous vraiment supprimer ce contenu ?")) {
-    try {
-      await store.deleteContent(id);
-      await fetchContent(); // Rafraîchir les données
-      toast.success("Supprimé avec succès");
-    } catch (error) {
-      toast.error("Échec de la suppression");
-    }
-  }
-};
-
-const handleModify = (id) => {
-  selectedItem.value = store.contents.find((item) => item.id === id);
-  if (selectedItem.value) {
-    dynamicModal.value?.openModal(selectedItem.value);
-  }
+  await deleteContent(id);
+  store.contents = store.contents.filter((item) => item.id !== id);
 };
 
 const handleSubmit = async (formData) => {
-  try {
-    if (selectedItem.value) {
-      await store.modifyContent(selectedItem.value.id, formData);
-      toast.success("Modification réussie");
-    } else {
-      await store.createContent(formData);
-      toast.success("Création réussie");
-    }
-    dynamicModal.value?.resetForm(); // Reset du formulaire
-    await fetchContent(); // Rafraîchir les données
-  } catch (error) {
-    toast.error("Erreur : " + error.message);
+  formData.landing_page_display = formData.landing_page_display ? 1 : 0;
+  formData.navbar_display = formData.navbar_display ? 1 : 0;
+
+  console.log("Données du formulaire:", formData);
+  const createdContent = await createContent(formData);
+
+  if (createdContent) {
+    store.contents.push(createdContent);
+    newContent.value = { title: "", description: "", image: "" };
   }
 };
+
+const handleModify = async (id) => {
+  const itemToModify = store.contents.find((item) => item.id === id);
+  if (itemToModify) {
+    selectedItem.value = {
+      ...itemToModify,
+      landing_page_display: Boolean(itemToModify.landing_page_display),
+      navbar_display: Boolean(itemToModify.navbar_display),
+    };
+
+    dynamicModal.value?.openModal(selectedItem.value, async (updatedData) => {
+      const success = await saveModifiedData(id, updatedData);
+      if (success) {
+        // Inclure les propriétés non modifiées (comme expanded)
+        const updatedContentWithExtra = {
+          ...itemToModify, // conserve les anciens champs
+          ...updatedData  // remplace ceux modifiés
+        };
+        store.updateContentInStore(updatedContentWithExtra);
+      }
+    });
+  }
+};
+
+
+
+const saveModifiedData = async (id, updatedData) => {
+  try {
+    updatedData.landing_page_display = updatedData.landing_page_display ? 1 : 0;
+    updatedData.navbar_display = updatedData.navbar_display ? 1 : 0;
+
+    const response = await modifyContent(id, updatedData);
+    return !!response;
+  } catch (error) {
+    console.error("Erreur lors de la modification :", error);
+    return false;
+  }
+};
+
 </script>
 

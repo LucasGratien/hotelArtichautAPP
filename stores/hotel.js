@@ -45,6 +45,16 @@ export const useHotelStore = defineStore('hotel', {
             } catch (error) {
                 console.error("Erreur :", error)
             }
+        },
+
+        updateContentInStore(updatedContent) {
+            const index = this.contents.findIndex(c => c.id === updatedContent.id);
+            if (index !== -1) {
+                this.contents[index] = {
+                    ...this.contents[index], // garde les champs non modifiés (ex: expanded)
+                    ...updatedContent
+                };
+            }
         }
     }
 })
