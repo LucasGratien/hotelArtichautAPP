@@ -79,9 +79,12 @@ export const useAuthStore = defineStore('auth', {
                     this.setAuthToken(data.value.authorisation.token);
                 }
 
+                return data.value;
+
             } catch (error) {
                 console.error('Registration failed:', error);
                 this.resetAuth();
+                return { status: 'error', message: 'Une exception est survenue' };
             }
         },
         //Mettre un token
