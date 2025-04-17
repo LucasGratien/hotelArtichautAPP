@@ -9,7 +9,7 @@
             <UCheckbox v-model="state[field.name]" />
           </template>
           <template v-else-if="field.type === 'file'">
-            <UInput type="file" @change="handleFileUpload($event, field.name)" />
+            <UInput type="file" multiple @change="handleFileUpload($event, field.name)" />
           </template>
           <template v-else>
             <UInput :type="field.type" v-model="state[field.name]" :placeholder="field.placeholder" />
