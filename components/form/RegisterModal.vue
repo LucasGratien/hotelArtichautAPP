@@ -1,13 +1,14 @@
 <script setup>
 // import du store et méthodes de vue // router pour la redirection après l'enregistrement
 import {useAuthStore} from '~/stores/auth';
-import {ref, reactive} from 'vue';
+import {ref, reactive, toRaw} from 'vue';
 
 //injection du store
 const authStore = useAuthStore();
 //gestion de la modale
 const isOpenRegister = defineModel();
-//récupération des credentials
+
+//initialisation des credentials
 const credentials = reactive({
   email: '',
   password: '',
@@ -18,9 +19,10 @@ const credentials = reactive({
   city: '',
   postal_code: '',
   phone: '',
-  images: '',
+  image: '',
   is_pro: false
 });
+
 //variables d'état
 const errorMsg = ref('');
 const pending = ref(false);
@@ -38,9 +40,45 @@ const register = async () => {
   //gestion de l'état de la requête // en cours= vrai et errorMsg. est initialisé
   pending.value = true;
   errorMsg.value = '';
+  // Vérif' des crédentials avant d'être Formaté
+  console.log('Body envoyé :', credentials);
+
   try {
+    //On instancie un nouveau formData pour gérer l'état de la donnée rentrée par l'utilisateur avant de l'envoyer à l'Api
+    const formData = new FormData();
+  // ici je parcours chaque clé valeur des données entrées par l'utilisateur
+    // et à chaque fois je vais utiliser la méthode
+    for (const key in credentials) {
+      // Si c’est l’image, on skip si vide
+      if (key === 'image') {
+        if (credentials.image instanceof File) {
+          formData.append('image', credentials.image);
+          console.log('Image appendée ?', formData.get('image'));
+        }
+        continue;
+      }
+
+      // is_pro est un booléen : on le convertit en string
+      if (key === 'is_pro') {
+        formData.append(key, credentials[key] ? '1' : '0');
+      } else {
+        // pour toutes les autres valeurs je les intègre dans le formData
+        formData.append(key, credentials[key]);
+      }
+    }
+    console.log('FormData FINAL :');
+    for (let [k, v] of formData.entries()) {
+      console.log(k, v);
+    }
+
+    console.log('FormData envoyé :');
+    for (const pair of formData.entries()) {
+      console.log(pair[0], pair[1]);
+    }
+    console.log('Body envoyé :', formData);
+
     //appel de la fonction register du store afin de charger les données rentrée par l'utilisateur.
-    await authStore.register(credentials);
+    await authStore.register (formData);
     //message (temporaire de bienvenue)
     alert(`Compte créé avec succès, bienvenue ${credentials.firstname} ${credentials.lastname}, vous pouvez vous login !`);
     // Fermer la modale après une inscription réussie
@@ -64,6 +102,17 @@ const register = async () => {
   } finally {
     pending.value = false;
   }
+};
+const handleFileUpload = (event) => {
+  const file = event?.target?.files?.[0] || event?.target?.input?.files?.[0];
+  if (file) {
+    credentials.image = file;
+    console.log('Fichier sélectionné :', file);
+  } else {
+    console.warn('Aucun fichier sélectionné');
+  }
+  console.log('Événement upload :', event);
+
 };
 </script>
 
@@ -96,14 +145,18 @@ const register = async () => {
           <UInput v-model="credentials.city" type="text" placeholder="Ville" class="mb-4"/>
           <UInput v-model="credentials.postal_code" type="text" placeholder="Code Postale" class="mb-4"/>
           <UInput v-model="credentials.phone" type="text" placeholder="Telephone" class="mb-4"/>
-          <UInput v-model="credentials.images" type="file" placeholder="Select a picture" class="mb-4"/>
+<!--          <UInput v-model="credentials.image" type="file" class="mb-4"/>-->
+<!--          <UInput type="file" class="mb-4" @change="handleFileUpload" />-->
+          <input type="file" class="mb-4" @change="handleFileUpload" />
 
 <!--          sur cet input ce serai mieux un selector (a avoir pour plus tard)-->
           <UInput v-model="credentials.is_pro" type="text" placeholder="Professionnel ? True ou False" class="mb-4"/>
+
 <!--          bouton de validation-->
           <UButton color="gray" variant="ghost" type="submit" :disabled="pending" class="w-full">
             {{ pending ? 'Inscription...' : "S'inscrire" }}
           </UButton>
+
         </form>
       </section>
     </UCard>
