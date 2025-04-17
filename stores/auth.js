@@ -164,5 +164,37 @@ export const useAuthStore = defineStore('auth', {
                 this.isLoggedIn = true;
             }
         },
+        async fetchUserReviews() {
+            this.loading = true
+            this.error = null
+            try {
+                const { data, error } = await useApiFetch('/review/user')
+
+                if (error.value) {
+                    throw new Error(`Erreur API: ${error.value.message}`)
+                }
+
+                if (!data.value || !Array.isArray(data.value)) {
+                    throw new Error("L'API a retourné une réponse invalide")
+                }
+
+                this.bookings = data.value.map(booking => ({
+                    ...booking,
+                    roomIds: booking.rooms?.map(room => room.id) || [],
+                    total_price: (booking.total_price_in_cents / 100).toFixed(2),
+                    client: {
+                        name: `${booking.user?.firstname} ${booking.user?.lastname}`,
+                        email: booking.user?.email,
+                        phone: booking.user?.phone
+                    }
+                }))
+                console.log('[RoomStore] Réservations utilisateur chargées :', this.bookings)
+            } catch (err) {
+                console.error('[RoomStore] Erreur fetchUserBookings:', err)
+                this.error = err.message || "Erreur inconnue lors du chargement des réservations utilisateur"
+            } finally {
+                this.loading = false
+            }
+        }
     },
 });
