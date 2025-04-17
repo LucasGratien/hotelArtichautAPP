@@ -1,15 +1,9 @@
 <template>
-  <div class="restaurant-page mt-20">
-    <div class="content">
-      <h1 class="text-center">Le Restaurant</h1>
-      <p class="text-center">
-        La chambre standard de notre hôtel allie confort et simplicité pour un séjour
-        agréable. Elle est équipée d'un lit double spacieux, d'une télévision à écran
-        plat, d'une connexion Wi-Fi gratuite, et d'une salle de bain privative avec
-        douche ou baignoire. Un bureau fonctionnel et un espace de rangement sont
-        également à votre disposition. La décoration moderne et chaleureuse offre une
-        ambiance propice à la détente. Idéale pour les séjours professionnels ou
-        touristiques, cette chambre vous garantit un repos optimal.
+  <div class="mt-20">
+    <div>
+      <h1 class=" text-3xl text-[var(--secondary-color)] text-center">{{ title }}</h1>
+      <p class="text-xl text-[var(--secondary-color)] text-center py-4 md:px-48">
+        {{description}}
       </p>
       <UiCarousel
           :current-slide="currentSlide"
@@ -18,20 +12,19 @@
           @next-slide="nextSlide"
       />
     </div>
-
   </div>
 </template>
 
 <script>
-import img1 from '@/assets/images/restaurant-hall-with-round-square-tables-some-chairs-plants.png'
-import img2 from '@/assets/images/chef.png'
+
 export default {
+  props: {
+    title: String,
+    description: String,
+    images: Array,
+  },
   data() {
     return {
-      images: [
-        img1,
-        img2,
-      ],
       currentSlide: 0,
     };
   },
@@ -45,35 +38,6 @@ export default {
     },
   },
 };
+
 </script>
 
-<style scoped>
-.restaurant-page {
-  padding: 20px;
-
-}
-
-.content {
-  margin-bottom: 30px;
-}
-
-h1 {
-  font-size: 3rem;
-  color: #4a4a4a;
-  text-decoration: underline ;
-  font-weight: bold;
-
-}
-
-p {
-  font-size: 1.5rem;
-  line-height: 1.5;
-  color: #4a4a4a;
-}
-
-.images img {
-  width: 100%;
-  border-radius: 10px;
-}
-
-</style>

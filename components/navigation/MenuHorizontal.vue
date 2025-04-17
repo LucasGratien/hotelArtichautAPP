@@ -30,7 +30,7 @@
         <ul class="ml-5 mr-5 divide-y divide-[var(--primary-color)]">
           <li>
             <NuxtLink
-                to="/restaurant"
+                to="/Restaurant"
                 class="block px-4 py-2 text-[var(--secondary-color)] hover:text-[var(--primary-color)]"
             >
               <p>Restaurant</p>
@@ -38,7 +38,7 @@
           </li>
           <li>
             <NuxtLink
-                to="/spa"
+                to="/Spa"
                 class="block px-4 py-2 text-[var(--secondary-color)] hover:text-[var(--primary-color)]"
             >
               <p>SPA</p>
@@ -149,5 +149,3 @@ onUnmounted(() => {
   transform: scale(1.05);
 }
 </style>
-<script setup lang="ts">
-</script>

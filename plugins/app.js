@@ -1,7 +1,11 @@
 import { useHotelStore } from "~/stores/hotel.js";
+import { useAuthStore } from "~/stores/auth.js";
 
 export default defineNuxtPlugin(async (nuxtApp) => {
     const hotelStore = useHotelStore()
+    const authStore = useAuthStore()
+
+    authStore.initializeAuth();
 
     try {
 
@@ -12,5 +16,6 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     }
 
 
-    nuxtApp.provide('hotel', hotelStore)
+    nuxtApp.provide('hotel', hotelStore);
+    nuxtApp.provide('auth', authStore);
 })
