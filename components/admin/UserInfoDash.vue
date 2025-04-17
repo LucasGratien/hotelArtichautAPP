@@ -25,7 +25,6 @@ const labels = {
 };
 
 import {useAuthStore} from "~/stores/auth.js";
-
 const authStore = useAuthStore();
 const userInfos = computed(() => authStore.user);
 
@@ -70,7 +69,7 @@ const userInfos = computed(() => authStore.user);
         <span class="text-sm font-medium text-gray-600">{{ labels.phone }}</span>
         <span class="p-2 bg-gray-100 rounded text-gray-800">{{ userInfos?.phone }}</span>
         <span class="text-sm font-medium text-gray-600">{{ labels.created_at }}</span>
-        <span class="p-2 bg-gray-100 rounded text-gray-800">{{ userInfos?.created_at }}</span>
+        <span class="p-2 bg-gray-100 rounded text-gray-800">{{new Date(userInfos?.created_at).toLocaleDateString()}}</span>
 
 
       </div>
