@@ -59,11 +59,14 @@ export const useAuthStore = defineStore('auth', {
             }
         },
         //S'enregistrer
-        async register(body) {
+        async register(formData) {
             try {
                 const { data, error } = await useApiFetch('/register', {
                     method: 'POST',
-                    body,
+                    body: formData,
+                    headers: {
+                        // NE PAS ajouter Content-Type ici ! Laissez le navigateur le gérer
+                    }
                 });
 
                 if (error.value) {

@@ -7,6 +7,7 @@ export const useApiFetch = (path, options = {}) => {
     //Utilisation de la config env pour url
     options.baseURL = config.public.apiBaseUrl;
 
+
     // Ajouter le token si disponible
     if (authStore.getToken) {
         options.headers = {
