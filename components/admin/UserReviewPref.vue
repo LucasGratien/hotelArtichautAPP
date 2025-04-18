@@ -5,14 +5,17 @@ import { useApiFetch } from '@/composables/useApiFetch'
 
 const authStore = useAuthStore()
 
+//initialise les variables encapsulation reviews et les variables états
 const reviews = ref([])
 const loading = ref(false)
 const error = ref(null)
 
+
 const fetchUserReviews = async () => {
+  //maj state
   loading.value = true
   error.value = null
-
+// tentative de fetch
   try {
     const { data, error: fetchError } = await useApiFetch('/review/user')
 
@@ -28,7 +31,7 @@ const fetchUserReviews = async () => {
     loading.value = false
   }
 }
-
+//chargement des données au montage du composant (à voir le middleware)
 onMounted(() => {
   authStore.initializeAuth() // si nécessaire pour sécuriser la route
   fetchUserReviews()
