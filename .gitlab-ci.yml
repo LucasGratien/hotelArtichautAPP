@@ -16,6 +16,7 @@ build_app:
   stage: build
   image: node:22-alpine
   script:
+    - npm install
     - npm run build
   artifacts:
     paths:
