@@ -58,4 +58,3 @@ deploy:
       "
   only:
     - develop
-
