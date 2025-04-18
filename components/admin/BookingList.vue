@@ -21,7 +21,14 @@ const fetchAdminBookings = async () => {
 
     if (fetchError.value) throw new Error(fetchError.value.message || 'Erreur API')
 
-    bookings.value = data.value || []
+    bookings.value = data.value.map(booking => ({
+      ...booking,
+      client_name: booking.user ? `${booking.user.firstname} ${booking.user.lastname}` : 'Inconnu',
+      room_numbers: booking.rooms?.map(r => `#${r.number}`).join(', ') || '—'
+    }))
+    if (!Array.isArray(data.value)) {
+      throw new Error('La réponse attendue n’est pas un tableau.')
+    }
   } catch (err) {
     error.value = err.message
     console.error('[BookingList] Erreur:', err)
@@ -42,24 +49,16 @@ const columns = [
   {
     key: 'total_price_in_cent',
     label: 'Total €',
-    formatter: row => (row.total_price_in_cent / 100).toFixed(2) + ' €'
+    formatter: (row) => (row.total_price_in_cent / 100).toFixed(2) + ' €'
   },
   {
     key: 'to_be_paid_in_cent',
     label: 'Restant €',
-    formatter: row => (row.to_be_paid_in_cent / 100).toFixed(2) + ' €'
+    formatter: (row) => (row.to_be_paid_in_cent / 100).toFixed(2) + ' €'
   },
   { key: 'number_of_persons', label: 'Pers.' },
-  {
-    key: 'user',
-    label: 'Client',
-    formatter: row => row.user ? `${row.user.firstname} ${row.user.lastname}` : 'Inconnu'
-  },
-  {
-    key: 'rooms',
-    label: 'Chambres',
-    formatter: row => row.rooms?.map(r => `#${r.number}`).join(', ')
-  }
+  { key: 'client_name', label: 'Client' },
+  { key: 'room_numbers', label: 'Chambres' }
 ]
 
 const currentPage = ref(1)
