@@ -2,7 +2,6 @@ stages:
   - install
   - build
   - dockerize
-  - deploy
 
 # Étape d'installation des dépendances
 install_dependencies:
