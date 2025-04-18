@@ -1,25 +1,57 @@
 <script setup>
-const verticalCard = {
-  title: "bonjour",
-  content: "bonsoir",
+import { ref, onMounted } from 'vue'
+import { useAuthStore } from '@/stores/auth'
+import { useApiFetch } from '@/composables/useApiFetch'
+
+const authStore = useAuthStore()
+
+const reviews = ref([])
+const loading = ref(false)
+const error = ref(null)
+
+const fetchUserReviews = async () => {
+  loading.value = true
+  error.value = null
+
+  try {
+    const { data, error: fetchError } = await useApiFetch('/review/user')
+
+    if (fetchError.value) {
+      throw new Error(fetchError.value.message || "Erreur lors du chargement des avis.")
+    }
+
+    reviews.value = data.value || []
+  } catch (err) {
+    console.error('[UserReviews] Erreur:', err)
+    error.value = err.message
+  } finally {
+    loading.value = false
+  }
 }
 
+onMounted(() => {
+  authStore.initializeAuth() // si nécessaire pour sécuriser la route
+  fetchUserReviews()
+})
 </script>
 
 <template>
-  <div class="col-span-1">
-    <div class="bg-white rounded-lg shadow-md p-8 h-full">
-      <div class="space-y-6">
-        <div class="bg-gray-100 p-4 rounded-lg">
+  <div class="bg-white rounded-lg shadow-md p-6 text-black">
+    <h2 class="text-xl font-semibold mb-4">Mes avis</h2>
 
-          <p>{{ verticalCard.title }}</p>
-          <p>{{ verticalCard.content }}</p>
+    <div v-if="loading" class="text-gray-500">Chargement des avis...</div>
+    <div v-else-if="error" class="text-red-500">{{ error }}</div>
+    <div v-else-if="reviews.length === 0" class="text-gray-500">Pas d'avis</div>
+
+    <ul v-else class="space-y-4">
+      <li v-for="review in reviews" :key="review.id" class="border rounded p-4 shadow-sm">
+        <div class="flex justify-between items-center">
+          <span class="font-bold">Note :</span>
+          <span class="text-yellow-500">{{ review.rate }}/5 ⭐</span>
         </div>
-      </div>
-    </div>
+        <p class="mt-2 italic">"{{ review.review_content }}"</p>
+      </li>
+    </ul>
   </div>
 </template>
 
-<style scoped>
-
-</style>
