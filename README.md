@@ -88,6 +88,10 @@ Notice the different level of access through rôles:
     User = role_id : 1 //Access to service, booking, dashboard
     Un-authentificated = role_id : 0 //Only visit
 
+To test the user workflow please use the following credentials
+
+    email: usertest@hotmail.art
+    password: user123456
 
 
 To reach the full documentation of the project please use the following command:
