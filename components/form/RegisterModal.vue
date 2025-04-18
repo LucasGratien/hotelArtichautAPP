@@ -45,6 +45,9 @@ const register = async () => {
 
   try {
     //On instancie un nouveau formData pour gérer l'état de la donnée rentrée par l'utilisateur avant de l'envoyer à l'Api
+    // FormData est un objet natif JavaScript utilisé pour construire des paires clé/valeur représentant les champs d’un
+    // formulaire, afin de les envoyer facilement via une requête HTTP (généralement POST) — notamment quand tu veux
+    // envoyer des fichiers (ex: images) en plus de simples données texte.
     const formData = new FormData();
   // ici je parcours chaque clé valeur des données entrées par l'utilisateur
     // et à chaque fois je vais utiliser la méthode append pour associer les données dans le même formData
@@ -110,6 +113,8 @@ const register = async () => {
     pending.value = false;
   }
 };
+//Ta fonction handleFileUpload sert à gérer l’upload de fichier (typiquement une image) lorsque l’utilisateur
+// choisit un fichier depuis un champ <input type="file">
 const handleFileUpload = (event) => {
   const file = event?.target?.files?.[0] || event?.target?.input?.files?.[0];
   if (file) {
@@ -119,7 +124,6 @@ const handleFileUpload = (event) => {
     console.warn('Aucun fichier sélectionné');
   }
   console.log('Événement upload :', event);
-
 };
 </script>
 
