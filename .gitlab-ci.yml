@@ -1,0 +1,47 @@
+stages:
+  - install
+  - build
+  - dockerize
+  - deploy
+
+# Étape d'installation des dépendances
+install_dependencies:
+  stage: install
+  image: node:22-alpine
+  script:
+    - npm install --frozen-lockfile #frozen empeche les modification du fichier package-lock.json pendant l'installation
+
+# Étape de build de l'application
+build_app:
+  stage: build
+  image: node:22-alpine
+  script:
+    - npm run build
+  artifacts:
+    paths:
+      - .output # Conservez les fichiers de build pour l'étape suivante
+
+# Étape de création de l'image Docker
+dockerize:
+  stage: dockerize
+  image: docker:latest
+  services:
+    - docker:dind # Docker in Docker
+  before_script:
+    - docker info # Vérification que Docker fonctionne
+  script:
+    - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG . # Build de l'image Docker
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG # Pousser l'image vers GitLab Registry
+  only:
+    - main
+
+# Étape de déploiement
+deploy:
+  stage: deploy
+  image: docker:latest
+  script:
+    - echo "Deploying to the production environment"
+    - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG # Récupérer l'image du registry
+    - docker run -d -p 3000:3000 $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG # Lancer le conteneur
+  only:
+    - main
