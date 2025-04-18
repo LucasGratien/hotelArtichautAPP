@@ -40,7 +40,6 @@ dockerize:
   only:
     - develop
 
-
 # Étape de déploiement
 deploy:
   stage: deploy
