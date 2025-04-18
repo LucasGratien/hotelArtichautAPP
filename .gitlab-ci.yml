@@ -54,6 +54,5 @@ deploy:
       docker stop hotel || true &&
       docker rm hotel || true &&
       docker run -d --name hotel -p 3000:3000 $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
-      "
   only:
     - develop
