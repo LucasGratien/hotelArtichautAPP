@@ -18,6 +18,7 @@ const credentials = reactive({
   city: '',
   postal_code: '',
   phone: '',
+  images: '',
   is_pro: false
 });
 //variables d'état
@@ -82,8 +83,9 @@ const register = async () => {
           <UInput v-model="credentials.city" type="text" placeholder="Ville" class="mb-4"/>
           <UInput v-model="credentials.postal_code" type="text" placeholder="Code Postale" class="mb-4"/>
           <UInput v-model="credentials.phone" type="text" placeholder="Telephone" class="mb-4"/>
+          <UInput v-model="credentials.images" type="file" placeholder="Select a picture" class="mb-4"/>
 
-<!--          sur cet input ce serai mieu un selector (a avoir pour plus tard)-->
+<!--          sur cet input ce serai mieux un selector (a avoir pour plus tard)-->
           <UInput v-model="credentials.is_pro" type="text" placeholder="Professionnel ? True ou False" class="mb-4"/>
 <!--          bouton de validation-->
           <UButton color="gray" variant="ghost" type="submit" :disabled="pending" class="w-full">

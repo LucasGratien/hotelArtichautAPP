@@ -16,7 +16,7 @@ const isOpenRegister = ref(false);
 const dropdownItems = computed(() => {
   return authStore.isLoggedIn
       ? [
-        [{label: 'Settings', icon: 'i-heroicons-cog-8-tooth'}],
+        [{label: 'Settings', icon: 'i-heroicons-cog-8-tooth', to: '/dashboard'}],
         [{label: 'Sign out', icon: 'i-heroicons-arrow-left-on-rectangle', action: authStore.logout}]
       ]
       : [
@@ -27,11 +27,11 @@ const dropdownItems = computed(() => {
 // propriété calculée qui va vérifier si 'l'utilisateur est connécté et que l'on peu récupérer le user
 const avatarSrc = computed(() => {
   if (authStore.isLoggedIn && authStore.user) {
-    // si le user a une iamge
-    if (authStore.user.images && authStore.user.images.length > 0) {
-      // ce sera la première image du user qui sera utilisée
-      return authStore.user.images[0];
-    }
+    // // si le user a une image
+    // if (authStore.user.images && authStore.user.images.length >= 0) {
+    //   // ce sera la première image du user qui sera utilisée
+    //   return authStore.user.images[0];
+    // }
     // Si pas d'images, on applique la logique dicebar
     const firstname = authStore.user.firstname;
     const lastname = authStore.user.lastname;
