@@ -2,12 +2,14 @@
 
 //Imports et chargement du User
 import {useAuthStore} from "~/stores/auth.js";
+
 const authStore = useAuthStore();
 onMounted(() => {
   authStore.initializeAuth();
 });
 //Imports et chargement des rooms/user
-import { useRoomStore } from '@/stores/room'
+import {useRoomStore} from '@/stores/room'
+
 const roomStore = useRoomStore()
 onMounted(() => {
   roomStore.fetchUserBookings()
@@ -19,12 +21,22 @@ const itemsPerPage = 5
 
 
 const columns = [
-  { key: 'numero', label: 'Numéro' },
-  { key: 'dateArrivee', label: 'Date d\'arrivée' },
-  { key: 'dateDepart', label: 'Date de départ' },
-  { key: 'chambre', label: 'Chambre' },
-  { key: 'detail', label: 'Détail' }
+  {key: 'numero', label: 'Numéro'},
+  {key: 'dateArrivee', label: 'Date d\'arrivée'},
+  {key: 'dateDepart', label: 'Date de départ'},
+  {key: 'chambre', label: 'Chambre'},
+  {key: 'detail', label: 'Détail'}
 ]
+
+// variabl ui pour la modification du style des entêtes du tableau
+const tableConfig = {
+  ui: {
+    thead: "bg-[var(--primary-color)]",
+    th: {
+      color: "text-[var(--secondary-color)] dark:text-[var(--secondary-color)]"
+    }
+  }
+};
 
 // Mapping des données depuis le store
 const formattedBookings = computed(() => {
@@ -33,8 +45,6 @@ const formattedBookings = computed(() => {
     dateArrivee: new Date(booking.check_in).toLocaleDateString(),
     dateDepart: new Date(booking.check_out).toLocaleDateString(),
     chambre: booking.roomIds?.length ? `Chambre ${booking.roomIds.join(', ')}` : 'Non spécifiée',
-    detail: 'Voir détails',
-    raw: booking // stocke la réservation complète pour les détails
   }))
 })
 
@@ -45,9 +55,6 @@ const currentItems = computed(() => {
   return formattedBookings.value.slice(start, start + itemsPerPage)
 })
 
-const showDetails = (row) => {
-  console.log('Détails de la réservation :', row.raw)
-}
 </script>
 
 <template>
@@ -64,17 +71,13 @@ const showDetails = (row) => {
           :rows="currentItems"
           :columns="columns"
           :loading="roomStore.loading"
-      >
-        <template #detail-data="{ row }">
-          <UButton
-              variant="ghost"
-              color="neutral"
-              @click="showDetails(row)"
-          >
-            {{ row.detail }}
-          </UButton>
-        </template>
-      </UTable>
+          :ui="{
+  thead: '!bg-[var(--primary-color)]',
+  th: {
+    color: '!text-[var(--secondary-color)] dark:!text-[var(--secondary-color)]'
+  }
+}"
+      />
 
       <!-- Pagination -->
       <div class="flex justify-end px-3 py-3.5 border-t border-gray-200">

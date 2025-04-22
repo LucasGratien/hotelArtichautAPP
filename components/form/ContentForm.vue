@@ -2,16 +2,17 @@
   <div>
     <!-- Vue desktop : tableau -->
     <div class="hidden md:block">
-      <UTable :columns="columns" :rows="rowsWithExpandedState">
+      <UTable :columns="columns" :rows="rowsWithExpandedState" v-bind="tableConfig">
         <template #actions-data="{ row }">
           <div class="flex justify-center w-full">
             <UButton
-              :disabled="loading"
-              @click="handleDelete(row.id)"
-              class="whitespace-nowrap w-full flex-grow"
-              color="red"
-              size="sm"
-              >Supprimer</UButton
+                :disabled="loading"
+                @click="handleDelete(row.id)"
+                class="whitespace-nowrap w-full flex-grow"
+                color="red"
+                size="sm"
+            >Supprimer
+            </UButton
             >
           </div>
         </template>
@@ -19,11 +20,12 @@
         <template #modify-data="{ row }">
           <div class="flex justify-center w-full">
             <UButton
-              :disabled="loading"
-              @click="handleModify(row.id)"
-              class="whitespace-nowrap w-full flex-grow"
-              size="sm"
-              >Modifier</UButton
+                :disabled="loading"
+                @click="handleModify(row.id)"
+                class="whitespace-nowrap w-full flex-grow"
+                size="sm"
+            >Modifier
+            </UButton
             >
           </div>
         </template>
@@ -31,11 +33,11 @@
         <template #images-data="{ row }">
           <div class="flex justify-center shadow-md flex-wrap gap-1">
             <img
-              v-for="image in row.images"
-              :key="image.id"
-              :src="image.url"
-              alt="images"
-              class="w-12 h-12 object-cover rounded"
+                v-for="image in row.images"
+                :key="image.id"
+                :src="image.url"
+                alt="images"
+                class="w-12 h-12 object-cover rounded"
             />
           </div>
         </template>
@@ -52,10 +54,10 @@
 
         <template #description-data="{ row }">
           <div
-            class="flex items-center text-[var(--secondary-color)] font-semibold text-md gap-2"
+              class="flex items-center text-[var(--secondary-color)] font-semibold text-md gap-2"
           >
             <div
-              :class="[
+                :class="[
                 'transition-all duration-300',
                 row.expanded
                   ? 'whitespace-normal'
@@ -65,10 +67,10 @@
               <p>{{ row.description }}</p>
             </div>
             <UButton
-              size="text-lg"
-              :style="{ color: 'var(--secondary-color)' }"
-              variant="ghost"
-              @click="toggleDescription(row.id)"
+                size="text-lg"
+                :style="{ color: 'var(--secondary-color)' }"
+                variant="ghost"
+                @click="toggleDescription(row.id)"
             >
               {{ row.expanded ? "Réduire" : "Voir plus" }}
             </UButton>
@@ -80,28 +82,30 @@
     <!-- Vue mobile : cards -->
     <div class="md:hidden space-y-4 px-4">
       <div
-        v-for="row in rowsWithExpandedState"
-        :key="row.id"
-        class="bg-white rounded-lg shadow-md p-4 space-y-3"
+          v-for="row in rowsWithExpandedState"
+          :key="row.id"
+          class="bg-white rounded-lg shadow-md p-4 space-y-3"
       >
         <div
-          class="flex text-[var(--secondary-color)] items-center justify-between"
+            class="flex text-[var(--secondary-color)] items-center justify-between"
         >
           <h3 class="text-lg font-bold">{{ row.name }}</h3>
           <div class="flex gap-2">
             <UButton
-              :disabled="loading"
-              @click="handleModify(row.id)"
-              size="md"
-              color="green"
-              >Modifier</UButton
+                :disabled="loading"
+                @click="handleModify(row.id)"
+                size="md"
+                color="green"
+            >Modifier
+            </UButton
             >
             <UButton
-              :disabled="loading"
-              @click="handleDelete(row.id)"
-              size="xs"
-              color="red"
-              >Supprimer</UButton
+                :disabled="loading"
+                @click="handleDelete(row.id)"
+                size="xs"
+                color="red"
+            >Supprimer
+            </UButton
             >
           </div>
         </div>
@@ -118,11 +122,11 @@
               {{ row.description }}
             </p>
             <UButton
-              size="xs"
-              color="gray"
-              variant="ghost"
-              @click="toggleDescription(row.id)"
-              class="mt-1"
+                size="xs"
+                color="gray"
+                variant="ghost"
+                @click="toggleDescription(row.id)"
+                class="mt-1"
             >
               {{ row.expanded ? "Réduire" : "Voir plus" }}
             </UButton>
@@ -130,61 +134,63 @@
         </div>
 
         <div
-          v-if="row.images && row.images.length"
-          class="flex flex-wrap gap-2"
+            v-if="row.images && row.images.length"
+            class="flex flex-wrap gap-2"
         >
           <img
-            v-for="image in row.images"
-            :key="image.id"
-            :src="image.url"
-            alt="images"
-            class="w-16 h-16 object-cover rounded"
+              v-for="image in row.images"
+              :key="image.id"
+              :src="image.url"
+              alt="images"
+              class="w-16 h-16 object-cover rounded"
           />
         </div>
       </div>
     </div>
 
     <div
-      class="flex justify-end px-3 py-3.5 border-t border-[var(--primary-color)] dark:border-[var(--primary-color)]"
+        class="flex justify-end px-3 py-3.5 border-t border-[var(--primary-color)] dark:border-[var(--primary-color)]"
     >
       <UPagination
-        v-model="page"
-        :page-count="pageCount"
-        :total="store.contents.length"
+          v-model="page"
+          :page-count="pageCount"
+          :total="store.contents.length"
+          class="bg-[var(--primary-color)] dark:bg-[var(--primary-color)]"
       />
     </div>
 
     <div class="flex flex-col items-center justify-center py-6 gap-3">
       <UButton
-        class="text-[var(--secondary-color)] bg-[var(--primary-color)] hover:text-[var(--primary-color)] hover:bg-[var(--secondary-color)] font-semibold text-lg hover:border-[2px] hover:border-[var(--primary-color)] dark:text-[var(--secondary-color)] dark:bg-[var(--primary-color)] dark:hover:text-[var(--primary-color)] dark:hover:bg-[var(--secondary-color)] dark:hover:border-[2px] dark:hover:border-[var(--primary-color)]"
-        @click="openModal"
-        >Ajouter un contenu</UButton
+          class="text-[var(--secondary-color)] bg-[var(--primary-color)] hover:text-[var(--primary-color)] hover:bg-[var(--secondary-color)] font-semibold text-lg hover:border-[2px] hover:border-[var(--primary-color)] dark:text-[var(--secondary-color)] dark:bg-[var(--primary-color)] dark:hover:text-[var(--primary-color)] dark:hover:bg-[var(--secondary-color)] dark:hover:border-[2px] dark:hover:border-[var(--primary-color)]"
+          @click="openModal"
+      >Ajouter un contenu
+      </UButton
       >
       <DynamicModalForm
-        ref="dynamicModal"
-        :fields="formFields"
-        :initialData="selectedItem"
-        modalTitle="Ajouter un contenu"
-        @submit="handleSubmit"
+          ref="dynamicModal"
+          :fields="formFields"
+          :initialData="selectedItem"
+          modalTitle="Ajouter un contenu"
+          @submit="handleSubmit"
       />
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, watch, onUnmounted } from "vue";
-import { useContentActions } from "@/composables/useContentActions";
-import { useHotelStore } from "@/stores/hotel";
+import {ref, onMounted, watch, onUnmounted} from "vue";
+import {useContentActions} from "@/composables/useContentActions";
+import {useHotelStore} from "@/stores/hotel";
 import DynamicModalForm from "@/components/form/DynamicModalForm.vue";
 
 const store = useHotelStore();
 const dynamicModal = ref(null);
-const { deleteContent, modifyContent, createContent, loading } =
-  useContentActions();
+const {deleteContent, modifyContent, createContent, loading} =
+    useContentActions();
 const page = ref(1);
 const pageCount = 10;
 const selectedItem = ref(null);
-const newContent = ref({ title: "", description: "", image: "" });
+const newContent = ref({title: "", description: "", image: ""});
 const windowWidth = ref(window.innerWidth);
 
 const updateWidth = () => {
@@ -195,26 +201,26 @@ onMounted(() => window.addEventListener("resize", updateWidth));
 onUnmounted(() => window.removeEventListener("resize", updateWidth));
 
 const rowsWithExpandedState = ref(
-  store.contents
-    .slice((page.value - 1) * pageCount, page.value * pageCount)
-    .map((row) => ({
-      ...row,
-      expanded: false,
-    })),
+    store.contents
+        .slice((page.value - 1) * pageCount, page.value * pageCount)
+        .map((row) => ({
+          ...row,
+          expanded: false,
+        })),
 );
 
 watch(page, () => {
   rowsWithExpandedState.value = store.contents
-    .slice((page.value - 1) * pageCount, page.value * pageCount)
-    .map((row) => ({
-      ...row,
-      expanded: false,
-    }));
+      .slice((page.value - 1) * pageCount, page.value * pageCount)
+      .map((row) => ({
+        ...row,
+        expanded: false,
+      }));
 });
 
 const toggleDescription = (id) => {
   const rowIndex = rowsWithExpandedState.value.findIndex(
-    (row) => row.id === id,
+      (row) => row.id === id,
   );
   if (rowIndex !== -1) {
     const updatedRow = {
@@ -285,7 +291,7 @@ const formFields = [
     placeholder: "Entrez la langue",
     required: true,
   },
-  { name: "images", label: "Images", type: "file", required: true },
+  {name: "images", label: "Images", type: "file", required: true},
   {
     name: "landing_page_display",
     label: "Afficher sur la page daccueil",
@@ -303,13 +309,22 @@ const openModal = () => {
 };
 
 const columns = ref([
-  { key: "name", label: "Nom", align: "left" },
-  { key: "title", label: "Titre" },
-  { key: "description", label: "Description" },
-  { key: "images", label: "Images" },
-  { key: "actions", label: "Supprimer", align: "center" },
-  { key: "modify", label: "Modifier", align: "center" },
+  {key: "name", label: "Nom"},
+  {key: "title", label: "Titre"},
+  {key: "description", label: "Description"},
+  {key: "images", label: "Images"},
+  {key: "actions", label: "Supprimer", align: "center"},
+  {key: "modify", label: "Modifier", align: "center"},
 ]);
+// variabl ui pour la modification du style des entêtes du tableau
+const tableConfig = {
+  ui: {
+    thead: "bg-[var(--primary-color)]",
+    th: {
+      color: "text-[var(--secondary-color)] dark:text-[var(--secondary-color)]"
+    }
+  }
+};
 
 const handleDelete = async (id) => {
   await deleteContent(id);
@@ -325,14 +340,14 @@ const handleSubmit = async (formData) => {
 
   if (createdContent) {
     store.contents.push(createdContent);
-    newContent.value = { title: "", description: "", image: "" };
+    newContent.value = {title: "", description: "", image: ""};
   }
 };
 
 const handleModify = async (id) => {
   const itemToModify = store.contents.find((item) => item.id === id);
   if (itemToModify) {
-    selectedItem.value = { ...itemToModify };
+    selectedItem.value = {...itemToModify};
     dynamicModal.value?.openModal(selectedItem.value, async (updateData) => {
       await saveModifiedData(id, updateData);
     });
