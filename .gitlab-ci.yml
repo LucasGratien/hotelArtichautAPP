@@ -50,7 +50,6 @@ deploy:
     - echo "$SSH_PRIVATE_KEY" > id_rsa
     - chmod 600 id_rsa
     - ssh -o StrictHostKeyChecking=no -i id_rsa $SSH_USER@$SSH_HOST "
-      docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY &&
       docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG &&
       docker stop hotel || true &&
       docker rm hotel || true &&
