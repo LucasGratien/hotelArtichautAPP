@@ -1,38 +1,30 @@
 <template>
-  <div class="min-h-screen bg-gray-100 p-8">
-    <div class="grid grid-cols-4 gap-8">
-
-
+<!--  zone de fond -->
+  <div class=" md:p-8">
+<!--    ensemble des trois cards-->
+    <div class="flex flex-col md:grid md:grid-cols-4 gap-8">
       <!-- Colonne principale avec les deux premières cards -->
       <div class="col-span-3 space-y-8">
 
+        <!-- UserInfoAdmin-->
+        <AdminUserInfoDash
+            :lastname="userInfos?.lastname"
+            :firstname="userInfos?.firstname"
+            :address="userInfos?.address"
+            :city="userInfos?.city"
+            :postal_code="userInfos?.postal_code"
+            :id="userInfos?.id"
+            :email="userInfos?.email"
+            :created_at="userInfos?.created_at"
+            :phone="userInfos?.phone"
+            :images="userInfos.images && userInfos.images.length > 0 ? userInfos.images[0].url : ''"
+        />
 
-<!-- UserInfoAdmin-->
-        <!-- Première card avec bouton jaune et champs de texte -->
-        <div class="bg-white rounded-lg shadow-md p-8 relative">
-          <!-- Bouton en haut à droite -->
-          <button class="absolute top-4 right-4 bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded">
-            Modifier
-          </button>
-
-          <!-- Champs de texte alignés -->
-          <div class="mb-8 grid grid-cols-2 gap-4">
-            <p class="p-2  rounded-md flex-1 font-semibold ">Infos Personnelles</p>
-            <div
-                v-for="(value, key) in userInfo"
-                :key="key"
-                class="flex items-center space-x-2 col-span-2"
-            >
-
-              <label class="text-sm font-medium text-gray-700 w-24">{{ labels[key] }} :</label>
-              <p class="p-2  rounded-md flex-1">{{ value }}</p>
-            </div>
-          </div>
-        </div>
 
 <!-- UserBookingHistory-->
+
         <!-- Deuxième card avec tableau et pagination -->
-        <div class="bg-white rounded-lg shadow-md p-8">
+        <div class="bg-white text-black rounded-lg shadow-md p-8">
           <UTable
               :rows="currentItems"
               :columns="columns"
@@ -76,12 +68,17 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import {useAuthStore} from "~/stores/auth.js";
+
+const authStore = useAuthStore();
+const userInfos = computed(() => authStore.user);
+
 
 // Pagination et tableau
 const currentPage = ref(1)
 const itemsPerPage = 5
 const totalItems = 15
-const totalPages = Math.ceil(totalItems / itemsPerPage)
+// const totalPages = Math.ceil(totalItems / itemsPerPage)
 
 const verticalCard = {
   title: "bonjour",

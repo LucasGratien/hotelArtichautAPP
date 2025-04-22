@@ -192,5 +192,21 @@ make sur to install it and configure it
 
     '@pinia/nuxt'
 
+[//]: # ()
+[//]: # (export default defineNuxtConfig&#40;{)
 
+[//]: # (...)
 
+[//]: # (vite: {)
+
+[//]: # (esbuild: {)
+
+[//]: # (drop: ["console"],)
+
+[//]: # (},)
+
+[//]: # (},)
+
+[//]: # (...)
+
+[//]: # (}&#41;;)
