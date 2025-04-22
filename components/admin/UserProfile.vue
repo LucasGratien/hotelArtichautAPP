@@ -1,7 +1,7 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue'
-import { useAuthStore } from '@/stores/auth'
-import { useApiFetch } from '@/composables/useApiFetch'
+import {ref, onMounted, computed} from 'vue'
+import {useAuthStore} from '@/stores/auth'
+import {useApiFetch} from '@/composables/useApiFetch'
 
 const authStore = useAuthStore()
 const users = ref([])
@@ -12,7 +12,7 @@ const fetchAllUsers = async () => {
   loading.value = true
   error.value = null
   try {
-    const { data, error: fetchError } = await useApiFetch('/admin/user', {
+    const {data, error: fetchError} = await useApiFetch('/admin/user', {
       headers: {
         Authorization: `Bearer ${authStore.getToken}`
       }
@@ -35,15 +35,15 @@ onMounted(() => {
 })
 
 const columns = [
-  { key: 'id', label: 'ID' },
-  { key: 'firstname', label: 'Prénom' },
-  { key: 'lastname', label: 'Nom' },
-  { key: 'email', label: 'Email' },
-  { key: 'city', label: 'Ville' },
-  { key: 'phone', label: 'Téléphone' },
-  { key: 'is_vip', label: 'VIP' },
-  { key: 'is_pro', label: 'Pro' },
-  { key: 'created_at', label: 'Créé le' }
+  {key: 'id', label: 'ID'},
+  {key: 'firstname', label: 'Prénom'},
+  {key: 'lastname', label: 'Nom'},
+  {key: 'email', label: 'Email'},
+  {key: 'city', label: 'Ville'},
+  {key: 'phone', label: 'Téléphone'},
+  {key: 'is_vip', label: 'VIP'},
+  {key: 'is_pro', label: 'Pro'},
+  {key: 'created_at', label: 'Créé le'}
 ]
 
 const currentPage = ref(1)
@@ -67,6 +67,12 @@ const paginatedUsers = computed(() => {
           :rows="paginatedUsers"
           :columns="columns"
           :loading="loading"
+          :ui="{
+  thead: '!bg-[var(--primary-color)]',
+  th: {
+    color: '!text-[var(--secondary-color)] dark:!text-[var(--secondary-color)]'
+  }
+}"
       />
 
       <div class="flex justify-end px-3 py-3.5 border-t border-gray-200">
