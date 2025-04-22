@@ -12,7 +12,7 @@ export const useHotelStore = defineStore('hotel', {
     }),
 
     getters: {
-        getContentByCategory: (state) => {
+        language: (state) => {
             return (category) =>
                 state.contents.filter(
                     (item) =>

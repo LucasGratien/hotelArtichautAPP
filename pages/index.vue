@@ -24,18 +24,12 @@
                   :image="heroPageDataEquipe?.image"
                   :link="'/Equipe'" >
     </UiHerobanner>
-
-
-
   <UiCardrestaurant
       :title="restaurantData?.title"
       :description="restaurantData?.description"
       :images="restaurantData?.images.map(img => img.url)"
   />
-
 </template>
-
-
 <script setup lang="js">
 
 //gestion des imports pour l'hydratation
