@@ -13,7 +13,7 @@ const form = ref({
 });
 
 const currentPage = ref(1);
-const itemsPerPage = 4; // Nombre de chambres par page
+const itemsPerPage = 4;
 
 const rechercherChambres = async () => {
   console.log("🔍 Recherche en cours...", form.value);
@@ -22,7 +22,7 @@ const rechercherChambres = async () => {
     form.value.dateFin,
     form.value.nombrePersonnes,
   );
-  currentPage.value = 1; // Réinitialise à la première page après la recherche
+  currentPage.value = 1;
 };
 
 const paginatedRooms = computed(() => {
@@ -50,8 +50,6 @@ const goToChambre = (id) => {
     console.error("Chambre introuvable");
   }
 };
-
-
 
 const nextPage = () => {
   if (currentPage.value < totalPages.value) {

@@ -3,26 +3,13 @@
     <div class="custom-modal p-4">
       <h2 class="text-xl font-bold mb-4">{{ modalTitle }}</h2>
 
-      <UForm :state="state" class="space-y-6" @submit.prevent="onSubmit">
+      <UForm :state="state" class="space-y-6" @submit="onSubmit">
         <UFormGroup v-for="field in fields" :key="field.name" :label="field.label" :name="field.name">
           <template v-if="field.type === 'checkbox'">
             <UCheckbox v-model="state[field.name]" />
           </template>
           <template v-else-if="field.type === 'file'">
-            <UInput
-                type="file"
-                multiple
-                @change="handleFileUpload($event, field.name)"
-                accept="image/*"
-            />
-            <div v-if="state[field.name] && state[field.name].length" class="mt-2">
-              <div v-for="(file, index) in state[field.name]" :key="index" class="text-sm text-gray-500">
-                {{ file.name || file }}
-              </div>
-            </div>
-          </template>
-          <template v-else-if="field.type === 'textarea'">
-            <UTextarea v-model="state[field.name]" :placeholder="field.placeholder" />
+            <UInput type="file" multiple @change="handleFileUpload($event, field.name)" />
           </template>
           <template v-else>
             <UInput :type="field.type" v-model="state[field.name]" :placeholder="field.placeholder" />
@@ -39,12 +26,13 @@
 </template>
 
 <script setup>
-import { ref, reactive, defineProps, defineEmits, defineExpose } from "vue";
+import { ref, reactive, watch, defineProps, defineEmits, defineExpose } from "vue";
 
 const props = defineProps({
   fields: {
     type: Array,
-    required: true
+    required: true,
+    validator: (fields) => fields.every(f => f.name && f.label && f.type)
   },
   modalTitle: {
     type: String,
@@ -62,87 +50,101 @@ const isOpen = ref(false);
 const state = reactive({});
 const isEditing = ref(false);
 const loading = ref(false);
+const onSaveCallback = ref(null);
 
 // Initialisation du state
 const initState = () => {
   props.fields.forEach(field => {
-    state[field.name] = field.type === "checkbox" ? false :
-        field.type === "file" ? [] : "";
-  });
+    const defaultValue = field.type === "checkbox" ? false :
+        field.type === "file" ? [] :
+            field.type === "number" ? 0 : "";
 
-  if (props.initialData) {
-    Object.keys(props.initialData).forEach(key => {
-      if (state.hasOwnProperty(key)) {
-        state[key] = props.initialData[key];
-      }
-    });
-  }
+    state[field.name] = defaultValue;
+  });
 };
 
 // Réinitialisation du formulaire
 const resetForm = () => {
-  props.fields.forEach(field => {
-    state[field.name] = field.type === "checkbox" ? false :
-        field.type === "file" ? [] : "";
-  });
+  initState();
   isEditing.value = false;
+  onSaveCallback.value = null;
 };
 
-// Ouvrir le modal avec des données initiales
-const openModal = (initialData = null) => {
-  resetForm();
-  if (initialData) {
+// Observer les changements de initialData
+watch(() => props.initialData, (newData) => {
+  if (newData) {
+    Object.keys(newData).forEach(key => {
+      if (state.hasOwnProperty(key)) {
+        state[key] = newData[key];
+      }
+    });
     isEditing.value = true;
+  }
+}, { deep: true });
+
+const openModal = (initialData = null, saveCallback = null) => {
+  resetForm();
+  onSaveCallback.value = saveCallback;
+
+  if (initialData) {
     Object.keys(initialData).forEach(key => {
       if (state.hasOwnProperty(key)) {
         state[key] = initialData[key];
       }
     });
+    isEditing.value = true;
   }
+
   isOpen.value = true;
 };
 
-// Fermer le modal
 const closeModal = () => {
   isOpen.value = false;
   emit("cancel");
 };
 
-// Soumission du formulaire
-const onSubmit = async () => {
+const onSubmit = async (event) => {
+  event.preventDefault();
   loading.value = true;
+
   try {
-    const formData = new FormData();
+    const formData = { ...state };
 
-    Object.keys(state).forEach(key => {
-      if (Array.isArray(state[key])) {
-        state[key].forEach(item => {
-          formData.append(`${key}[]`, item instanceof File ? item : String(item));
-        });
-      } else if (typeof state[key] === "boolean") {
-        formData.append(key, state[key] ? "1" : "0");
-      } else if (state[key] !== null && state[key] !== undefined) {
-        formData.append(key, String(state[key]));
-      }
-    });
+    // Conversion des valeurs booléennes pour la base de données
+    if (formData.landing_page_display !== undefined) {
+      formData.landing_page_display = formData.landing_page_display ? 1 : 0;
+    }
+    if (formData.navbar_display !== undefined) {
+      formData.navbar_display = formData.navbar_display ? 1 : 0;
+    }
 
-    emit("submit", formData);
+    // Si un callback est fourni (pour la modification)
+    if (onSaveCallback.value) {
+      await onSaveCallback.value(formData);
+    } else {
+      // Sinon émettre l'événement submit (pour la création)
+      emit("submit", formData);
+    }
+
     closeModal();
   } catch (error) {
-    console.error("Erreur formulaire:", error);
+    console.error("Erreur lors de la soumission:", error);
   } finally {
     loading.value = false;
   }
 };
 
-// Gestion de l'upload des fichiers
-const handleFileUpload = (event, fieldName) => {
-  const files = event.target.files;
-  state[fieldName] = files ? Array.from(files) : [];
-};
+// Gérer l'upload de fichier
+const handleFileUpload = (fileList, fieldName) => {
+  // Met à jour le state dynamiquement
+  state[fieldName] = Array.from(fileList);
 
-// Initialisation au montage
-initState();
+  // Corrige l'affectation de images.value
+  images.value = Array.from(fileList);
+
+  console.log("État mis à jour :", state);
+  console.log("Images enregistrées :", images.value);
+};
 
 defineExpose({
   openModal,

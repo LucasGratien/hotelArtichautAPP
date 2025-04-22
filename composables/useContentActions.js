@@ -1,5 +1,6 @@
 import { ref } from 'vue'
 import { useApiFetch } from '@/composables/useApiFetch'
+
 /**
  * Hook pour gérer les actions CRUD sur les contenus
  * @returns {{
@@ -11,137 +12,169 @@ import { useApiFetch } from '@/composables/useApiFetch'
  * }}
  */
 export function useContentActions() {
-    const loading = ref(false);
-    const error = ref(null);
+    const loading = ref(false)
+    const error = ref(null)
+
+    // Fonction utilitaire pour créer FormData
+    const createFormData = (data) => {
+        const formData = new FormData()
+
+        Object.entries(data).forEach(([key, value]) => {
+            if (key === 'images' && Array.isArray(value)) {
+                value.forEach((file, index) => {
+                    if (file instanceof File) {
+                        formData.append(`images[${index}]`, file)
+                    }
+                })
+            } else if (value !== undefined && value !== null) {
+                formData.append(key, value)
+            }
+        })
+
+        return formData
+    }
+
+    // Validation des champs requis
+    const validateRequiredFields = (data, fields) => {
+        const missingFields = fields.filter(field =>
+            data[field] === undefined ||
+            data[field] === null ||
+            (Array.isArray(data[field]) && data[field].length === 0)
+        )
+
+        if (missingFields.length > 0) {
+            throw new Error(`Les champs suivants sont obligatoires: ${missingFields.join(', ')}`)
+        }
+    }
 
     const createContent = async (newData) => {
-        if (loading.value) return null;
-
-        loading.value = true;
-        error.value = null;
+        if (loading.value) return null
 
         try {
-            const requiredFields = ['name', 'title', 'short_description', 'description', 'landing_page_display', 'navbar_display', 'display_order', 'language_id'];
-            for (const field of requiredFields) {
-                if ([null, undefined].includes(newData[field])) {
-                    throw new Error(`Le champ "${field}" est obligatoire`);
-                }
+            loading.value = true
+            error.value = null
+
+            // Champs obligatoires
+            const requiredFields = [
+                'name',
+                'title',
+                'short_description',
+                'description',
+                'display_order',
+                'language_id'
+            ]
+
+            validateRequiredFields(newData, requiredFields)
+
+            // Normalisation des données
+            const normalizedData = {
+                ...newData,
+                landing_page_display: newData.landing_page_display ? 1 : 0,
+                navbar_display: newData.navbar_display ? 1 : 0,
+                display_order: String(newData.display_order),
+                language_id: String(newData.language_id),
+                images: Array.isArray(newData.images) ? newData.images : [newData.images].filter(Boolean)
             }
 
-            newData.landing_page_display = newData.landing_page_display ? 1 : 0;
-            newData.navbar_display = newData.navbar_display ? 1 : 0;
-            newData.display_order = String(newData.display_order);
-            newData.language_id = String(newData.language_id);
-
-            if (!newData.images) {
-                newData.images = [];
-            } else if (!Array.isArray(newData.images)) {
-                newData.images = [newData.images];
-            }
-
-            const formData = new FormData();
-            Object.keys(newData).forEach((key) => {
-                if (key === "images" && Array.isArray(newData.images)) {
-                    newData.images.forEach((file, index) => {
-                        formData.append(`images[${index}]`, file);
-                    });
-                } else {
-                    formData.append(key, newData[key]);
-                }
-            });
-
-            formData.forEach((value, key) => {
-                console.log(key, value);
-            });
-
+            const formData = createFormData(normalizedData)
             const response = await useApiFetch('content', {
-                method: "POST",
+                method: 'POST',
                 body: formData,
-            });
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
 
-            if (!response || response.error) {
-                throw new Error(response?.error || "Erreur inconnue");
+            if (!response?.data?.value) {
+                throw new Error(response?.error?.value?.message || 'Échec de la création du contenu')
             }
 
-            return response;
+            return response.data.value
         } catch (err) {
-            error.value = err instanceof Error ? err : new Error('Une erreur inconnue est survenue');
-            console.error('Erreur lors de la création:', error.value);
-            return { success: false, error: error.value };
+            error.value = err instanceof Error ? err : new Error('Erreur lors de la création du contenu')
+            console.error('Erreur createContent:', error.value)
+            return null
         } finally {
-            loading.value = false;
+            loading.value = false
         }
-    };
+    }
 
     const deleteContent = async (id) => {
-        if (loading.value) return false;
-
-        loading.value = true;
-        error.value = null;
+        if (loading.value) return false
 
         try {
-            const response = await useApiFetch(`content/${id}`, { method: "DELETE" });
+            loading.value = true
+            error.value = null
 
-            if (!response || response.error) {
-                throw new Error(response?.error || "Erreur inconnue");
+            if (!id) {
+                throw new Error('ID du contenu manquant')
             }
-
-            return true;
-        } catch (err) {
-            error.value = err instanceof Error ? err : new Error('Une erreur inconnue est survenue');
-            console.error('Erreur lors de la suppression:', error.value);
-            return false;
-        } finally {
-            loading.value = false;
-        }
-    };
-
-    const modifyContent = async (id, updatedData) => {
-        if (loading.value) return null;
-
-        loading.value = true;
-        error.value = null;
-
-        try {
-            if (!updatedData.images) {
-                updatedData.images = [];
-            } else if (!Array.isArray(updatedData.images)) {
-                updatedData.images = [updatedData.images];
-            }
-
-            const formData = new FormData();
-            Object.keys(updatedData).forEach((key) => {
-                if (key === "images" && Array.isArray(updatedData.images)) {
-                    updatedData.images.forEach((file, index) => {
-                        formData.append(`images[${index}]`, file);
-                    });
-                } else {
-                    formData.append(key, updatedData[key]);
-                }
-            });
-
-            formData.forEach((value, key) => {
-                console.log(key, value);
-            });
 
             const response = await useApiFetch(`content/${id}`, {
-                method: "PUT",
-                body: formData,
-            });
+                method: 'DELETE'
+            })
 
-            if (!response || response.error) {
-                throw new Error(response?.error || "Erreur inconnue");
+            if (response?.error?.value) {
+                throw new Error(response.error.value.message || 'Échec de la suppression')
             }
 
-            return response;
+            return true
         } catch (err) {
-            error.value = err instanceof Error ? err : new Error('Une erreur inconnue est survenue');
-            console.error('Erreur lors de la modification:', error.value);
-            return { success: false, error: error.value };
+            error.value = err instanceof Error ? err : new Error('Erreur lors de la suppression')
+            console.error('Erreur deleteContent:', error.value)
+            return false
         } finally {
-            loading.value = false;
+            loading.value = false
         }
-    };
+    }
 
-    return { loading, error, createContent, deleteContent, modifyContent };
+    const modifyContent = async (id, updatedData) => {
+        if (loading.value) return null
+
+        try {
+            loading.value = true
+            error.value = null
+
+            if (!id) {
+                throw new Error('ID du contenu manquant')
+            }
+
+            // Normalisation des données
+            const normalizedData = {
+                ...updatedData,
+                landing_page_display: updatedData.landing_page_display ? 1 : 0,
+                navbar_display: updatedData.navbar_display ? 1 : 0,
+                images: Array.isArray(updatedData.images) ? updatedData.images : [updatedData.images].filter(Boolean)
+            }
+
+            const formData = createFormData(normalizedData)
+            const response = await useApiFetch(`content/${id}`, {
+                method: 'PUT',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+
+            if (!response?.data?.value) {
+                throw new Error(response?.error?.value?.message || 'Échec de la mise à jour du contenu')
+            }
+
+            return response.data.value
+        } catch (err) {
+            error.value = err instanceof Error ? err : new Error('Erreur lors de la mise à jour du contenu')
+            console.error('Erreur modifyContent:', error.value)
+            return null
+        } finally {
+            loading.value = false
+        }
+    }
+
+    return {
+        loading,
+        error,
+        createContent,
+        deleteContent,
+        modifyContent
+    }
 }

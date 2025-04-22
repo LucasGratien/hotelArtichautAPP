@@ -178,20 +178,22 @@
 </template>
 
 <script setup>
-import {ref, onMounted, watch, onUnmounted} from "vue";
-import {useContentActions} from "@/composables/useContentActions";
-import {useHotelStore} from "@/stores/hotel";
+import { ref, computed, onMounted, watch, onUnmounted } from "vue";
+import { useNuxtApp } from "#app";
+import { useContentActions } from "@/composables/useContentActions";
+import { useHotelStore } from "@/stores/hotel";
 import DynamicModalForm from "@/components/form/DynamicModalForm.vue";
+
 
 const store = useHotelStore();
 const dynamicModal = ref(null);
-const {deleteContent, modifyContent, createContent, loading} =
-    useContentActions();
+const { deleteContent, modifyContent, createContent, loading } = useContentActions();
 const page = ref(1);
 const pageCount = 10;
 const selectedItem = ref(null);
-const newContent = ref({title: "", description: "", image: ""});
+const newContent = ref({ title: "", description: "", image: "" });
 const windowWidth = ref(window.innerWidth);
+const expandedStates = ref({});
 
 const updateWidth = () => {
   windowWidth.value = window.innerWidth;
@@ -200,108 +202,43 @@ const updateWidth = () => {
 onMounted(() => window.addEventListener("resize", updateWidth));
 onUnmounted(() => window.removeEventListener("resize", updateWidth));
 
-const rowsWithExpandedState = ref(
+const toggleDescription = (id) => {
+  expandedStates.value[id] = !expandedStates.value[id];
+};
+
+const rowsWithExpandedState = computed(() =>
     store.contents
         .slice((page.value - 1) * pageCount, page.value * pageCount)
         .map((row) => ({
           ...row,
-          expanded: false,
-        })),
+          expanded: expandedStates.value[row.id] || false,
+        }))
 );
-
-watch(page, () => {
-  rowsWithExpandedState.value = store.contents
-      .slice((page.value - 1) * pageCount, page.value * pageCount)
-      .map((row) => ({
-        ...row,
-        expanded: false,
-      }));
-});
-
-const toggleDescription = (id) => {
-  const rowIndex = rowsWithExpandedState.value.findIndex(
-      (row) => row.id === id,
-  );
-  if (rowIndex !== -1) {
-    const updatedRow = {
-      ...rowsWithExpandedState.value[rowIndex],
-      expanded: !rowsWithExpandedState.value[rowIndex].expanded,
-    };
-    rowsWithExpandedState.value.splice(rowIndex, 1, updatedRow);
-  }
-};
 
 const fetchContent = async () => {
   try {
     await store.fetch();
+    store.contents = store.contents.map((item) => ({
+      ...item,
+      expanded: false,
+    }));
   } catch (err) {
     console.error("Erreur lors de la récupération des données :", err);
   }
 };
-
 onMounted(fetchContent);
 
 const formFields = [
-  {
-    name: "name",
-    label: "Nom",
-    type: "text",
-    placeholder: "Entrez votre nom",
-    required: true,
-  },
-  {
-    name: "title",
-    label: "Titre",
-    type: "text",
-    placeholder: "Entrez le titre",
-    required: true,
-  },
-  {
-    name: "short_description",
-    label: "Description courte",
-    type: "textarea",
-    placeholder: "Entrez une description courte",
-    required: true,
-  },
-  {
-    name: "description",
-    label: "Description",
-    type: "textarea",
-    placeholder: "Entrez une description",
-    required: true,
-  },
-  {
-    name: "link",
-    label: "Lien",
-    type: "text",
-    placeholder: "Entrez le lien",
-    required: true,
-  },
-  {
-    name: "display_order",
-    label: "Ordre d`affichage",
-    type: "text",
-    placeholder: "Entrez l`ordre daffichage",
-    required: true,
-  },
-  {
-    name: "language_id",
-    label: "Langue",
-    type: "text",
-    placeholder: "Entrez la langue",
-    required: true,
-  },
-  {name: "images", label: "Images", type: "file", required: true},
-  {
-    name: "landing_page_display",
-    label: "Afficher sur la page daccueil",
-    type: "checkbox",
-  },
-  {
-    name: "navbar_display",
-    label: "Afficher dans la barre de navigation",
-    type: "checkbox",
-  },
+  { name: "name", label: "Nom", type: "text", placeholder: "Entrez votre nom", required: true },
+  { name: "title", label: "Titre", type: "text", placeholder: "Entrez le titre", required: true },
+  { name: "short_description", label: "Description courte", type: "textarea", placeholder: "Entrez une description courte", required: true },
+  { name: "description", label: "Description", type: "textarea", placeholder: "Entrez une description", required: true },
+  { name: "link", label: "Lien", type: "text", placeholder: "Entrez le lien", required: true },
+  { name: "display_order", label: "Ordre d'affichage", type: "number", placeholder: "Entrez l'ordre d'affichage", required: true },
+  { name: "language_id", label: "Langue", type: "number", placeholder: "Entrez la langue", required: true },
+  { name: "images", label: "Images", type: "file", required: true },
+  { name: "landing_page_display", label: "Afficher sur la page d'accueil", type: "checkbox" },
+  { name: "navbar_display", label: "Afficher dans la barre de navigation", type: "checkbox" },
 ];
 
 const openModal = () => {
@@ -309,12 +246,12 @@ const openModal = () => {
 };
 
 const columns = ref([
-  {key: "name", label: "Nom"},
-  {key: "title", label: "Titre"},
-  {key: "description", label: "Description"},
-  {key: "images", label: "Images"},
-  {key: "actions", label: "Supprimer", align: "center"},
-  {key: "modify", label: "Modifier", align: "center"},
+  { key: "name", label: "Nom", align: "left" },
+  { key: "title", label: "Titre" },
+  { key: "description", label: "Description" },
+  { key: "images", label: "Images" },
+  { key: "actions", label: "Supprimer", align: "center" },
+  { key: "modify", label: "Modifier", align: "center" }
 ]);
 // variabl ui pour la modification du style des entêtes du tableau
 const tableConfig = {
@@ -347,30 +284,40 @@ const handleSubmit = async (formData) => {
 const handleModify = async (id) => {
   const itemToModify = store.contents.find((item) => item.id === id);
   if (itemToModify) {
-    selectedItem.value = {...itemToModify};
-    dynamicModal.value?.openModal(selectedItem.value, async (updateData) => {
-      await saveModifiedData(id, updateData);
+    selectedItem.value = {
+      ...itemToModify,
+      landing_page_display: Boolean(itemToModify.landing_page_display),
+      navbar_display: Boolean(itemToModify.navbar_display),
+    };
+
+    dynamicModal.value?.openModal(selectedItem.value, async (updatedData) => {
+      const success = await saveModifiedData(id, updatedData);
+      if (success) {
+        // Inclure les propriétés non modifiées (comme expanded)
+        const updatedContentWithExtra = {
+          ...itemToModify, // conserve les anciens champs
+          ...updatedData  // remplace ceux modifiés
+        };
+        store.updateContentInStore(updatedContentWithExtra);
+      }
     });
   }
 };
 
-const saveModifiedData = async (id, updatedData) => {
-  updatedData.landing_page_display = updatedData.landing_page_display ? 1 : 0;
-  updatedData.navbar_display = updatedData.navbar_display ? 1 : 0;
 
+
+const saveModifiedData = async (id, updatedData) => {
   try {
-    const updatedContent = await modifyContent(id, updatedData);
-    if (updatedContent) {
-      const index = store.contents.findIndex((item) => item.id === id);
-      if (index !== -1) {
-        store.contents[index] = updatedContent;
-      }
-      console.log("Mise à jour réussie :", updatedContent);
-    }
+    updatedData.landing_page_display = updatedData.landing_page_display ? 1 : 0;
+    updatedData.navbar_display = updatedData.navbar_display ? 1 : 0;
+
+    const response = await modifyContent(id, updatedData);
+    return !!response;
   } catch (error) {
-    console.error("Erreur lors de la mise à jour :", error);
+    console.error("Erreur lors de la modification :", error);
+    return false;
   }
 };
+
 </script>
 
-<style scoped></style>

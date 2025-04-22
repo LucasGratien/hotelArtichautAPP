@@ -19,6 +19,8 @@
     "@vueuse/motion": "^2.2.6",
     "axios": "^1.7.9",
     "framer-motion": "^12.4.7",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^3.0.1",
     "jwt-decode": "^4.0.0",
     "motion": "^12.4.7",
     "nuxt": "^3.15.1",
