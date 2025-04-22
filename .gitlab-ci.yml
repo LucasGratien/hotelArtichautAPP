@@ -49,13 +49,13 @@ deploy:
   script:
     - echo "$SSH_PRIVATE_KEY" > id_rsa
     - chmod 600 id_rsa
-    # Exécute la commande SSH avec la bonne syntaxe
-    - ssh -o StrictHostKeyChecking=no -i id_rsa $SSH_USER@$SSH_HOST "
-      docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG &&
-      docker stop hotel || true &&
-      docker rm hotel || true &&
-      docker run -d --name hotel -p 3000:3000 $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
-      "
+    - |
+      ssh -o StrictHostKeyChecking=no -i id_rsa $SSH_USER@$SSH_HOST << EOF
+        docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+        docker stop hotel || true
+        docker rm hotel || true
+        docker run -d --name hotel -p 3000:3000 $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+      EOF
   only:
     - develop
 
