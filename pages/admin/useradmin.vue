@@ -14,9 +14,7 @@
     </div>
     <div class="w-full md:w-5/6">
       <UiAdminTitle/>
-
     <AdminUserProfile/>
-      <p class="text-black text-xl p-8">Ici bientôt la gestion des utilisateurs</p>
     </div>
   </div>
 </template>

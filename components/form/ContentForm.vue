@@ -2,42 +2,77 @@
   <div>
     <!-- Vue desktop : tableau -->
     <div class="hidden md:block">
-      <UTable :columns="columns" :rows="rowsWithExpandedState">
+      <UTable :columns="columns" :rows="rowsWithExpandedState" v-bind="tableConfig">
         <template #actions-data="{ row }">
           <div class="flex justify-center w-full">
-            <UButton :disabled="loading" @click="handleDelete(row.id)" class="whitespace-nowrap w-full flex-grow" size="sm">Supprimer</UButton>
+            <UButton
+                :disabled="loading"
+                @click="handleDelete(row.id)"
+                class="whitespace-nowrap w-full flex-grow"
+                color="red"
+                size="sm"
+            >Supprimer
+            </UButton
+            >
           </div>
         </template>
 
         <template #modify-data="{ row }">
           <div class="flex justify-center w-full">
-            <UButton :disabled="loading" @click="handleModify(row.id)" class="whitespace-nowrap w-full flex-grow" size="sm">Modifier</UButton>
+            <UButton
+                :disabled="loading"
+                @click="handleModify(row.id)"
+                class="whitespace-nowrap w-full flex-grow"
+                size="sm"
+            >Modifier
+            </UButton
+            >
           </div>
         </template>
 
         <template #images-data="{ row }">
-          <div class="flex justify-center flex-wrap gap-1">
-            <img v-for="image in row.images" :key="image.id" :src="image.url" alt="images" class="w-12 h-12 object-cover rounded" />
+          <div class="flex justify-center shadow-md flex-wrap gap-1">
+            <img
+                v-for="image in row.images"
+                :key="image.id"
+                :src="image.url"
+                alt="images"
+                class="w-12 h-12 object-cover rounded"
+            />
+          </div>
+        </template>
+        <template #title-data="{ row }">
+          <div class="text-[var(--secondary-color)] font-semibold">
+            <p>{{ row.title }}</p>
+          </div>
+        </template>
+        <template #name-data="{ row }">
+          <div class="text-[var(--secondary-color)] font-semibold">
+            <p>{{ row.name }}</p>
           </div>
         </template>
 
         <template #description-data="{ row }">
-          <div class="flex items-center gap-2">
+          <div
+              class="flex items-center text-[var(--secondary-color)] font-semibold text-md gap-2"
+          >
             <div
                 :class="[
                 'transition-all duration-300',
-                row.expanded ? 'whitespace-normal' : 'whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px]'
+                row.expanded
+                  ? 'whitespace-normal'
+                  : 'whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px]',
               ]"
             >
-              {{ row.description }}
+              <p>{{ row.description }}</p>
             </div>
             <UButton
-                size="xs"
-                color="gray"
+                size="text-lg"
+                :style="{ color: 'var(--secondary-color)' }"
                 variant="ghost"
                 @click="toggleDescription(row.id)"
             >
-              {{ row.expanded ? 'Réduire' : 'Voir plus' }}
+              {{ row.expanded ? "Réduire" : "Voir plus" }}
             </UButton>
           </div>
         </template>
@@ -46,24 +81,46 @@
 
     <!-- Vue mobile : cards -->
     <div class="md:hidden space-y-4 px-4">
-      <div v-for="row in rowsWithExpandedState" :key="row.id" class="bg-white rounded-lg shadow-md p-4 space-y-3">
-        <div class="flex items-center justify-between">
-          <h3 class="text-lg font-semibold">{{ row.name }}</h3>
+      <div
+          v-for="row in rowsWithExpandedState"
+          :key="row.id"
+          class="bg-white rounded-lg shadow-md p-4 space-y-3"
+      >
+        <div
+            class="flex text-[var(--secondary-color)] items-center justify-between"
+        >
+          <h3 class="text-lg font-bold">{{ row.name }}</h3>
           <div class="flex gap-2">
-            <UButton :disabled="loading" @click="handleModify(row.id)" size="xs" color="gray">Modifier</UButton>
-            <UButton :disabled="loading" @click="handleDelete(row.id)" size="xs" color="red">Supprimer</UButton>
+            <UButton
+                :disabled="loading"
+                @click="handleModify(row.id)"
+                size="md"
+                color="green"
+            >Modifier
+            </UButton
+            >
+            <UButton
+                :disabled="loading"
+                @click="handleDelete(row.id)"
+                size="xs"
+                color="red"
+            >Supprimer
+            </UButton
+            >
           </div>
         </div>
 
-        <div class="text-sm text-gray-600">
-          <p class="font-medium">Titre:</p>
+        <div class="text-[var(--secondary-color)]">
+          <p class="font-bold">Titre:</p>
           <p>{{ row.title }}</p>
         </div>
 
-        <div class="text-sm text-gray-600">
-          <p class="font-medium">Description:</p>
+        <div class="text-sm font-semibold text-[var(--secondary-color)]">
+          <p class="font-semibold">Description:</p>
           <div class="relative">
-            <p :class="{ 'line-clamp-2': !row.expanded }">{{ row.description }}</p>
+            <p :class="{ 'line-clamp-2': !row.expanded }">
+              {{ row.description }}
+            </p>
             <UButton
                 size="xs"
                 color="gray"
@@ -71,12 +128,15 @@
                 @click="toggleDescription(row.id)"
                 class="mt-1"
             >
-              {{ row.expanded ? 'Réduire' : 'Voir plus' }}
+              {{ row.expanded ? "Réduire" : "Voir plus" }}
             </UButton>
           </div>
         </div>
 
-        <div v-if="row.images && row.images.length" class="flex flex-wrap gap-2">
+        <div
+            v-if="row.images && row.images.length"
+            class="flex flex-wrap gap-2"
+        >
           <img
               v-for="image in row.images"
               :key="image.id"
@@ -88,12 +148,24 @@
       </div>
     </div>
 
-    <div class="flex justify-end px-3 py-3.5 border-t border-gray-200 dark:border-gray-700">
-      <UPagination v-model="page" :page-count="pageCount" :total="store.contents.length"/>
+    <div
+        class="flex justify-end px-3 py-3.5 border-t border-[var(--primary-color)] dark:border-[var(--primary-color)]"
+    >
+      <UPagination
+          v-model="page"
+          :page-count="pageCount"
+          :total="store.contents.length"
+          class="bg-[var(--primary-color)] dark:bg-[var(--primary-color)]"
+      />
     </div>
 
     <div class="flex flex-col items-center justify-center py-6 gap-3">
-      <UButton @click="openModal">Ajouter un contenu</UButton>
+      <UButton
+          class="text-[var(--secondary-color)] bg-[var(--primary-color)] hover:text-[var(--primary-color)] hover:bg-[var(--secondary-color)] font-semibold text-lg hover:border-[2px] hover:border-[var(--primary-color)] dark:text-[var(--secondary-color)] dark:bg-[var(--primary-color)] dark:hover:text-[var(--primary-color)] dark:hover:bg-[var(--secondary-color)] dark:hover:border-[2px] dark:hover:border-[var(--primary-color)]"
+          @click="openModal"
+      >Ajouter un contenu
+      </UButton
+      >
       <DynamicModalForm
           ref="dynamicModal"
           :fields="formFields"
@@ -181,6 +253,15 @@ const columns = ref([
   { key: "actions", label: "Supprimer", align: "center" },
   { key: "modify", label: "Modifier", align: "center" }
 ]);
+// variabl ui pour la modification du style des entêtes du tableau
+const tableConfig = {
+  ui: {
+    thead: "bg-[var(--primary-color)]",
+    th: {
+      color: "text-[var(--secondary-color)] dark:text-[var(--secondary-color)]"
+    }
+  }
+};
 
 const handleDelete = async (id) => {
   await deleteContent(id);
@@ -196,7 +277,7 @@ const handleSubmit = async (formData) => {
 
   if (createdContent) {
     store.contents.push(createdContent);
-    newContent.value = { title: "", description: "", image: "" };
+    newContent.value = {title: "", description: "", image: ""};
   }
 };
 

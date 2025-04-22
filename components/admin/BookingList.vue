@@ -61,6 +61,16 @@ const columns = [
   { key: 'room_numbers', label: 'Chambres' }
 ]
 
+// variabl ui pour la modification du style des entêtes du tableau
+const tableConfig = {
+  ui: {
+    thead: "bg-[var(--primary-color)]",
+    th: {
+      color: "text-[var(--secondary-color)] dark:text-[var(--secondary-color)]"
+    }
+  }
+};
+
 const currentPage = ref(1)
 const itemsPerPage = 10
 
@@ -71,20 +81,21 @@ const paginatedBookings = computed(() => {
 </script>
 
 <template>
-  <div class="bg-white text-black rounded-lg shadow-md p-6">
-    <h2 class="text-xl font-bold mb-4">Réservations Admin</h2>
+  <div class="bg-white rounded-lg shadow-md p-6">
+    <h2 class="text-xl text-black font-bold mb-4">Réservations Admin</h2>
 
-    <div v-if="loading">Chargement des réservations...</div>
+    <div v-if="loading" class="text-black">Chargement des réservations...</div>
     <div v-else-if="error" class="text-red-600">Erreur : {{ error }}</div>
-    <div v-else-if="bookings.length === 0">Aucune réservation trouvée.</div>
+    <div v-else-if="bookings.length === 0" class="text-black">Aucune réservation trouvée.</div>
     <div v-else>
       <UTable
           :rows="paginatedBookings"
           :columns="columns"
           :loading="loading"
+          v-bind="tableConfig"
       />
 
-      <div class="flex justify-end px-3 py-3.5 border-t border-gray-200">
+      <div class="flex justify-end dark:bg-white bg-white px-3 py-3.5 border-t border-gray-200">
         <UPagination
             v-model="currentPage"
             :page-count="itemsPerPage"
