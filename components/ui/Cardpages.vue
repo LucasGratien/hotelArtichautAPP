@@ -13,7 +13,7 @@
     </div>
 
     <div
-      class="w-full :w-2/6 p-8 flex flex-col justify-end -md-10 z-10 text-background rounded-md"
+      class="w-full :w-2/6 p-8 flex flex-col justify-end -md-10 z-10 text-background rounded-mdLu"
       :class="inverted ? 'lg:-me-10' : 'lg:-ms-8'"
     >
       <h2
