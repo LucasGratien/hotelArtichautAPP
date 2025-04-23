@@ -1,4 +1,10 @@
-<script setup lang="js"></script>
+<script setup lang="js">
+defineProps({
+      title: String,
+    }
+)
+
+</script>
 
 <template>
   <div
@@ -6,12 +12,10 @@
   >
     <div class="flex items-center">
       <h2 class="text-[var(--primary-color)] font-bold text-xl pl-4">
-        Content-Admin
+        {{ title }}
       </h2>
     </div>
   </div>
 </template>
 
-<style scoped>
 
-</style>
