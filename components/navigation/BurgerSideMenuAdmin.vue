@@ -25,15 +25,44 @@ const isOpen = ref(false);
         <div
           class="max-h-[80vh] text-center flex justify-between text-3xl font-cardo p-4 bg-white rounded-lg shadow-md"
         >
-          <ul>
-            <li class="pb-6 text-[var(--primary-color)] rounded-md hover:text-[var(--secondary-color)] hover:bg-[var(--primary-color)] bg-[var(--secondary-color)]"><NuxtLink to="/">Home</NuxtLink></li>
-            <li class="pb-6 text-[var(--primary-color)] rounded-md hover:text-[var(--secondary-color)] hover:bg-[var(--primary-color)] bg-[var(--secondary-color)]"><NuxtLink to="/Rooms">Rooms</NuxtLink></li>
-            <li class="pb-6 text-[var(--primary-color)] rounded-md hover:text-[var(--secondary-color)] hover:bg-[var(--primary-color)] bg-[var(--secondary-color)]">
-              <NuxtLink to="/Restaurant">Restaurant</NuxtLink>
+          <ul class="ml-5 mr-5 divide-y divide-[var(--primary-color)]">
+            <li
+                class="bg-[var(--primary-color)] mt-5 text-[var(--secondary-color)] text-center rounded-lg"
+            >
+              <NuxtLink to="/admin/serviceadmin">
+                <p>Services</p>
+              </NuxtLink>
             </li>
-            <li class="pb-6 text-[var(--primary-color)] rounded-md hover:text-[var(--secondary-color)] hover:bg-[var(--primary-color)] bg-[var(--secondary-color)]"><NuxtLink to="/Spa">Spa</NuxtLink></li>
-            <li class="pb-6 text-[var(--primary-color)] rounded-md hover:text-[var(--secondary-color)] hover:bg-[var(--primary-color)] bg-[var(--secondary-color)]"><NuxtLink to="/Service">Services</NuxtLink></li>
-            <li class="pb-6 text-[var(--primary-color)] rounded-md hover:text-[var(--secondary-color)] hover:bg-[var(--primary-color)] bg-[var(--secondary-color)]"><NuxtLink to="/Booking">Booking</NuxtLink></li>
+            <li
+                class="bg-[var(--primary-color)] mt-5 text-[var(--secondary-color)] text-center rounded-lg"
+            >
+              <NuxtLink to="/admin/roomsadmin"> Rooms </NuxtLink>
+            </li>
+            <li
+                class="bg-[var(--primary-color)] mt-5 text-[var(--secondary-color)] text-center rounded-lg"
+            >
+              <NuxtLink to="/admin/contentadmin"> Contents </NuxtLink>
+            </li>
+            <li
+                class="bg-[var(--primary-color)] mt-5 text-[var(--secondary-color)] text-center rounded-lg"
+            >
+              <NuxtLink to="/admin/useradmin"> Clients </NuxtLink>
+            </li>
+            <li
+                class="bg-[var(--primary-color)] mt-5 text-[var(--secondary-color)] text-center rounded-lg"
+            >
+              <NuxtLink to="/admin/bookingadmin"> Réservations </NuxtLink>
+            </li>
+            <li
+                class="bg-[var(--primary-color)] mt-5 text-[var(--secondary-color)] text-center rounded-lg"
+            >
+              <NuxtLink to="/admin/staffadmin"> Staff </NuxtLink>
+            </li>
+            <li
+                class="bg-[var(--primary-color)] mt-5 text-[var(--secondary-color)] text-center rounded-lg"
+            >
+              <NuxtLink to="/admin/dashboardadmin"> Stats </NuxtLink>
+            </li>
           </ul>
         </div>
       </div>
