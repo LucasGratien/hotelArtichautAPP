@@ -5,7 +5,7 @@ import imgButton  from "@/assets/logo/adminKey.png";
 
 <template>
   <div v-if="authStore.isLoggedIn && authStore.tokenUser.role_id > 2">
-    <NuxtLink to="/admin/contentadmin">
+    <NuxtLink to="/admin/homeadmin">
       <UAvatar
           :src="imgButton"
           alt="Logo"

@@ -2,10 +2,10 @@
 <template>
   <div class="flex flex-col md:flex-row w-full">
     <div class="w-full md:w-1/6">
-      <div class="hidden md:block md:h-screen bg-[#4b6447] border-2 border-[var(primary)] ">
+      <div class="hidden md:block md:h-screen bg-[var(--secondary-color)] border-2 border-[var(primary)] ">
         <NavigationSideBar/>
       </div>
-      <div class="block md:hidden h-auto bg-[#4b6447] border-2 border-[var(primary)] ">
+      <div class="block md:hidden h-auto bg-[var(--secondary-color)] border-2 border-[var(primary)] ">
         <NavigationBurgerSideMenuAdmin/>
       </div>
     </div>

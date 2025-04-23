@@ -13,7 +13,9 @@
       </div>
     </div>
     <div class="w-full md:w-5/6">
-      <UiAdminTitle />
+      <UiAdminTitle
+          title="Contenus-Admin"
+      />
       <FormContentForm
         v-if="store.contents && store.contents.length > 0"
         :title="store.contents[0].title"
