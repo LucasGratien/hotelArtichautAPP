@@ -1,25 +1,30 @@
 <template>
   <div class="flex flex-col md:flex-row w-full">
     <div class="w-full md:w-1/6">
-      <div class="hidden md:block md:h-screen bg-[#4b6447] border-2 border-[var(primary)]">
+      <div class="hidden md:block md:h-screen bg-[var(--secondary-color)] border-2 border-[var(--primary-color)]">
         <NavigationSideBar />
       </div>
-      <div class="block md:hidden h-auto bg-[#4b6447] border-2 border-[var(primary)]">
+      <div class="block md:hidden h-auto bg-[var(--secondary-color)] border-2 border-[var(--primary-color)]">
         <NavigationBurgerSideMenuAdmin />
       </div>
     </div>
-    <div class="grid grid-cols-3 gap-4 p-4 mb-72">
+    <div class="w-full md:w-5/6">
+      <UiAdminTitle
+          title="Accueil-Admin"
+      />
+<!--      grid des chambres-->
+    <div class="grid grid-cols-3 gap-4 p-4">
       <div
           v-for="(legend, index) in statusLegends"
           :key="index"
           :style="{ backgroundColor: legend.color }"
-          class="bg-gray-200 p-4 rounded-lg flex items-center justify-center h-1"
+          class="bg-[var(--primary-color)] p-4 rounded-lg flex items-center justify-center h-1"
       >
         <span class="text-sm">{{ legend.text }}</span>
       </div>
       <!-- Première carte horizontale avec les carrés -->
       <div class="col-span-3 space-y-4 -mt-2">
-        <UCard class="w-full">
+        <UCard class="w-full !text-[var(--secondary-color)] rounded-lg !shadow-m !ring-0 dark:!bg-[var(--primary-color)] !bg-[var(--primary-color)]">
           <div v-if="loading">Chargement des chambres...</div>
           <div v-else class="grid grid-cols-4 gap-2">
             <div
@@ -29,7 +34,7 @@
                 class="bg-gray-200 p-4 rounded-lg flex items-center justify-center cursor-pointer"
                 @click="selectRoom(room.id)"
             >
-              <span class="text-sm">{{ room.number }}</span>
+              <span class="text-sm text-black">{{ room.number }}</span>
             </div>
           </div>
         </UCard>
@@ -37,7 +42,7 @@
 
       <!-- Deuxième carte horizontale pour les détails de réservation -->
       <div class="col-span-3 space-y-4">
-        <UCard class="w-full">
+        <UCard class="w-full !text-[var(--secondary-color)] rounded-lg !shadow-m !ring-0 dark:!bg-[var(--primary-color)] !bg-[var(--primary-color)]">
           <p>Détails de la réservation</p>client
           <div v-if="currentBooking">
             <p><strong>Numéro de booking :</strong> {{ currentBooking.id }}</p>
@@ -52,7 +57,7 @@
             <p>Aucune réservation sélectionnée.</p>
           </div>
           <div class="flex justify-end mt-auto">
-            <UButton class="bg-yellow-400 hover:bg-yellow-500 text-white font-bold">Modifier</UButton>
+            <UButton class="!bg-yellow-400 !hover:bg-yellow-500 !text-white !font-bold">Modifier</UButton>
 
           </div>
         </UCard>
@@ -61,7 +66,7 @@
 
     <!-- Troisième carte verticale pour les détails de la chambre -->
     <div class="col-span-1 p-4">
-      <UCard class="h-80">
+      <UCard class="w-full rounded-lg !shadow-m !ring-0 dark:!bg-[var(--primary-color)] !bg-[var(--primary-color)]">
         <p>Détails de la chambre</p>
         <div v-if="selectedRoom">
           <p><strong>Numéro :</strong> {{ selectedRoom.number }}</p>
@@ -74,6 +79,7 @@
           <p>Aucune chambre sélectionnée.</p>
         </div>
       </UCard>
+    </div>
     </div>
   </div>
 </template>
@@ -96,9 +102,9 @@ const currentBooking = computed(() => roomStore.currentBooking)
 
 const getRoomClass = (status) => {
   const classes = {
-    occupied: 'bg-red-200 hover:bg-red-300',
-    available: 'bg-green-200 hover:bg-green-300',
-    maintenance: 'bg-yellow-200 hover:bg-yellow-300'
+    occupied: 'bg-red-300 hover:bg-red-500',
+    available: 'bg-green-300 hover:bg-green-500',
+    maintenance: 'bg-yellow-300 hover:bg-yellow-500'
   }
   return classes[status] || 'bg-gray-200 hover:bg-gray-300'
 }

@@ -14,10 +14,10 @@
       <UiAdminTitle
           title="Accueil-Admin"
       />
-      <div class="flex flex-col justify-center items-center h-1/3 w-full" >
+      <div class="flex flex-col justify-center items-center h-full w-full" >
         <div class="bg-[var(--primary-color)] rounded-lg shadow-md p-6">
-      <h1 class="text-xl md:text-3xl text-[var(--secondary-color)] "> Section Administrateur</h1>
-        <h2 class="text-[var(--secondary-color)]"> Selectionnez un panel dans la side-bar </h2>
+      <h1 class="text-xl md:text-6xl text-[var(--secondary-color)] "> Section Administrateur</h1>
+          <UiLogo/>
       </div>
       </div>
     </div>
