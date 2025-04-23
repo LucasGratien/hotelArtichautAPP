@@ -37,12 +37,12 @@ const userInfos = computed(() => authStore.user);
   <div class="bg-white rounded-lg shadow-md p-4 md:p-6 relative flex flex-col md:flex-row gap-4">
 
     <!-- Bouton en haut à droite (absolu par rapport à la card) -->
-    <button class="absolute top-4 right-4 bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded z-5">
+    <button class="absolute top-4 right-4 bg-yellow-400 shadow-md hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded z-5">
       Modifier
     </button>
 
     <!-- Image -->
-    <div class="w-full md:w-1/3 h-64 md:h-auto overflow-hidden rounded-lg">
+    <div class="w-full md:w-1/3 h-64 md:h-auto overflow-hidden shadow-md rounded-lg">
       <img :src="userInfos.images && userInfos.images.length > 0 ? userInfos.images[0].url : ''"
            alt="User image"
            class="object-cover w-full h-full"
@@ -55,21 +55,21 @@ const userInfos = computed(() => authStore.user);
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
         <span class="text-sm font-medium text-gray-600">{{ labels.lastname }}</span>
-        <span class="p-2 bg-gray-100 rounded text-gray-800">{{ userInfos?.lastname }}</span>
+        <span class="p-2 bg-gray-100 shadow-md rounded text-gray-800">{{ userInfos?.lastname }}</span>
         <span class="text-sm font-medium text-gray-600">{{ labels.firstname }}</span>
-        <span class="p-2 bg-gray-100 rounded text-gray-800">{{ userInfos?.firstname }}</span>
+        <span class="p-2 bg-gray-100 rounded shadow-md text-gray-800">{{ userInfos?.firstname }}</span>
         <span class="text-sm font-medium text-gray-600">{{ labels.address }}</span>
-        <span class="p-2 bg-gray-100 rounded text-gray-800">{{ userInfos?.address }}</span>
+        <span class="p-2 bg-gray-100 rounded shadow-md text-gray-800">{{ userInfos?.address }}</span>
         <span class="text-sm font-medium text-gray-600">{{ labels.city }}</span>
-        <span class="p-2 bg-gray-100 rounded text-gray-800">{{ userInfos?.city }}</span>
+        <span class="p-2 bg-gray-100 rounded shadow-md text-gray-800">{{ userInfos?.city }}</span>
         <span class="text-sm font-medium text-gray-600">{{ labels.postal_code }}</span>
-        <span class="p-2 bg-gray-100 rounded text-gray-800">{{ userInfos?.postal_code }}</span>
+        <span class="p-2 bg-gray-100 rounded shadow-md text-gray-800">{{ userInfos?.postal_code }}</span>
         <span class="text-sm font-medium text-gray-600">{{ labels.email }}</span>
-        <span class="p-2 bg-gray-100 rounded text-gray-800">{{ userInfos?.email }}</span>
+        <span class="p-2 bg-gray-100 rounded shadow-md text-gray-800">{{ userInfos?.email }}</span>
         <span class="text-sm font-medium text-gray-600">{{ labels.phone }}</span>
-        <span class="p-2 bg-gray-100 rounded text-gray-800">{{ userInfos?.phone }}</span>
+        <span class="p-2 bg-gray-100 rounded shadow-md text-gray-800">{{ userInfos?.phone }}</span>
         <span class="text-sm font-medium text-gray-600">{{ labels.created_at }}</span>
-        <span class="p-2 bg-gray-100 rounded text-gray-800">{{new Date(userInfos?.created_at).toLocaleDateString()}}</span>
+        <span class="p-2 bg-gray-100 rounded shadow-md text-gray-800">{{new Date(userInfos?.created_at).toLocaleDateString()}}</span>
 
 
       </div>

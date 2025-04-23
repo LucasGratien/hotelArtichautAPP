@@ -72,11 +72,12 @@ const currentItems = computed(() => {
           :columns="columns"
           :loading="roomStore.loading"
           :ui="{
-  thead: '!bg-[var(--primary-color)]',
-  th: {
-    color: '!text-[var(--secondary-color)] dark:!text-[var(--secondary-color)]'
-  }
-}"
+            wrapper: 'rounded-lg shadow-md',
+            thead: '!bg-[var(--primary-color)]',
+            th: {
+              color: '!text-[var(--secondary-color)] dark:!text-[var(--secondary-color)]'
+            }
+          }"
       />
 
       <!-- Pagination -->
