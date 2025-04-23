@@ -13,16 +13,16 @@
     </div>
 
     <div
-      class="w-full :w-2/6 p-8 flex flex-col justify-end -md-10 z-10 text-background"
+      class="w-full :w-2/6 p-8 flex flex-col justify-end -md-10 z-10 text-background rounded-md"
       :class="inverted ? 'lg:-me-10' : 'lg:-ms-8'"
     >
       <h2
-        class="title text-3xl font-bold mb-6 md:ml-10 text-center md:text-left"
+        class="text-3xl underline text-[var(--secondary-color)] font-bold mb-6 md:ml-10 text-center md:text-left"
       >
         {{ room.category_name }}
       </h2>
       <p
-        class="description text-[var(--secondary-color)] text-lg leading-relaxed mb-10 md:ml-10 text-center md:text-left"
+        class="description text-[var(--secondary-color)] text-md leading-relaxed mb-10 md:ml-10 text-center md:text-left"
       >
         {{ room.description }}
       </p>
