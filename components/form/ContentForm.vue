@@ -2,10 +2,12 @@
   <div>
     <!-- Vue desktop : tableau -->
     <div class="hidden md:block">
-      <UTable :columns="columns" :rows="rowsWithExpandedState" v-bind="tableConfig">
+      <UTable data-test="content-table" :columns="columns" :rows="rowsWithExpandedState" v-bind="tableConfig">
+<!--        bouton supprimer-->
         <template #actions-data="{ row }">
           <div class="flex justify-center w-full">
             <UButton
+                data-test="delete-btn"
                 :disabled="loading"
                 @click="handleDelete(row.id)"
                 class="whitespace-nowrap w-full flex-grow"
@@ -16,10 +18,11 @@
             >
           </div>
         </template>
-
+<!--bouton modifier-->
         <template #modify-data="{ row }">
           <div class="flex justify-center w-full">
             <UButton
+                data-test="modify-btn"
                 :disabled="loading"
                 @click="handleModify(row.id)"
                 class="whitespace-nowrap w-full flex-grow"
@@ -29,7 +32,7 @@
             >
           </div>
         </template>
-
+<!--affichage images-->
         <template #images-data="{ row }">
           <div class="flex justify-center shadow-md flex-wrap gap-1">
             <img
@@ -41,6 +44,7 @@
             />
           </div>
         </template>
+
         <template #title-data="{ row }">
           <div class="text-[var(--secondary-color)] font-semibold">
             <p>{{ row.title }}</p>
@@ -52,6 +56,8 @@
           </div>
         </template>
 
+
+<!--affichage description-->
         <template #description-data="{ row }">
           <div
               class="flex items-center text-[var(--secondary-color)] font-semibold text-md gap-2"
@@ -62,11 +68,11 @@
                 row.expanded
                   ? 'whitespace-normal'
                   : 'whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px]',
-              ]"
-            >
+              ]">
               <p>{{ row.description }}</p>
             </div>
             <UButton
+                data-test="toggle-description-btn"
                 size="text-lg"
                 :style="{ color: 'var(--secondary-color)' }"
                 variant="ghost"
@@ -95,18 +101,12 @@
                 :disabled="loading"
                 @click="handleModify(row.id)"
                 size="md"
-                color="green"
-            >Modifier
-            </UButton
-            >
+                color="green" >Modifier</UButton>
             <UButton
                 :disabled="loading"
                 @click="handleDelete(row.id)"
                 size="xs"
-                color="red"
-            >Supprimer
-            </UButton
-            >
+                color="red">Supprimer</UButton>
           </div>
         </div>
 
@@ -118,10 +118,9 @@
         <div class="text-sm font-semibold text-[var(--secondary-color)]">
           <p class="font-semibold">Description:</p>
           <div class="relative">
-            <p :class="{ 'line-clamp-2': !row.expanded }">
-              {{ row.description }}
-            </p>
+            <p :class="{ 'line-clamp-2': !row.expanded }"> {{ row.description }}</p>
             <UButton
+                data-test="toggle-description-btn"
                 size="xs"
                 color="gray"
                 variant="ghost"
@@ -133,10 +132,7 @@
           </div>
         </div>
 
-        <div
-            v-if="row.images && row.images.length"
-            class="flex flex-wrap gap-2"
-        >
+        <div v-if="row.images && row.images.length" class="flex flex-wrap gap-2">
           <img
               v-for="image in row.images"
               :key="image.id"
@@ -148,11 +144,10 @@
       </div>
     </div>
 
-    <div
-        class="flex justify-end px-3 py-3.5 border-t border-[var(--primary-color)] dark:border-[var(--primary-color)]"
-    >
+    <div class="flex justify-end px-3 py-3.5 border-t border-[var(--primary-color)] dark:border-[var(--primary-color)]">
       <UPagination
           v-model="page"
+          data-test="content-pagination"
           :page-count="pageCount"
           :total="store.contents.length"
           class="bg-[var(--primary-color)] dark:bg-[var(--primary-color)]"
@@ -163,9 +158,9 @@
       <UButton
           class="text-[var(--secondary-color)] bg-[var(--primary-color)] hover:text-[var(--primary-color)] hover:bg-[var(--secondary-color)] font-semibold text-lg hover:border-[2px] hover:border-[var(--primary-color)] dark:text-[var(--secondary-color)] dark:bg-[var(--primary-color)] dark:hover:text-[var(--primary-color)] dark:hover:bg-[var(--secondary-color)] dark:hover:border-[2px] dark:hover:border-[var(--primary-color)]"
           @click="openModal"
-      >Ajouter un contenu
-      </UButton
-      >
+      >Ajouter un contenu </UButton>
+
+
       <DynamicModalForm
           ref="dynamicModal"
           :fields="formFields"
@@ -179,7 +174,6 @@
 
 <script setup>
 import { ref, computed, onMounted, watch, onUnmounted } from "vue";
-import { useNuxtApp } from "#app";
 import { useContentActions } from "@/composables/useContentActions";
 import { useHotelStore } from "@/stores/hotel";
 import DynamicModalForm from "@/components/form/DynamicModalForm.vue";
