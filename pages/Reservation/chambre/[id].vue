@@ -213,6 +213,7 @@ const continuer = () => {
         class="mt-5 font-bold text-[var(--primary-color)] border-[2px] border-[var(--primary-color)] rounded-md px-4 py-2 hover:text-[var(--secondary-color)] hover:bg-[var(--primary-color)]"
         @click="continuer"
         :disabled="isLoading"
+        title="Je réglerais à la reservation"
       >
         Continuer
       </button>
