@@ -11,7 +11,12 @@
         mt-6  py-4 px-2 mx-4
         md:mx-16 md:py-16 md:px-16
         ">
-      <UiInfoIntro/>
+      <UiInfoIntro
+          v-for="(card, index) in equipeInfo"
+          :key="index"
+          :description="card.description"
+          :short_description="card.short_description"
+      />
 
       <UiCardInfos
           v-for="(card, index) in equipeData"
@@ -42,6 +47,6 @@ const heroPageData = computed(() => {
     image: bannerData.images && bannerData.images.length > 0 ? bannerData.images[0].url : ''
   }
 })
-
+const equipeInfo = computed(() => store.language('info-equipe'))
 const equipeData = computed(() => store.language('equipe-card'))
 </script>
