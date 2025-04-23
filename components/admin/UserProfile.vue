@@ -9,6 +9,7 @@ const loading = ref(false)
 const error = ref(null)
 
 const fetchAllUsers = async () => {
+  authStore.initializeAuth()
   loading.value = true
   error.value = null
   try {
@@ -56,8 +57,7 @@ const paginatedUsers = computed(() => {
 </script>
 
 <template>
-  <div class="bg-white text-black rounded-lg shadow-md p-6">
-    <h2 class="text-xl font-bold mb-4">Liste des utilisateurs</h2>
+  <div class="bg-white text-black rounded-lg shadow-md ">
 
     <div v-if="loading">Chargement...</div>
     <div v-else-if="error" class="text-red-600">Erreur : {{ error }}</div>
@@ -68,11 +68,12 @@ const paginatedUsers = computed(() => {
           :columns="columns"
           :loading="loading"
           :ui="{
-  thead: '!bg-[var(--primary-color)]',
-  th: {
-    color: '!text-[var(--secondary-color)] dark:!text-[var(--secondary-color)]'
-  }
-}"
+            wrapper: 'rounded-lg shadow-md',
+            thead: '!bg-[var(--primary-color)]',
+            th: {
+             color: '!text-[var(--secondary-color)] dark:!text-[var(--secondary-color)]'
+            }
+          }"
       />
 
       <div class="flex justify-end px-3 py-3.5 border-t border-gray-200">

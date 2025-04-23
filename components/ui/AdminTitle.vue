@@ -1,6 +1,7 @@
 <script setup lang="js">
 defineProps({
       title: String,
+      required: true
     }
 )
 

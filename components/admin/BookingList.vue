@@ -64,6 +64,7 @@ const columns = [
 // variabl ui pour la modification du style des entêtes du tableau
 const tableConfig = {
   ui: {
+    wrapper: 'rounded-lg shadow-md',
     thead: "bg-[var(--primary-color)]",
     th: {
       color: "text-[var(--secondary-color)] dark:text-[var(--secondary-color)]"
@@ -81,9 +82,7 @@ const paginatedBookings = computed(() => {
 </script>
 
 <template>
-  <div class="bg-white rounded-lg shadow-md p-6">
-    <h2 class="text-xl text-black font-bold mb-4">Réservations Admin</h2>
-
+  <div class="bg-white rounded-lg shadow-md">
     <div v-if="loading" class="text-black">Chargement des réservations...</div>
     <div v-else-if="error" class="text-red-600">Erreur : {{ error }}</div>
     <div v-else-if="bookings.length === 0" class="text-black">Aucune réservation trouvée.</div>
