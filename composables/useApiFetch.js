@@ -1,4 +1,4 @@
-import {useAuthStore} from '~/stores/auth';
+import {useAuthStore} from '@/stores/auth';
 
 export const useApiFetch = (path, options = {}) => {
     const config = useRuntimeConfig();

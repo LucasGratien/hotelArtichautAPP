@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { jwtDecode } from 'jwt-decode';
-import { useApiFetch } from '~/composables/useApiFetch';
+import { useApiFetch } from '@/composables/useApiFetch';
 
 export const useAuthStore = defineStore('auth', {
     //Stat du user
