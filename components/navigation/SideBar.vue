@@ -1,38 +1,47 @@
 <template>
-  <UVerticalNavigation :links="links">
-
-    <template #default="{ link }">
-      <span class="group-hover:text-primary relative items-center text-[var(primary)] font-cardo">{{ link.label }}</span>
-    </template>
-
-  </UVerticalNavigation>
+  <h1 class="font-bold text-[20px] text-[var(--primary-color)] text-center py-2">
+    Admin Panel
+  </h1>
+  <div class="menu font-bold flex flex-col justify-between text-lg font-cardo">
+    <ul class="ml-5 mr-5 divide-y divide-[var(--primary-color)]">
+      <li
+        class="bg-[var(--primary-color)] mt-5 text-[var(--secondary-color)] text-center rounded-lg"
+      >
+        <NuxtLink to="/admin/serviceadmin">
+          <p>Services</p>
+        </NuxtLink>
+      </li>
+      <li
+        class="bg-[var(--primary-color)] mt-5 text-[var(--secondary-color)] text-center rounded-lg"
+      >
+        <NuxtLink to="/admin/roomsadmin"> Rooms </NuxtLink>
+      </li>
+      <li
+        class="bg-[var(--primary-color)] mt-5 text-[var(--secondary-color)] text-center rounded-lg"
+      >
+        <NuxtLink to="/admin/contentadmin"> Contents </NuxtLink>
+      </li>
+      <li
+        class="bg-[var(--primary-color)] mt-5 text-[var(--secondary-color)] text-center rounded-lg"
+      >
+        <NuxtLink to="/admin/useradmin"> Clients </NuxtLink>
+      </li>
+      <li
+        class="bg-[var(--primary-color)] mt-5 text-[var(--secondary-color)] text-center rounded-lg"
+      >
+        <NuxtLink to="/admin/bookingadmin"> Réservations </NuxtLink>
+      </li>
+      <li
+        class="bg-[var(--primary-color)] mt-5 text-[var(--secondary-color)] text-center rounded-lg"
+      >
+        <NuxtLink to="/admin/staffadmin"> Staff </NuxtLink>
+      </li>
+      <li
+        class="bg-[var(--primary-color)] mt-5 text-[var(--secondary-color)] text-center rounded-lg"
+      >
+        <NuxtLink to="/admin/dashboardadmin"> Stats </NuxtLink>
+      </li>
+    </ul>
+  </div>
 </template>
-<script setup lang="js">
 
-const links = [{
-  label: 'Services',
-  to: '/components/vertical-navigation'
-}, {
-  label: 'Rooms ',
-  to: '/components/command-palette'
-}, {
-  label: 'Contents',
-  to: '/components/table'
-}, {
-  label: 'Clients',
-  to: '/components/command-palette'
-}, {
-  label: 'Reservations',
-  to: '/components/command-palette'
-}, {
-  label: 'Staff',
-  to: '/components/command-palette'
-}, {
-  label: 'Statistiques',
-  to: '/components/command-palette'
-}]
-</script>
-
-<style lang="scss" scoped>
-
-</style>

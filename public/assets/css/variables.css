@@ -1,13 +1,29 @@
 :root {
-    --primary-color: rgba(234, 198, 132, 1);
-    --secondary-color: rgba(75, 101, 71, 1);
-    --background-color: rgba(255, 255, 255, 1)
+  --primary-color: rgba(234, 198, 132, 1);
+  --secondary-color: rgba(75, 101, 71, 1);
+  --background-color: rgba(255, 255, 255, 1);
+  --champ-color: rgba(75, 101, 71, 0.7);
+  --black-color: rgb(0, 0, 0);
 }
 
-h2, h1, h3, h4 {
-    font-family: 'Lora', serif;
+h2,
+h1,
+h3,
+h4,
+h5,
+h6{
+  font-family: "Lora", serif;
 }
 
 p {
-    font-family: 'Cardo', serif;
+  font-family: "Cardo", serif;
+}
+a {
+  font-family: "Cardo", serif;
+}
+button {
+  font-family: "cardo", serif;
+}
+.placeholder-text {
+  font-family: "Cardo", serif;
 }

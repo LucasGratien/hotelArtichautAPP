@@ -1,8 +1,8 @@
 <template>
-  <div class="bg-[#4B6547] pt-4">
-    <h2 class="text-[var(primary)] text-2xl font-cardo text-center "> OUR HAPPY CUSTOMER</h2>
+  <div class="bg-[var(--secondary-color)] pt-4">
+    <h2 class="text-[var(--primary-color)] text-2xl text-center "> OUR HAPPY CUSTOMER</h2>
     <div class="flex justify-center items-center">
-      <img src="public/assets/image/component_separator.png" alt="separator">
+      <img src="@/assets/images/component_separator.png" alt="separator">
     </div>
     <div class="relative w-full max-w-8xl mx-auto md:px-8">
       <UCarousel
@@ -14,12 +14,12 @@
     }"
           :prev-button="{
       variant: 'link',
-      icon: 'i-heroicons-arrow-left-20-solid',
+      icon: 'i-heroicons-arrow-left-20-solid text-[var(--primary-color)]',
       class: 'hidden sm:block -start-6'
     }"
           :next-button="{
       variant: 'link',
-      icon: 'i-heroicons-arrow-right-20-solid',
+      icon: 'i-heroicons-arrow-right-20-solid text-[var(--primary-color)]',
       class: 'hidden sm:block -end-6'
     }"
           arrows
@@ -39,52 +39,11 @@
 
 </template>
 
-<script setup lang="ts">
+<script setup lang="js">
+ import {useApiFetch} from "~/composables/useApiFetch.js";
 
-interface Review {
-  id: number;
-  rate: number;
-  review_content: string;
-  user_id: number;
-}
-
-const { data: reviews } = await useFetch<Review[]>('/review/', {
-  baseURL: useRuntimeConfig().public.apiBase,
-  default: () => []
-})
-
-// const reviews = [
-//   {
-//     rate: 5,
-//     name: "Johnny",
-//     description: "Mais c'était merveilleux cet Hotel, je recommande vivement ! Le service était impeccable et les installations sont magnifiques."
-//   },
-//   {
-//     rate: 4,
-//     name: "Marie",
-//     description: "Très bon séjour, personnel attentionné. Seul petit bémol : le petit-déjeuner pourrait être plus varié."
-//   },
-//   {
-//     rate: 5,
-//     name: "Pierre",
-//     description: "Une expérience inoubliable ! La vue depuis la chambre était à couper le souffle."
-//   },
-//   {
-//     rate: 5,
-//     name: "Sophie",
-//     description: "Excellent rapport qualité-prix. Je reviendrai sans hésiter !"
-//   },
-//   {
-//     rate: 4,
-//     name: "Lucas",
-//     description: "Très satisfait de mon séjour. L'emplacement est parfait pour visiter la ville."
-//   }
-// ]
+ const { data: reviews } = await useApiFetch('/review/', {
+   baseURL: useRuntimeConfig().public.apiBase,
+   default: () => []
+ })
 </script>
-
-<style scoped>
-</style>
-
-<!--//.font-lora {-->
-<!--//  font-family: 'Lora', serif;-->
-<!--//}-->
