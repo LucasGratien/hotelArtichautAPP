@@ -10,19 +10,24 @@ install_dependencies:
   stage: install
   image: node:22-alpine
   script:
-    - npm install --frozen-lockfile --production=false  #frozen empeche les modification du fichier package-lock.json pendant l'installation
+    - npm install --frozen-lockfile --production=false
+  artifacts:
+    paths:
+      - node_modules/
 
-    #Etape de test
 run_tests:
   stage: test
   image: node:22-alpine
+  dependencies:
+    - install_dependencies
   script:
-    - npm run test:ci # Cette commande devrait exécuter vos tests dans l'environnement CI
+    - npm run test:ci
   only:
     - develop
   artifacts:
     paths:
-      - coverage/ # Gardez les résultats de couverture pour les afficher dans GitLab
+      - coverage/
+
 
 # Étape de build de l'application
 build_app:
