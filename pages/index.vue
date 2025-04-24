@@ -7,7 +7,7 @@
                  />
   </div>
 <UiLogo/>
-  <UiCardhome
+  <UiCardhomespa
       v-for="(item, index) in store.language('content')"
       :key="item.id"
       :title="item.title"
@@ -19,7 +19,9 @@
       :inverted="index % 2 === 0"
   />
   <UiCardhomespa/>
-    <UiHerobanner :title="heroPageDataEquipe?.title"
+    <UiHerobanner
+        class="font-semibold"
+        :title="heroPageDataEquipe?.title"
                   :buttonText="'Je découvre'"
                   :image="heroPageDataEquipe?.image"
                   :link="'/Equipe'" >

@@ -14,11 +14,15 @@
       <UiAdminTitle
           title="Accueil-Admin"
       />
-      <div class="flex flex-col justify-center items-center h-full w-full" >
-        <div class="bg-[var(--primary-color)] rounded-lg shadow-md p-6">
-      <h1 class="text-xl md:text-6xl text-[var(--secondary-color)] "> Section Administrateur</h1>
+      <div class="flex flex-col justify-center items-center h-full w-full p-4">
+        <div class="relative rounded-lg shadow-lg p-8 ">
+          <div class="absolute inset-0 bg-[var(--primary-color)] opacity-70 rounded-lg"></div>
+          <div class="relative z-10 text-center">
+            <h1 class="text-xl md:text-4xl text-[var(--secondary-color)] font-semibold underline mb-4">Section Administrateur</h1>
+            <p class="text-lg text-[var(--secondary-color)] ">Bienvenue dans la section administrateur, où vous pouvez gérer toutes les configurations du système.</p>
           <UiLogo/>
-      </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -8,7 +8,7 @@
     <p class="mb-4 font-bold text-gray-700 flex justify-center">{{feature.feature_name}}</p>
       <p class="mb-4 text-gray-700 flex justify-center">{{feature.description}}</p>
     </div>
-    <p class="text-lg flex justify-end font-semibold mt-4 text-gray-700">{{ room.price_in_cent }}€</p>
+    <p class="text-lg flex justify-end font-semibold mt-4 text-gray-700">{{ room.price_in_cent }}€/nuit</p>
   </div>
   <div v-else class="text-center py-10">Chargement...</div>
   </div>

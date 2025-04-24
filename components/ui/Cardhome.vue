@@ -1,4 +1,4 @@
-<template>
+"<template>
   <div class="flex flex-col md:flex-row items-center bg-[var(--background-color)]/75 p-8 rounded-md shadow-lg w-full mt-4"
        :class="inverted ? 'md:flex-row-reverse' : ''">
     <div class="hover:scale-105 transition-transform duration-300 ease-in-out w-full  md:w-1/2 relative">
@@ -16,7 +16,7 @@
             :to="link"
             class="bg-[var(--primary-color)] hover:bg-[var(--champ-color)]
             text-[var(--secondary-color)] hover:text-[var(--primary-color)]
-            py-3 px-8 rounded-md shadow cta-btn"
+            py-3 px-8 rounded-md shadow cta-btn font-semibold"
         >
           {{ buttonText }}
         </NuxtLink>

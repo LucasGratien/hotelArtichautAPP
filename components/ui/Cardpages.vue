@@ -29,7 +29,7 @@
       <div class="text-center md:text-left">
         <NuxtLink
           :to="`/roomdetail/${room.id}`"
-          class="bg-[var(--primary-color)] hover:bg-[var(--champ-color)] text-[var(--secondary-color)] hover:text-[var(--primary-color)] py-3 px-8 rounded-md ml-10 shadow cta-btn"
+          class="bg-[var(--primary-color)] font-semibold hover:bg-[var(--champ-color)] text-[var(--secondary-color)] hover:text-[var(--primary-color)] py-3 px-8 rounded-md ml-10 shadow cta-btn"
         >
           {{ buttonText }}
         </NuxtLink>
