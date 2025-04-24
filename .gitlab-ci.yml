@@ -1,0 +1,62 @@
+stages:
+  - install
+  - build
+  - dockerize
+  - deploy
+
+# Étape d'installation des dépendances
+install_dependencies:
+  stage: install
+  image: node:22-alpine
+  script:
+    - npm install --frozen-lockfile #frozen empeche les modification du fichier package-lock.json pendant l'installation
+
+# Étape de build de l'application
+build_app:
+  stage: build
+  image: node:22-alpine
+  script:
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - .output # Conservez les fichiers de build pour l'étape suivante
+
+# Étape de création de l'image Docker
+dockerize:
+  stage: dockerize
+  image: docker:latest
+  services:
+    - docker:dind
+  variables:
+    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_TLS_CERTDIR: ""
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+    - docker info
+  script:
+    - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG .
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  only:
+    - develop
+
+# Étape de déploiement
+deploy:
+  stage: deploy
+  image: alpine:latest
+  before_script:
+    - apk add --no-cache openssh
+  script:
+    - echo "$SSH_PRIVATE_KEY" > id_rsa
+    - chmod 600 id_rsa
+    - |
+      ssh -o StrictHostKeyChecking=no -i id_rsa $SSH_USER@$SSH_HOST << EOF
+        docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+        docker stop hotel || true
+        docker rm hotel || true
+        docker run -d --name hotel -p 3000:3000 $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+      EOF
+  only:
+    - develop
+
+

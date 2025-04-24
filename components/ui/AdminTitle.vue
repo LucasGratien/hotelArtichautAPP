@@ -1,17 +1,22 @@
-<script setup lang="ts">
+<script setup lang="js">
+defineProps({
+      title: String,
+      required: true
+    }
+)
 
 </script>
 
 <template>
-  <div class="bg-[var(--secondary)] p-4 border-2 border-[var(--primary)]">
+  <div
+    class="bg-[var(--secondary-color)] p-4 border-2 border-[var(--primary-color)]"
+  >
     <div class="flex items-center">
-      <h2 class="text-[var(--primary)] text-xl font-cardo pl-4">Content-Admin</h2>
+      <h2 class="text-[var(--primary-color)] font-bold text-xl pl-4">
+        {{ title }}
+      </h2>
     </div>
   </div>
-
 </template>
 
 
-<style scoped>
-
-</style>
