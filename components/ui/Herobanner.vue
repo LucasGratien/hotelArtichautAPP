@@ -24,7 +24,7 @@
                 :to="link"
                 class="
             bg-[var(--primary-color)] hover:bg-[var(--champ-color)]
-            text-[var(--secondary-color)] hover:text-[var(--primary-color)]
+            text-[var(--secondary-color)] font-semibold hover:text-[var(--primary-color)]
              py-3 px-8 rounded-md shadow cta-btn"
             >
               {{ buttonText }}
