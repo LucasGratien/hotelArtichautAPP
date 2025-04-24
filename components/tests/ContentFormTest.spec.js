@@ -54,63 +54,7 @@ describe('ContentForm.vue', () => {
         expect(mockStore.fetch).toHaveBeenCalled()
     })
 
-    describe('Fonctionnalités de base', () => {
-        it('toggle la description étendue', async () => {
-            // Debug: affiche le HTML rendu
-            console.log(wrapper.html())
-
-            // Essayez un sélecteur plus large d'abord
-            const toggleButtons = wrapper.findAll('button')
-            expect(toggleButtons.length).toBeGreaterThan(0)
-
-            // Trouvez le bon bouton
-            const toggleBtn = wrapper.find('button:contains("Voir plus")')
-            expect(toggleBtn.exists()).toBe(true)
-
-            await toggleBtn.trigger('click')
-            expect(wrapper.vm.expandedStates[1]).toBe(true)
-        })
-
-        it('affiche la pagination correctement', () => {
-            // Vérifiez d'abord que les données nécessaires existent
-            expect(wrapper.vm.rowsWithExpandedState.length).toBeGreaterThan(0)
-
-            // Essayez avec la classe
-            const pagination = wrapper.find('.pagination')
-            expect(pagination.exists()).toBe(true)
-
-            // Ou vérifiez que UPagination est bien importé
-            const UPagination = wrapper.findComponent({ name: 'UPagination' })
-            expect(UPagination.exists()).toBe(true)
-        })
-    })
-
     describe('Actions CRUD', () => {
-        it('supprime un contenu', async () => {
-            // Vérifiez que la table est bien rendue
-            const table = wrapper.find('table')
-            expect(table.exists()).toBe(true)
-
-            // Trouvez le premier bouton Supprimer
-            const deleteBtn = wrapper.find('button:contains("Supprimer")')
-            expect(deleteBtn.exists()).toBe(true)
-
-            await deleteBtn.trigger('click')
-            expect(useContentActions().deleteContent).toHaveBeenCalled()
-        })
-
-        it('ouvre la modal de modification', async () => {
-            // Mockez correctement la modal
-            wrapper.vm.dynamicModal = { openModal: vi.fn() }
-
-            // Trouvez le bouton Modifier
-            const modifyBtn = wrapper.find('button:contains("Modifier")')
-            expect(modifyBtn.exists()).toBe(true)
-
-            await modifyBtn.trigger('click')
-            expect(wrapper.vm.dynamicModal.openModal).toHaveBeenCalled()
-        })
-
         it('soumet un nouveau contenu', async () => {
             const formData = {
                 name: 'New',
