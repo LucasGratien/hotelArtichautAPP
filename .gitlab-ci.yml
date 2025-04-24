@@ -10,7 +10,7 @@ install_dependencies:
   stage: install
   image: node:22-alpine
   script:
-    - npm install --frozen-lockfile #frozen empeche les modification du fichier package-lock.json pendant l'installation
+    - npm install --frozen-lockfile --production=false  #frozen empeche les modification du fichier package-lock.json pendant l'installation
 
     #Etape de test
 run_tests:
